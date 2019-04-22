@@ -1,0 +1,16 @@
+.idea
+.htaccess
+
+wp-admin
+wp-includes
+wp-config.php
+index.php
+wp-content/uploads
+wp-content/themes/twentynineteen
+
+!wp-content/themes/bdchomok/index.php
+
+wp-content/upgrade
+wp-content/updraft
+wp-content/debug.log
+wp-content/plugins
