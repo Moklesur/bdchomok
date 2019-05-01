@@ -3,7 +3,6 @@
     $(document).on('click', '.ajax_add_to_cart', function (e) {
         e.preventDefault();
 
-
         var $thisbutton = $(this),
             product_sku = $thisbutton.attr('data-product_sku'),
             product_qty =$thisbutton.attr('data-quantity'),
@@ -17,11 +16,6 @@
             quantity: product_qty,
             variation_id: variation_id,
         };
-
-
-
-        $("#popup_cart_info").find('.cart_info').append('<h3>Quantity:'+data.quantity+'</h3>');
-
 
         $(document.body).trigger('adding_to_cart', [$thisbutton, data]);
 
@@ -39,8 +33,8 @@
             success: function (response) {
                 $(".product-card-model").modal("show");
 
+                modelData(data);
 
-                console.log(data);
 
                 if (response.error & response.product_url) {
                     window.location = response.product_url;
@@ -53,5 +47,23 @@
 
         return false;
     });
+
+    function modelData(data) {
+        let  product, title, src, price;
+        if (data.product_id ){
+             product = $('.post-'+data.product_id);
+             title = product.find('.woocommerce-loop-product__title').html();
+             src = product.find('img').attr('src');
+             price = product.find('.price').html();
+            // console.log(price);
+            // $("#popup_cart_info").find('.cart_info').append(response);
+            $("#popup_cart_info").find('.cart_info').append(
+                '<div class="single-product" style="padding: 30px"> ' +
+                '<img src='+src+' alt="">' +
+                '<h3>'+title+'</h3>' +
+                '<h4>Quantity:'+data.quantity+'</h4>  <span>price:</span> '+
+                price+'</div>');
+        }
+    }
 
 })(jQuery);

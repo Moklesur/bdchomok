@@ -390,3 +390,6 @@ object {
 .gallery-caption {
 	display: block;
 }
+.cart_info .single-product{
+	padding: 30px;
+}
