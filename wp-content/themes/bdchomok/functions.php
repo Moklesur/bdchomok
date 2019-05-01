@@ -246,6 +246,7 @@ function bdchomok_active_plugins() {
 
 
 
+
 function woocommerce_ajax_add_to_cart_js() {
 //    if (function_exists('is_product') && is_product()) {
         wp_enqueue_script('woocommerce-ajax-add-to-cart', get_template_directory_uri() . '/js/ajax-add-to-cart.js', array('jquery'), '', true);

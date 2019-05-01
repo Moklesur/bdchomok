@@ -32,6 +32,10 @@
                 $thisbutton.addClass('added').removeClass('loading');
             },
             success: function (response) {
+                $(".product-card-model").modal("show");
+                var dd = $("#popup_cart_info").find('cart_info');
+
+                console.log(dd);
 
                 if (response.error & response.product_url) {
                     window.location = response.product_url;
