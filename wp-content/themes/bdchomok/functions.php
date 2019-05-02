@@ -274,7 +274,7 @@ function woocommerce_ajax_add_to_cart() {
             wc_add_to_cart_message(array($product_id => $quantity), true);
         }
 
-        WC_AJAX :: get_refreshed_fragments();
+         WC_AJAX :: get_refreshed_fragments();
     } else {
 
         $data = array(

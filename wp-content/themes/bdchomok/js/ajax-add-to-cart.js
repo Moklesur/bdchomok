@@ -33,8 +33,8 @@
             success: function (response) {
                 $(".product-card-model").modal("show");
 
-                modelData(data);
 
+                modelData(response.fragments['div.widget_shopping_cart_content']);
 
                 if (response.error & response.product_url) {
                     window.location = response.product_url;
@@ -48,22 +48,31 @@
         return false;
     });
 
-    function modelData(data) {
+    function modelData( response) {
         let  product, title, src, price;
-        if (data.product_id ){
-             product = $('.post-'+data.product_id);
-             title = product.find('.woocommerce-loop-product__title').html();
-             src = product.find('img').attr('src');
-             price = product.find('.price').html();
-            // console.log(price);
-            // $("#popup_cart_info").find('.cart_info').append(response);
-            $("#popup_cart_info").find('.cart_info').append(
-                '<div class="single-product" style="padding: 30px"> ' +
-                '<img src='+src+' alt="">' +
-                '<h3>'+title+'</h3>' +
-                '<h4>Quantity:'+data.quantity+'</h4>  <span>price:</span> '+
-                price+'</div>');
-        }
+
+        console.log(response);
+
+
+            $("#popup_cart_info").find('.cart_info').append(response);
+
+
+
+
+        // if (data.product_id ){
+        //      product = $('.post-'+data.product_id);
+        //      title = product.find('.woocommerce-loop-product__title').html();
+        //      src = product.find('img').attr('src');
+        //      price = product.find('.price').html();
+        //     // console.log(price);
+        //     // $("#popup_cart_info").find('.cart_info').append(response);
+        //     $("#popup_cart_info").find('.cart_info').append(
+        //         '<div class="single-product" style="padding: 30px"> ' +
+        //         '<img src='+src+' alt="">' +
+        //         '<h3>'+title+'</h3>' +
+        //         '<h4>Quantity:'+data.quantity+'</h4>  <span>price:</span> '+
+        //         price+'</div>');
+        // }
     }
 
 })(jQuery);
