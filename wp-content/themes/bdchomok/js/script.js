@@ -46,8 +46,7 @@
             });
         }
 
-
-
+        // Quick View
         $(document).on('click', '.quick-view', function (e) {
 
             var pid = $(this).attr('data-pid');
@@ -57,7 +56,7 @@
             // $(".quick-view-modal").modal("show");
         });
 
-
+        // Quick View Function
         load_ajax_product_pp = function(pid){
             $.ajax({
                 method: 'POST',

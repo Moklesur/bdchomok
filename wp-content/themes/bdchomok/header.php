@@ -70,11 +70,21 @@
                     <!-- .cart-account start -->
                     <div class="col-lg-3 col-sm-4 col-6 cart-account">
                         <ul class="list-inline mb-0 text-right">
+                            <?php if( class_exists( 'WooCommerce' ) ): ?>
                             <li class="list-inline-item">
-                                <div class="cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i></a>
+                                <div class="cart-wrap position-relative">
+                                    <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
+                                        <i class="icofont-shopping-cart"></i>
+                                        <span>
+										<?php echo sprintf ( _n( ' %d', ' %d', WC()->cart->get_cart_contents_count(), 'bdchomok' ), WC()->cart->get_cart_contents_count() ); ?>
+									</span>
+                                    </a>
+                                    <div class="mini-cart-fix">
+                                        <?php woocommerce_mini_cart(); ?>
+                                    </div>
                                 </div>
                             </li>
+                            <?php endif; ?>
                             <li class="list-inline-item">
                                 <a href="#" class="btn"><?php esc_html_e( 'Log In', 'bdchomok' ); ?></a>
                             </li>

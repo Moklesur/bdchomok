@@ -114,8 +114,8 @@ function bdchomok_widgets_init()
         'description' => esc_html__('Add widgets here.', 'bdchomok'),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget' => '</section>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
     ));
 }
 
@@ -440,3 +440,53 @@ function load_single_product()
 
 add_action('wp_ajax_nopriv_load_single_product', 'load_single_product');
 add_action('wp_ajax_load_single_product', 'load_single_product');
+
+/**
+ * Update contents count via AJAX
+ */
+add_filter('woocommerce_add_to_cart_fragments', 'bdchomok_header_add_to_cart_fragment');
+function bdchomok_header_add_to_cart_fragment( $fragments ) {
+    global $woocommerce;
+    ob_start();
+    ?>
+    <a class="cart-contents" href="<?php echo esc_url( $woocommerce->cart->get_cart_url() ); ?>"><i class="icofont-shopping-cart"></i><span><?php echo sprintf(_n(' %d', ' %d', $woocommerce->cart->cart_contents_count, 'bdchomok'), $woocommerce->cart->cart_contents_count ); ?></span></a>
+    <?php
+    $fragments['a.cart-contents'] = ob_get_clean();
+    return $fragments;
+}
+
+/**
+ * Update mini-cart when products are added to the cart via AJAX
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
+    ob_start();
+    ?>
+    <div class="mini-cart-fix">
+        <?php woocommerce_mini_cart(); ?>
+    </div>
+    <?php $fragments['div.mini-cart-fix'] = ob_get_clean();
+    return $fragments;
+} );
+
+/**
+ * woocommerce support
+ */
+function bdchomok_woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+    add_theme_support( 'wc-product-gallery-zoom' );
+}
+add_action( 'after_setup_theme', 'bdchomok_woocommerce_support' );
+
+/**
+ * Gallery WC Support
+ */
+function ushop_gallery_thumns_wc_support() {
+
+    add_theme_support( 'woocommerce', array(
+        'gallery_thumbnail_image_width' => 600,
+    ) );
+    add_theme_support( 'wc-product-gallery-lightbox' );
+}
+add_action( 'after_setup_theme', 'ushop_gallery_thumns_wc_support' );
+
