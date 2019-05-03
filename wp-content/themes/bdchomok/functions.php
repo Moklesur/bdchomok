@@ -376,23 +376,17 @@ function load_single_product()
 
 
 
-    $output .= '.'.$product->get_short_description() .'
-</div>
+    $output .= '.'.$product->get_short_description() .'</div>';
 
-	
-	<form class="cart" action="" method="post" enctype="multipart/form-data">
-		
-			<div class="quantity">
-		<label class="screen-reader-text" for="quantity_5cca10dd7afb8">Reloj Inteligente Smart Watch M26 Touch Bluetooh quantity</label>
-		<input type="number" id="quantity_5cca10dd7afb8" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" inputmode="numeric">
-	</div>
-	
-		<button type="submit" name="add-to-cart" value="14" class="single_add_to_cart_button btn  alt">Add to cart</button>
 
-			</form>
+    $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1"
+                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart pull-right wc-variation-selection-needed mb-3"
+                               data-product_id="'.$product->get_id().'" data-product_sku=""
+                               aria-label="Add “Product” to your cart" rel="nofollow"><img class="mr-2" src="'.URL.'/images/shop_cart.png" alt="">Add to
+                    cart</a>';
 
-	
-<div class="product_meta">';
+
+    $output .= '.<div class="product_meta">';
 	$catIds = $product->get_category_ids();
     $category_name = [];
     $category_slug = '';

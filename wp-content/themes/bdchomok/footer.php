@@ -44,7 +44,13 @@
 
 <div class="modal fade bd-example-modal-lg product-card-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content p-5">
+        <div class="modal-content">
+            <div class="modal-header ml-auto">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
             <div class="row">
                 <div id='popup_cart_info' class='col-8 text-center m-auto'>
 
@@ -73,7 +79,7 @@
                     <h2>Our Other Products</h2>
                 </div>
             </div>
-
+            </div>
         </div>
     </div>
 </div>
