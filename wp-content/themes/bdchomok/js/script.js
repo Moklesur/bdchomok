@@ -46,6 +46,36 @@
             });
         }
 
+
+
+        $(document).on('click', '.quick-view', function (e) {
+
+            var pid = $(this).attr('data-pid');
+
+            load_ajax_product_pp(pid);
+
+            // $(".quick-view-modal").modal("show");
+        });
+
+
+        load_ajax_product_pp = function(pid){
+            $.ajax({
+                method: 'POST',
+                url: js_vars.ajaxurl,
+                data: { action: "load_single_product", pid: pid},
+                dataType: "json",
+                async:false,
+                success: function (response) {
+
+                    setTimeout(function() {
+                        $('.quick-view-modal .modal-body').html(response.html);
+                        $(".quick-view-modal").modal("show");
+                    }, 500);
+                }
+            });
+        };
+
+
     });
 
 })(jQuery);
