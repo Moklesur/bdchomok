@@ -226,16 +226,6 @@ function bdchomok_active_plugins() {
             'required'  => false,
         ),
         array(
-            'name'      => __( 'Reading Time WP', 'bdchomok' ),
-            'slug'      => 'reading-time-wp',
-            'required'  => false,
-        ),
-        array(
-            'name'      => __( 'kirki Customizer', 'bdchomok' ),
-            'slug'      => 'kirki',
-            'required'  => false,
-        ),
-        array(
             'name'      => __( 'WooCommerce', 'bdchomok' ),
             'slug'      => 'woocommerce',
             'required'  => false,
@@ -243,9 +233,6 @@ function bdchomok_active_plugins() {
     );
     tgmpa( $plugins );
 }
-
-
-
 
 function woocommerce_ajax_add_to_cart_js() {
 //    if (function_exists('is_product') && is_product()) {

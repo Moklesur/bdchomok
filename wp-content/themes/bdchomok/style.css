@@ -159,6 +159,10 @@ textarea {
 /*--------------------------------------------------------------
 # Woocommerce
 --------------------------------------------------------------*/
+
+.product-category-filter {
+	padding: 15px;
+}
 .category-filter-wrap {
 	margin: 0 -15px;
 }
