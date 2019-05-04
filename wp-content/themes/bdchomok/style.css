@@ -595,3 +595,14 @@ object {
 .product-card-model  div.product{
 	display: inline-block;
  }
+.product-card-model .modal-body ul.random-product>li{
+	width: 100%;
+
+}
+.product-card-model .modal-body ul.random-product>li:focus{
+	outline: none;
+	outline-color: transparent;
+}
+.product-card-model .modal-body ul>li p{
+	width: 50%;
+}

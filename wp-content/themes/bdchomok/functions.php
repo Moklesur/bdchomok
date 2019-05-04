@@ -131,6 +131,7 @@ function bdchomok_scripts()
 
     wp_enqueue_style('icofont', get_template_directory_uri() . '/css/icofont.min.css', array(), '4.7.0');
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.1.3');
+    wp_enqueue_style('slick', get_template_directory_uri() . '/css/slick.css', array(), '4.1.3');
 
     wp_enqueue_style('bdchomok-style', get_stylesheet_uri());
 
@@ -148,6 +149,7 @@ function bdchomok_scripts()
     //wp_enqueue_script( 'jquery-popper', get_template_directory_uri() . '/js/popper.min.js', array('jquery'), '1.12.5', true );
     //wp_enqueue_script( 'jquery-isotope', get_template_directory_uri() . '/js/isotope.pkgd.js', array('jquery'), '3.0.4', true );
     wp_enqueue_script('jquery-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.1.3', true);
+    wp_enqueue_script('slick-js', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
 
     wp_enqueue_script('bdchomok-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true);
@@ -493,9 +495,6 @@ function load_add_cart_info_product()
      <p class="price">'.$product->get_price_html().'</p>
 <div class="woocommerce-product-details__short-description">';
 
-    $output .= '.'.$product->get_short_description() .'</div>';
-
-
     $output .= '<a href="'.site_url().'/cart" 
                                class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button added_to_cart wc-forward mb-3"
                              >View Cart</a>';
@@ -508,13 +507,13 @@ function load_add_cart_info_product()
 
 
     $args = array(
-        'posts_per_page'   => 10,
+        'posts_per_page'   => 5,
         'orderby'          => 'rand',
         'post_type'        => 'product' );
 
     $random_products = get_posts( $args );
     $single = '';
-    $output .= '<div class="clearfix"><ul class="list-inline">';
+    $output .= '<div class="clearfix"><ul class="list-inline random-product rand-slider">';
     foreach ( $random_products as $post ) : setup_postdata( $post );
         $permalink =  get_post_permalink($post->ID);
         $product_meta = get_post_meta($post->ID);
@@ -544,40 +543,7 @@ add_action('wp_ajax_nopriv_load_add_cart_info_product', 'load_add_cart_info_prod
 add_action('wp_ajax_load_add_cart_info_product', 'load_add_cart_info_product');
 
 
-function test(){
 
-
-
-
-    $args = array(
-        'posts_per_page'   => 10,
-        'orderby'          => 'rand',
-        'post_type'        => 'product' );
-
-    $related_posts = get_posts( apply_filters('woocommerce_product_related_posts', $args) );
-
-    foreach ( $related_posts as $post ) : setup_postdata( $post );
-
-        $permalink =  get_post_permalink($post->ID);
-        $product_meta = get_post_meta($post->ID);
-
-
-        $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID));?>
-        <img src="<?php echo $featured_image[0]; ?>" alt="" />
-
-     <h2><?php echo  $product_meta['_regular_price'][0];?></h2>
-
-        <?php
-    echo "<pre>";
-     print_r($featured_image[0]);
-    endforeach;
-    wp_reset_postdata();
-
-
-
-
-}
-//test();
 
 /**
  * Update contents count via AJAX
