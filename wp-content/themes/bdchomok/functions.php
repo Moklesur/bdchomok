@@ -435,6 +435,150 @@ function load_single_product()
 add_action('wp_ajax_nopriv_load_single_product', 'load_single_product');
 add_action('wp_ajax_load_single_product', 'load_single_product');
 
+
+function load_add_cart_info_product()
+{
+    $pid = $_POST['pid'];
+    $response = array(
+        'status' => 'success'
+    );
+    $product = wc_get_product($pid);
+
+
+    $output = '<div class="woocommerce-notices-wrapper"></div>';
+
+
+    $output .= '<div id="product-' . $product->get_id() . '" class="product type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">
+
+	<div>';
+
+    $columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+    $post_thumbnail_id = $product->get_image_id();
+    $wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_classes', array(
+        'woocommerce-product-gallery',
+        'woocommerce-product-gallery--' . ( $product->get_image_id() ? 'with-images' : 'without-images' ),
+        'woocommerce-product-gallery--columns-' . absint( $columns ),
+        'images',
+    ) );
+
+    $output .= '<div class="'.esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ).'" data-columns="'.esc_attr( $columns ).'" style="opacity: 1; transition: opacity .25s ease-in-out;">
+                                        <figure class="woocommerce-product-gallery__wrapper">';
+
+    if ( $product->get_image_id() ) {
+        $html = wc_get_gallery_image_html( $post_thumbnail_id, true );
+    } else {
+        $html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+        $html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src( 'woocommerce_single' ) ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+        $html .= '</div>';
+    }
+
+    $output .=  apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id );
+
+    //$output .= do_action( 'woocommerce_product_thumbnails' );
+
+    $output .= '</figure>
+                                    </div>';
+
+    $attachment_ids = $product->get_gallery_image_ids();
+
+    if ( $attachment_ids && $product->get_image_id() ) {
+        foreach ( $attachment_ids as $attachment_id ) {
+            //echo wc_get_gallery_image_html( $attachment_id );die();
+            $output .= apply_filters( 'woocommerce_single_product_image_thumbnail_html', wc_get_gallery_image_html( $attachment_id ), $attachment_id );
+        }
+    }
+    $output .= '</div>
+	<div class="summary entry-summary">
+	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
+     <p class="price">'.$product->get_price_html().'</p>
+<div class="woocommerce-product-details__short-description">';
+
+    $output .= '.'.$product->get_short_description() .'</div>';
+
+
+    $output .= '<a href="'.site_url().'/cart" 
+                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button added_to_cart wc-forward mb-3"
+                             >View Cart</a>';
+
+
+
+
+
+    $output .= '</div> </div></div> </div>';
+
+
+    $args = array(
+        'posts_per_page'   => 10,
+        'orderby'          => 'rand',
+        'post_type'        => 'product' );
+
+    $random_products = get_posts( $args );
+    $single = '';
+    $output .= '<div class="clearfix"><ul class="list-inline">';
+    foreach ( $random_products as $post ) : setup_postdata( $post );
+        $permalink =  get_post_permalink($post->ID);
+        $product_meta = get_post_meta($post->ID);
+        $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID));
+        $single .= '<li class="list-inline-item">
+             <img src='.$featured_image[0].' alt="" />
+     <h5> Price : '.$product_meta['_regular_price'][0].'</h5>
+            <p><a href='.$permalink.'>'.$post->post_title .'</a></p>
+            <p><a href="'.wc_get_cart_url().'" data-quantity="1"
+                               class="text-center alt custom-btn btn add_to_cart_button ajax_add_to_cart pull-right wc-variation-selection-needed mb-3"
+                               data-product_id="'.$post->ID.'" data-product_sku=""
+                               aria-label="Add “Product” to your cart" rel="nofollow">Add to
+                    cart</a></p>
+        </li>';
+     endforeach;
+    wp_reset_postdata();
+
+    $output .= $single;
+    $output .= '</ul></div>';
+
+    $output .= '</div>';
+    $response['html'] = $output;
+    wp_send_json($response);
+}
+
+add_action('wp_ajax_nopriv_load_add_cart_info_product', 'load_add_cart_info_product');
+add_action('wp_ajax_load_add_cart_info_product', 'load_add_cart_info_product');
+
+
+function test(){
+
+
+
+
+    $args = array(
+        'posts_per_page'   => 10,
+        'orderby'          => 'rand',
+        'post_type'        => 'product' );
+
+    $related_posts = get_posts( apply_filters('woocommerce_product_related_posts', $args) );
+
+    foreach ( $related_posts as $post ) : setup_postdata( $post );
+
+        $permalink =  get_post_permalink($post->ID);
+        $product_meta = get_post_meta($post->ID);
+
+
+        $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID));?>
+        <img src="<?php echo $featured_image[0]; ?>" alt="" />
+
+     <h2><?php echo  $product_meta['_regular_price'][0];?></h2>
+
+        <?php
+    echo "<pre>";
+     print_r($featured_image[0]);
+    endforeach;
+    wp_reset_postdata();
+
+
+
+
+}
+//test();
+
 /**
  * Update contents count via AJAX
  */

@@ -22,7 +22,7 @@
         $.ajax({
             type: 'post',
             url: wc_add_to_cart_params.ajax_url,
-            data: data,
+            data: { action: "load_add_cart_info_product", pid: product_id},
             beforeSend: function (response) {
                 $thisbutton.removeClass('added').addClass('loading');
             },
@@ -31,10 +31,11 @@
                 $thisbutton.addClass('added').removeClass('loading');
             },
             success: function (response) {
-                $(".product-card-model").modal("show");
 
-
-                modelData(response.fragments['div.widget_shopping_cart_content']);
+                setTimeout(function() {
+                    $('.product-card-model .modal-body').html(response.html);
+                    $(".product-card-model").modal("show");
+                }, 500);
 
                 if (response.error & response.product_url) {
                     window.location = response.product_url;
@@ -48,32 +49,6 @@
         return false;
     });
 
-    function modelData( response) {
-        let  product, title, src, price;
-
-        console.log(response);
-
-
-            $("#popup_cart_info").find('.cart_info').append(response);
-
-
-
-
-        // if (data.product_id ){
-        //      product = $('.post-'+data.product_id);
-        //      title = product.find('.woocommerce-loop-product__title').html();
-        //      src = product.find('img').attr('src');
-        //      price = product.find('.price').html();
-        //     // console.log(price);
-        //     // $("#popup_cart_info").find('.cart_info').append(response);
-        //     $("#popup_cart_info").find('.cart_info').append(
-        //         '<div class="single-product" style="padding: 30px"> ' +
-        //         '<img src='+src+' alt="">' +
-        //         '<h3>'+title+'</h3>' +
-        //         '<h4>Quantity:'+data.quantity+'</h4>  <span>price:</span> '+
-        //         price+'</div>');
-        // }
-    }
 
 })(jQuery);
 

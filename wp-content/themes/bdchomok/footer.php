@@ -52,17 +52,14 @@
             </div>
             <div class="modal-body">
             <div class="row">
-                <div id='popup_cart_info' class='col-8 text-center m-auto'>
+                <div  class='col-12 popup_cart_info'>
 
-                    <div class='cart_info'>
-
-                    </div>
 
                 </div>
             </div>
             <div class="row mb-2">
                     <div class="col-6 text-left">
-                        <a href="<?php echo site_url().'/shop' ?>">More Product Add</a>
+                        <a class="btn" href="<?php echo site_url().'/shop' ?>">More Product Add</a>
                     </div>
 
                     <div class="col-6 text-right">
@@ -70,7 +67,7 @@
                         global $woocommerce;
                         $checkout_page_url = function_exists( 'wc_get_cart_url' ) ? wc_get_checkout_url() : $woocommerce->cart->get_checkout_url();
                         ?>
-                        <a href="<?php echo $checkout_page_url; ?>">Please Order here</a>
+                        <a class="btn" href="<?php echo $checkout_page_url; ?>">Please Order here</a>
                     </div>
             </div>
 
