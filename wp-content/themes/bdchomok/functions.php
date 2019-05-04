@@ -266,7 +266,6 @@ function woocommerce_ajax_add_to_cart_js()
 
 add_action('wp_enqueue_scripts', 'woocommerce_ajax_add_to_cart_js', 99);
 
-
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
 add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
 
