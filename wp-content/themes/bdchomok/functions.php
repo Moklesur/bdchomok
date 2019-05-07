@@ -388,7 +388,7 @@ function load_single_product()
 
 
     $output .= '.<div class="product_meta">';
-	$catIds = $product->get_category_ids();
+    $catIds = $product->get_category_ids();
     $category_name = [];
     $category_slug = '';
 
@@ -396,16 +396,16 @@ function load_single_product()
         foreach ($catIds as $cat_id) {
             $trm = get_term_by('id', $cat_id, 'product_cat');
 
-                $category_name[] = $trm->name;
-                $category_slug = $trm->slug;
-                break;
-                break;
+            $category_name[] = $trm->name;
+            $category_slug = $trm->slug;
+            break;
+            break;
 
         }
     }
 
 
-	$output .= ' <span class="posted_in">Category: <a href='.site_url().'/product-category/'.$category_slug.' rel="tag">'. implode(', ', $category_name).'</a></span>
+    $output .= ' <span class="posted_in">Category: <a href='.site_url().'/product-category/'.$category_slug.' rel="tag">'. implode(', ', $category_name).'</a></span>
 	
 	
 </div>
@@ -421,7 +421,7 @@ function load_single_product()
 					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description" style="display: block;">
 				
   <h2>Description</h2>'
-.$product->get_description().'
+        .$product->get_description().'
 
 			</div>
 			</div>
@@ -527,7 +527,7 @@ function load_add_cart_info_product()
                                aria-label="Add “Product” to your cart" rel="nofollow">Add to
                     cart</a></p>
         </li>';
-     endforeach;
+    endforeach;
     wp_reset_postdata();
 
     $output .= $single;
@@ -593,3 +593,11 @@ function ushop_gallery_thumns_wc_support() {
 }
 add_action( 'after_setup_theme', 'ushop_gallery_thumns_wc_support' );
 
+
+// Add To Cart
+add_filter('woocommerce_product_single_add_to_cart_text', 'bdchomok_cart_button_text');
+add_filter( 'woocommerce_product_add_to_cart_text', 'bdchomok_cart_button_text' );
+
+function bdchomok_cart_button_text() {
+    return __( 'ক্রয় করুন', 'bdchomok' );
+}
