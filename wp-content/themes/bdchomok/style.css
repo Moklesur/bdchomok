@@ -335,7 +335,7 @@ textarea {
 	flex-shrink: 0;
 	flex-basis: 100%;
 	clear: inherit;
-	margin: 0;
+	margin: 0 15px;
 	padding: 15px;
 }
 .woocommerce ul.products li.product a {
@@ -606,3 +606,10 @@ object {
 .product-card-model .modal-body ul>li p{
 	width: 50%;
 }
+
+.banner-slide .slick-slide{
+	 outline: none;
+ }
+.banner-slide .slick-slide img{
+	 width: 100%;
+ }
