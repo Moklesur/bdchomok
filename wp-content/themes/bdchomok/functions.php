@@ -130,13 +130,14 @@ function bdchomok_scripts()
     wp_enqueue_style('bdchomok-body-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700');
 
     wp_enqueue_style('icofont', get_template_directory_uri() . '/css/icofont.min.css', array(), '4.7.0');
+    wp_enqueue_style('ionicons', 'https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css', array(), '4.7.0');
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.1.3');
     wp_enqueue_style('slick', get_template_directory_uri() . '/css/slick.css', array(), '4.1.3');
 
     wp_enqueue_style('bdchomok-style', get_stylesheet_uri());
 
 
-    $loaded_jsvars = array(
+        $loaded_jsvars = array(
         'ajaxurl' => admin_url('admin-ajax.php'));
 
 
