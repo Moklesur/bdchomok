@@ -412,7 +412,7 @@ function load_single_product()
 
 
     $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1"
-                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart pull-right wc-variation-selection-needed mb-3"
+                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
                                data-product_id="'.$product->get_id().'" data-product_sku=""
                                aria-label="Add “Product” to your cart" rel="nofollow"><img class="mr-2" src="'.URL.'/images/shop_cart.png" alt="">Add to
                     cart</a>';
@@ -543,6 +543,7 @@ function load_add_cart_info_product()
 
     $random_products = get_posts( $args );
     $single = '';
+    $output .='<h3 class="other-title">Other\'s Product </h3>';
     $output .= '<div class="clearfix"><ul class="list-inline random-product rand-slider">';
     foreach ( $random_products as $post ) : setup_postdata( $post );
         $permalink =  get_post_permalink($post->ID);
@@ -553,7 +554,7 @@ function load_add_cart_info_product()
      <h5> Price : '.$product_meta['_regular_price'][0].'</h5>
             <p><a href='.$permalink.'>'.$post->post_title .'</a></p>
             <p><a href="'.wc_get_cart_url().'" data-quantity="1"
-                               class="text-center alt custom-btn btn add_to_cart_button ajax_add_to_cart pull-right wc-variation-selection-needed mb-3"
+                               class="text-center alt custom-btn btn add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
                                data-product_id="'.$post->ID.'" data-product_sku=""
                                aria-label="Add “Product” to your cart" rel="nofollow">Add to
                     cart</a></p>
