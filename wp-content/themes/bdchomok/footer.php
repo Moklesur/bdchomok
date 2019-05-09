@@ -14,11 +14,45 @@
 </div><!-- #content -->
 
 <footer id="colophon" class="site-footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
+                    <?php
+                    if ( is_active_sidebar( 'footer-widget' ) ) :
+                        dynamic_sidebar( 'footer-widget' );
+                    endif;
+                    ?>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
+                    <?php
+                    if ( is_active_sidebar( 'footer-widget-1' ) ) :
+                        dynamic_sidebar( 'footer-widget-1-1' );
+                    endif;
+                    ?>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
+                    <?php
+                    if ( is_active_sidebar( 'footer-widget-2' ) ) :
+                        dynamic_sidebar( 'footer-widget-2' );
+                    endif;
+                    ?>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
+                    <?php
+                    if ( is_active_sidebar( 'footer-widget-3' ) ) :
+                        dynamic_sidebar( 'footer-widget-3' );
+                    endif;
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div><!-- .footer-top -->
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="site-info text-center">
-                    <p>© 2019 bdchomok</p>
+                    <p><?php esc_html_e( '© 2019 bdchomok', 'bdchomok' ); ?></p>
                 </div><!-- .site-info -->
             </div>
         </div>

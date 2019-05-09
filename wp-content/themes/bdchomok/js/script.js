@@ -26,16 +26,23 @@
                 $(this).slick({
                     slidesToShow: 5,
                     autoplay: false,
-                    nextArrow: '<i class="ion-ios-arrow-right slider-right arrow-position f-2x"></i>',
-                    prevArrow: '<i class="ion-ios-arrow-left arrow-position f-2x"></i>',
+                    nextArrow: '<i class="icofont-long-arrow-right slider-right arrow-position f-2x"></i>',
+                    prevArrow: '<i class="icofont-long-arrow-left arrow-position f-2x"></i>',
                     centerPadding: '0px',
                     centerMode: true,
                     responsive: [
                         {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
                             breakpoint: 768,
                             settings: {
                                 slidesToShow: 2
-                            }},
+                            }
+                        },
                         {
                         breakpoint: 600,
                         settings: {
@@ -73,13 +80,6 @@
                 }
             });
         };
-
-
-
-
-
-
-
     });
 
 })(jQuery);
