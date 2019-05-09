@@ -1077,7 +1077,18 @@ Min Width 768px And Max Width 991px
 /*--------------------------------------------------------------
 Max Width 767px
 --------------------------------------------------------------*/
-@media only screen and (max-width:767px) {}
+@media only screen and (max-width:767px) {
+	.site-content {
+		padding: 60px 0;
+	}
+	.entry-content{
+		padding: 15px 0;
+	}
+	.woocommerce .products ul, .woocommerce ul.products,
+	.woocommerce ul.products[class*=columns-] li.product, .woocommerce-page ul.products[class*=columns-] li.product{
+		clear: inherit;
+	}
+}
 /*--------------------------------------------------------------
 Max Width 480px
 --------------------------------------------------------------*/
