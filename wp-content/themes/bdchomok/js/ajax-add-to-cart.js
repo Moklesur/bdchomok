@@ -33,14 +33,16 @@
             success: function (response) {
 
                 setTimeout(function() {
+                    var model = $(".product-card-model");
                     $('.product-card-model .modal-body').html(response.html);
-                    $(".product-card-model").modal("show");
-                    var slider = $(".product-card-model").find('.rand-slider');
+                    model.modal("show");
+                    var slider = model.find('.rand-slider');
+
 
                     slider.slick({
                         dots: false,
-                        infinite: false,
-                        arrows:false,
+                        infinite: true,
+                        arrows:true,
                         speed: 300,
                         autoplay: true,
                         autoplaySpeed: 2000,
@@ -50,24 +52,26 @@
                             {
                                 breakpoint: 1024,
                                 settings: {
-                                    slidesToShow: 1,
+                                    slidesToShow: 2,
                                     slidesToScroll: 1,
                                     infinite: true,
-                                    dots: true
+                                    dots: false,
                                 }
                             },
                             {
                                 breakpoint: 600,
                                 settings: {
                                     slidesToShow: 2,
-                                    slidesToScroll: 2
+                                    slidesToScroll: 2,
+                                    dots: false,
                                 }
                             },
                             {
                                 breakpoint: 480,
                                 settings: {
                                     slidesToShow: 1,
-                                    slidesToScroll: 1
+                                    slidesToScroll: 1,
+                                    dots: false,
                                 }
                             }
                         ]
