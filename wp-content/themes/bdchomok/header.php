@@ -16,11 +16,49 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
 
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v3.3'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="266866433725283"
+         theme_color="#51b848">
+    </div>
     <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
+
+<div class="text-center loading-wrap  d-none">
+    <div class="d-table">
+        <div class="d-table-cell align-middle">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bdchomok' ); ?></a>
 
@@ -31,11 +69,13 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <!-- .logo start -->
-                    <div class="col-lg-3 col-sm-4 col-6 logo">
-                        <button class="navbar-toggler d-none" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="site-branding pr-5">
+                    <div class="col-lg-3 col-sm-4 col-6 logo order-lg-0 order-0">
+                        <div class="site-branding pr-0 pr-lg-5">
+                            <button class="navbar-toggler d-lg-none d-inline-block" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                             <?php
                             the_custom_logo();
                             if ( is_front_page() && is_home() ) :
@@ -56,22 +96,33 @@
                     </div>
                     <!-- .logo end -->
                     <!-- .advance-search start -->
-                    <div class="col-lg-6 col-sm-4 col-12 advance-search">
+                    <div class="col-lg-6 col-sm-4 col-12 advance-search order-lg-1 order-2">
                         <form class="advance-search-form" action="">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search ...">
+                                <input type="text" class="form-control" placeholder="অনুসন্ধান করুন ..">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="icofont-search-2"></i></button>
+                                    <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <!-- .advance-search end -->
                     <!-- .cart-account start -->
-                    <div class="col-lg-3 col-sm-4 col-6 cart-account">
+                    <div class="col-lg-3 col-sm-4 col-6 cart-account order-lg-2 order-1">
                         <ul class="list-inline mb-0 text-right">
-                            <?php if( class_exists( 'WooCommerce' ) ): ?>
                             <li class="list-inline-item">
+                                <div class="account-login-dropdown">
+                                    <?php if ( is_user_logged_in() ) { ?>
+                                        <a class="btn mr-2" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id' ) ) ); ?>"><i class="ion-ios-person-outline"></i> <?php esc_html_e( 'Account','bdchomok'); ?></a>
+                                        <a class="btn" href="<?php echo esc_url( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><i class="ion-log-out"></i> <?php esc_html_e( 'Log Out','bdchomok' ); ?></a>
+                                    <?php }
+                                    else { ?>
+                                        <a class="btn" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id') ) ); ?>"><?php esc_html_e( 'Login','bdchomok' ); ?></a>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                            <?php if( class_exists( 'WooCommerce' ) ): ?>
+                            <li class="list-inline-item ml-2">
                                 <div class="cart-wrap position-relative">
                                     <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
                                         <i class="icofont-shopping-cart"></i>
@@ -85,16 +136,11 @@
                                 </div>
                             </li>
                             <?php endif; ?>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn"><?php esc_html_e( 'Log In', 'bdchomok' ); ?></a>
-                            </li>
                         </ul>
                     </div>
                     <!-- .cart-account end -->
                 </div>
             </div>
-
-
         </div>
         <!-- .header-top end -->
 

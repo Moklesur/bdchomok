@@ -46,7 +46,7 @@
                         {
                         breakpoint: 600,
                         settings: {
-                            slidesToShow: 1
+                            slidesToShow: 2
                         }
                     }]
                 });
@@ -55,7 +55,7 @@
 
         // Quick View
         $(document).on('click', '.quick-view', function (e) {
-
+            $(".loading-wrap").removeClass("d-none");
             var pid = $(this).attr('data-pid');
 
             load_ajax_product_pp(pid);
@@ -74,6 +74,7 @@
                 success: function (response) {
 
                     setTimeout(function() {
+                        $(".loading-wrap").addClass("d-none");
                         $('.quick-view-modal .modal-body').html(response.html);
                         $(".quick-view-modal").modal("show");
                     }, 500);

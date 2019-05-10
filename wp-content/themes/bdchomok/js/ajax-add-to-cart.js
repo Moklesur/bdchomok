@@ -19,6 +19,8 @@
 
         $(document.body).trigger('adding_to_cart', [$thisbutton, data]);
 
+        $(".loading-wrap").removeClass("d-none");
+
         $.ajax({
             type: 'post',
             url: wc_add_to_cart_params.ajax_url,
@@ -33,6 +35,7 @@
             success: function (response) {
 
                 setTimeout(function() {
+                    $(".loading-wrap").addClass("d-none");
                     var model = $(".product-card-model");
                     $('.product-card-model .modal-body').html(response.html);
                     model.modal("show");

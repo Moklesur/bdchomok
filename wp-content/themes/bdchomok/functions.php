@@ -143,10 +143,10 @@ function bdchomok_widgets_init()
         'description'   => '',
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget' => '</section>',
-        'before_title' => '<h3 class="widget-title">',
-        'after_title' => '</h3>',
+        'before_title' => '<h5 class="widget-title">',
+        'after_title' => '</h5>',
     );
-    register_sidebars( 4, $args_footer_widgets );
+    register_sidebars( 5, $args_footer_widgets );
 }
 
 add_action('widgets_init', 'bdchomok_widgets_init');
@@ -341,7 +341,7 @@ function custom_woocommerce_template_loop_add_to_cart()
     global $product; ?>
     <div class="overlay">
         <button type="button" data-pid="<?php echo $product->id; ?>"
-                class="quick-view"><?php echo __('Quick View', 'woocommerce') ?></button>
+                class="quick-view"><?php echo __('এক নজরে', 'woocommerce') ?></button>
     </div>
 
     <?php
