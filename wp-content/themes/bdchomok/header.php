@@ -65,7 +65,49 @@
     <header id="masthead" class="site-header">
 
         <!-- .header-top start -->
-        <div class="header-top">
+        <div class="header-top overflow-hidden">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <!-- .information start -->
+                    <div class="col-lg-6 col-sm-6 col-6 info-box">
+                        <ul class="m-0 list-inline">
+                            <li class="list-inline-item">
+                                <i class="icofont-location-pin"></i> Dhaka 1200, BD
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="icofont-envelope-open"></i> contact@bdchomok.com
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="icofont-headphone-alt"></i> +019 111 44444
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- .information end -->
+
+                    <!-- .cart-account start -->
+                    <div class="col-lg-6 col-sm-6 col-6 account">
+                        <ul class="list-inline mb-0 text-right">
+                            <li class="list-inline-item">
+                                <div class="account-login-dropdown">
+                                    <?php if ( is_user_logged_in() ) { ?>
+                                        <a class="mr-2" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id' ) ) ); ?>"><i class="ion-ios-person-outline"></i> <?php esc_html_e( 'অ্যাকাউন্ট','bdchomok'); ?></a>
+                                        <a  href="<?php echo esc_url( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><i class="ion-log-out"></i> <?php esc_html_e( 'বাহির','bdchomok' ); ?></a>
+                                    <?php }
+                                    else { ?>
+                                        <a href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id') ) ); ?>"><?php esc_html_e( 'প্রবেশ / নিবন্ধন','bdchomok' ); ?></a>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- .cart-account end -->
+                </div>
+            </div>
+        </div>
+        <!-- .header-top end -->
+
+        <!-- .header-top start -->
+        <div class="header-top d-none">
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <!-- .logo start -->
@@ -122,19 +164,19 @@
                                 </div>
                             </li>
                             <?php if( class_exists( 'WooCommerce' ) ): ?>
-                            <li class="list-inline-item ml-2">
-                                <div class="cart-wrap position-relative">
-                                    <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
-                                        <i class="icofont-shopping-cart"></i>
-                                        <span>
+                                <li class="list-inline-item ml-2">
+                                    <div class="cart-wrap position-relative">
+                                        <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
+                                            <i class="icofont-shopping-cart"></i>
+                                            <span>
 										<?php echo sprintf ( _n( ' %d', ' %d', WC()->cart->get_cart_contents_count(), 'bdchomok' ), WC()->cart->get_cart_contents_count() ); ?>
 									</span>
-                                    </a>
-                                    <div class="mini-cart-fix">
-                                        <?php woocommerce_mini_cart(); ?>
+                                        </a>
+                                        <div class="mini-cart-fix">
+                                            <?php woocommerce_mini_cart(); ?>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             <?php endif; ?>
                         </ul>
                     </div>
@@ -148,18 +190,72 @@
         <div class="header-bottom main-menu">
             <div class="container">
                 <nav class="navbar navbar-expand-lg p-0">
+
+                    <!-- .logo start -->
+                    <div class="site-branding logo">
+                        <?php
+                        the_custom_logo();
+                        if ( is_front_page() && is_home() ) :
+                            ?>
+                            <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                        <?php
+                        else :
+                            ?>
+                            <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+                        <?php
+                        endif;
+                        $bdchomok_description = get_bloginfo( 'description', 'display' );
+                        if ( $bdchomok_description || is_customize_preview() ) :
+                            ?>
+                            <p class="site-description"><?php echo $bdchomok_description; /* WPCS: xss ok. */ ?></p>
+                        <?php endif; ?>
+                    </div><!-- .site-branding -->
+                    <!-- .logo end -->
+
+                    <button class="navbar-toggler d-lg-none d-inline-block" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
                     <?php
                     wp_nav_menu( array(
                             'theme_location'    => 'menu-1',
                             'container'			=> 'div',
                             'container_class'	=> 'collapse navbar-collapse',
                             'container_id'		=> 'bdchomok-main-menu-id',
-                            'menu_class'		=> 'navbar-nav',
+                            'menu_class'		=> 'navbar-nav ml-auto',
                             'fallback_cb'		=> 'WP_Bootstrap_Navwalker::fallback',
                             'walker'			=> new WP_Bootstrap_Navwalker()
                         )
                     ); ?>
+                    <!-- .cart-account start -->
+                    <div class="cart-search">
+                        <ul class="list-inline mb-0 text-right">
+                            <li class="list-inline-item ml-4">
+                                <a href="#" class="advance-search-tri"><i class="icofont-search-2"></i></a>
+                            </li>
+
+                            <?php if( class_exists( 'WooCommerce' ) ): ?>
+                                <li class="list-inline-item ml-2">
+                                    <div class="cart-wrap position-relative">
+                                        <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
+                                            <i class="icofont-grocery"></i>
+                                            <span>
+										<?php echo sprintf ( _n( ' %d', ' %d', WC()->cart->get_cart_contents_count(), 'bdchomok' ), WC()->cart->get_cart_contents_count() ); ?>
+									</span>
+                                        </a>
+                                        <div class="mini-cart-fix">
+                                            <?php woocommerce_mini_cart(); ?>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                    <!-- .cart-account end -->
                 </nav>
+
             </div>
         </div>
         <!-- .header-bottom end -->

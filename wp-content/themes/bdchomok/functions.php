@@ -584,7 +584,7 @@ function bdchomok_header_add_to_cart_fragment( $fragments ) {
     global $woocommerce;
     ob_start();
     ?>
-    <a class="cart-contents" href="<?php echo esc_url( $woocommerce->cart->get_cart_url() ); ?>"><i class="icofont-shopping-cart"></i><span><?php echo sprintf(_n(' %d', ' %d', $woocommerce->cart->cart_contents_count, 'bdchomok'), $woocommerce->cart->cart_contents_count ); ?></span></a>
+    <a class="cart-contents" href="<?php echo esc_url( $woocommerce->cart->get_cart_url() ); ?>"><i class="icofont-grocery"></i><span><?php echo sprintf(_n(' %d', ' %d', $woocommerce->cart->cart_contents_count, 'bdchomok'), $woocommerce->cart->cart_contents_count ); ?></span></a>
     <?php
     $fragments['a.cart-contents'] = ob_get_clean();
     return $fragments;
