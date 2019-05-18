@@ -20,7 +20,7 @@
             <ul class="list-unstyled row">
                 <li class="media col-lg-3 col-sm-6 col-12">
                     <p class="mr-3 align-self-center ">
-                        <i class="icofont-read-book"></i>
+                        <i class="icofont-fast-delivery"></i>
                     </p>
 
                     <div class="media-body">
@@ -30,7 +30,7 @@
                 </li>
                 <li class="media col-lg-3 col-sm-6 col-12">
                     <p class="mr-3 align-self-center ">
-                        <i class="icofont-read-book"></i>
+                        <i class="icofont-sale-discount"></i>
                     </p>
 
                     <div class="media-body">
@@ -40,7 +40,7 @@
                 </li>
                 <li class="media col-lg-3 col-sm-6 col-12">
                     <p class="mr-3 align-self-center ">
-                        <i class="icofont-read-book"></i>
+                        <i class="icofont-ui-love"></i>
                     </p>
 
                     <div class="media-body">
@@ -50,7 +50,7 @@
                 </li>
                 <li class="media col-lg-3 col-sm-6 col-12">
                     <p class="mr-3 align-self-center ">
-                        <i class="icofont-read-book"></i>
+                        <i class="icofont-support"></i>
                     </p>
 
                     <div class="media-body">

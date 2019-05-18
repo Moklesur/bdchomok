@@ -698,12 +698,58 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
+footer.site-footer{
+	background-color: #000;
+}
+.footer-top{
+	padding: 30px 0;
+	background: #fff;
+	border-top: 2px solid #eee
+}
+.delivery-info i{
+	font-size: 36px;
+}
+
+.delivery-info li{
+	position: relative;
+}
+
+.delivery-info li:after{
+	content: '';
+	height: 100%;
+	width: 2px;
+	background: #eee;
+	right: 30px;
+	position: absolute;
+	top: 0;
+}
+
+.delivery-info li:last-child i {
+	color: #037ef3;
+}
+
+.delivery-info li:nth-child(2) i {
+	color: #7d3f98;
+}
+
+.delivery-info li:first-child i {
+	color: #ff4c4c;
+}
+
+.delivery-info li:last-child:after{
+	display: none;
+}
+
+.footer-middle h3.widget-title{
+	color: #fff;
+	text-transform: uppercase;
+}
 .site-footer ul {
 	padding-left: 18px;
 }
 .site-footer a,
 .site-footer h5{
-	color: #989898;
+	color: #000;
 }
 
 .site-footer a:hover {
@@ -1312,24 +1358,6 @@ h3#order_review_heading{
 .woocommerce .widget_price_filter .price_slider_amount {
 	color: #000;
 }
-
-footer.site-footer{
-	background-color: #000;
-}
-.footer-top{
-	padding: 30px 0;
-	background: #fff;
-	border-top: 2px solid #eee
-}
-.footer-top i{
-	font-size: 36px;
-}
-
-.footer-middle h3.widget-title{
-	color: #fff;
-	text-transform: uppercase;
-}
-
 .slick-initialized .slick-slide {
 	display: block;
 	outline: none;
