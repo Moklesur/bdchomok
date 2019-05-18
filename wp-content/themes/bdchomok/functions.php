@@ -201,9 +201,10 @@ add_action('wp_enqueue_scripts', 'bdchomok_scripts');
 function bdchomok_register_elementor_widgets()
 {
 
-    if (defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base')) {
+    if ( defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base') ) {
         require get_template_directory() . '/plugins/category-post.php';
         require get_template_directory() . '/plugins/recent-products-woo.php';
+        require get_template_directory() . '/plugins/author-list.php';
     }
 }
 

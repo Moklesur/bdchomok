@@ -9,27 +9,59 @@
  * @package bdchomok
  */
 
-
-
-
-
-
-$blogusers = get_users( 'blog_id=1&orderby=nicename&role=author' );
-// Array of WP_User objects.
-foreach ( $blogusers as $user ) {
-    ?>
-    <img src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" />
-    <?php
-    echo '<span>' . esc_html( $user->user_email ) . '</span>';
-}
-
-
 ?>
+
 
 </div><!-- #content -->
 
 <footer id="colophon" class="site-footer">
-    <div class="footer-top">
+    <div class="footer-top delivery-info">
+        <div class="container">
+            <ul class="list-unstyled row">
+                <li class="media col-lg-3 col-sm-6 col-12">
+                    <p class="mr-3 align-self-center ">
+                        <i class="icofont-fast-delivery"></i>
+                    </p>
+
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">Fast Delivery</h5>
+                        <p>Shipping in BD</p>
+                    </div>
+                </li>
+                <li class="media col-lg-3 col-sm-6 col-12">
+                    <p class="mr-3 align-self-center ">
+                        <i class="icofont-sale-discount"></i>
+                    </p>
+
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">Open Discount</h5>
+                        <p>Offering Open Discount</p>
+                    </div>
+                </li>
+                <li class="media col-lg-3 col-sm-6 col-12">
+                    <p class="mr-3 align-self-center ">
+                        <i class="icofont-ui-love"></i>
+                    </p>
+
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">Eyes On Quality</h5>
+                        <p>Publishing Quality Work</p>
+                    </div>
+                </li>
+                <li class="media col-lg-3 col-sm-6 col-12">
+                    <p class="mr-3 align-self-center ">
+                        <i class="icofont-support"></i>
+                    </p>
+
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">24/7 Support</h5>
+                        <p>Saving Every Moments</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><!-- .footer-top -->
+    <div class="footer-middle">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
