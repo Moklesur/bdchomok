@@ -761,6 +761,22 @@ object {
 }
 
 /*--------------------------------------------------------------
+## Author List
+--------------------------------------------------------------*/
+.author-meta .list-inline-item:not(:last-child) {
+	padding: 0 40px;
+}
+
+.author-meta p {
+	margin-top: 20px;
+}
+
+.author-meta .author-pic {
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
+	border: 5px solid #ffff;
+	background: #fff;
+}
+/*--------------------------------------------------------------
 ## Galleries
 --------------------------------------------------------------*/
 .gallery {

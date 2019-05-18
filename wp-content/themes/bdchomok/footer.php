@@ -9,22 +9,8 @@
  * @package bdchomok
  */
 
-
-
-
-
-
-$blogusers = get_users( 'blog_id=1&orderby=nicename&role=author' );
-// Array of WP_User objects.
-foreach ( $blogusers as $user ) {
-    ?>
-    <img src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" />
-    <?php
-    echo '<span>' . esc_html( $user->user_email ) . '</span>';
-}
-
-
 ?>
+
 
 </div><!-- #content -->
 
