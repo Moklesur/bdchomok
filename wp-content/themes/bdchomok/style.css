@@ -472,10 +472,10 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 .product-border h5{
 	margin-bottom: 20px;
 	font-size: 24px;
-	color: #000;
+	color: #51b848;
 }
 .product-border ul.product_list_widget li {
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #51b848;;
 }
 .product-border ul.product_list_widget li:last-child {
 	border-bottom: 0;
@@ -492,11 +492,17 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 .cat-link a{
 	display: inline-block;
 	padding: 12px 30px;
-	background: #fff;
+	background: #51b848;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 1px;
-	border: 1px solid #eee;
+	border: 1px solid #51b848;
+	color: #fff;
+}
+.cat-link a:hover{
+	background: #000000;
+	color: #ffffff;
+	border: 1px solid #000000;
 }
 .category-filter-wrap.cat-tab a:after {
 	content: '';
@@ -1141,12 +1147,12 @@ aside.widget-area{
 }
 
 .widget-area section .widget-title {
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #51b848;
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 	font-size: 22px;
 	text-transform: uppercase;
-	color: #000;
+	color: #51b848;
 }
 .widget ul>li a {
 	 text-decoration: none;
