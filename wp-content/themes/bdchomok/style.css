@@ -324,11 +324,28 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 	padding: 10px 0;
 }
 .widget-area section ,
-.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
 	padding: 15px;
+	/*-webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);*/
+	/*box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);*/
+	background: #fff;
+	border: 1px solid #eee;
+}
+.woocommerce ul.products li.product:hover,
+.woocommerce-page ul.products li.product:hover {
 	-webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
-	background: #fff;
+}
+.woocommerce ul.products li.product .button {
+	color: #000;
+	border-color: #000;
+	background: none;
+}
+.woocommerce ul.products li.product:hover .button {
+	color: #fff;
+	background: #51b848;
+	border-color: #51b848;
 }
 .widget-area section {
 	padding: 30px;
@@ -444,14 +461,75 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 /*--------------------------------------------------------------
 # Woocommerce
 --------------------------------------------------------------*/
-.category-filter-wrap.cat-tab:before {
+.product-border {
+	border: 1px solid #eee;
+	padding: 30px;
+}
+.product-border ul.product_list_widget li a {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.product-border h5{
+	margin-bottom: 20px;
+	font-size: 24px;
+	color: #000;
+}
+.product-border ul.product_list_widget li {
+	border-bottom: 1px solid #eee;
+}
+.product-border ul.product_list_widget li:last-child {
+	border-bottom: 0;
+}
+.product-border ul.product_list_widget li img {
+	width: 45px;
+}
+.product-border del{
+	margin-right: 10px;
+}
+.product-border ins {
+	text-decoration: none;
+}
+.cat-link a{
+	display: inline-block;
+	padding: 12px 30px;
+	background: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	border: 1px solid #eee;
+}
+.category-filter-wrap.cat-tab a:after {
 	content: '';
-	width: 5px;
-	height: 30px;
-	position: absolute;
+	width: 57px;
 	left: 0;
 	z-index: 99;
-	background: #792983;
+	background-image: url(./images/reading-book-1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 59%;
+	margin: -19px auto 0;
+	text-align: center;
+	display: block;
+	height: 0;
+	background-color: #f9f9f9;
+}
+.category-filter-wrap.cat-tab a span:after {
+	content: '';
+	width: 145px;
+	height: 2px;
+	background: #7a2983;
+	display: block;
+	margin: 20px auto -20px;
+	z-index: -1;
+}
+
+.category-filter-wrap a .icofont-read-book {
+	position: relative;
+	z-index: 1;
+	background: #f9f9f9;
+	padding: 0 15px;
+	font-size: 39px;
+	color: #7a2983;
 }
 
 .woocommerce div.product p.price ins, .woocommerce div.product span.price ins,
@@ -502,7 +580,7 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 	flex-shrink: 0;
 	flex-basis: 100%;
 	clear: inherit;
-	margin: 0 15px 15px;
+	margin: 0 10px 15px;
 	padding: 15px;
     outline: none;
 }
@@ -817,13 +895,9 @@ object {
  }
 
 .product-category-filter .category-filter-wrap.cat-tab {
-	border: 1px solid #51b848;
 	padding: 15px;
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
-	background: #fff;
 	margin: 0 0 40px 0px !important;
-	}
+}
 .product-category-filter .category-filter-wrap.cat-tab a{
   font-size: 24px;
 }

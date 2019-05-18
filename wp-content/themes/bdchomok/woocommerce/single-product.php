@@ -11,7 +11,6 @@
  * the readme will list any important changes.
  *
  * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		WooThemes
  * @package 	WooCommerce/Templates
  * @version     1.6.4
  */
@@ -20,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); ?>
+get_header( 'shop' );  ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-12">
@@ -58,7 +57,8 @@ get_header( 'shop' ); ?>
              *
              * @hooked woocommerce_get_sidebar - 10
              */
-            do_action( 'woocommerce_sidebar' );
+            dynamic_sidebar( 'product-page' );
+            //do_action( 'woocommerce_sidebar' );
             ?>
 
         </div>

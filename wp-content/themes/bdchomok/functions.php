@@ -120,7 +120,7 @@ function bdchomok_widgets_init()
 
     register_sidebar(array(
         'name' => esc_html__('Shop', 'bdchomok'),
-        'id' => 'shop',
+        'id' => 'shop-page',
         'description' => esc_html__('Add widgets here.', 'bdchomok'),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget' => '</section>',
@@ -129,7 +129,7 @@ function bdchomok_widgets_init()
     ));
     register_sidebar(array(
         'name' => esc_html__('Product', 'bdchomok'),
-        'id' => 'product',
+        'id' => 'product-page',
         'description' => esc_html__('Add widgets here.', 'bdchomok'),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget' => '</section>',
@@ -146,7 +146,7 @@ function bdchomok_widgets_init()
         'before_title' => '<h5 class="widget-title">',
         'after_title' => '</h5>',
     );
-    register_sidebars( 5, $args_footer_widgets );
+    register_sidebars( 4, $args_footer_widgets );
 }
 
 add_action('widgets_init', 'bdchomok_widgets_init');
@@ -203,6 +203,7 @@ function bdchomok_register_elementor_widgets()
 
     if (defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base')) {
         require get_template_directory() . '/plugins/category-post.php';
+        require get_template_directory() . '/plugins/recent-products-woo.php';
     }
 }
 
@@ -632,4 +633,10 @@ add_filter( 'woocommerce_product_add_to_cart_text', 'bdchomok_cart_button_text' 
 
 function bdchomok_cart_button_text() {
     return __( 'ক্রয় করুন', 'bdchomok' );
+}
+
+
+add_action('init', 'function_to_add_author_woocommerce', 999 );
+function function_to_add_author_woocommerce() {
+    add_post_type_support( 'product', 'author' );
 }

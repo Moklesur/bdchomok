@@ -9,6 +9,21 @@
  * @package bdchomok
  */
 
+
+
+
+
+
+$blogusers = get_users( 'blog_id=1&orderby=nicename&role=author' );
+// Array of WP_User objects.
+foreach ( $blogusers as $user ) {
+    ?>
+    <img src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" />
+    <?php
+    echo '<span>' . esc_html( $user->user_email ) . '</span>';
+}
+
+
 ?>
 
 </div><!-- #content -->
@@ -38,17 +53,10 @@
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-top-padding">
+                <div class="col-lg-5 col-md-6 col-sm-6 col-12 footer-top-padding">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-4' ) ) :
                         dynamic_sidebar( 'footer-widget-4' );
-                    endif;
-                    ?>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
-                    <?php
-                    if ( is_active_sidebar( 'footer-widget-5' ) ) :
-                        dynamic_sidebar( 'footer-widget-5' );
                     endif;
                     ?>
                 </div>

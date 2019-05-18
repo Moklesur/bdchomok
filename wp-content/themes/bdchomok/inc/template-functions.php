@@ -11,6 +11,8 @@
  * @param array $classes Classes for the body element.
  * @return array
  */
+
+
 function bdchomok_body_classes( $classes ) {
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
