@@ -167,7 +167,7 @@ function bdchomok_scripts()
     wp_enqueue_style('bdchomok-style', get_stylesheet_uri());
 
 
-        $loaded_jsvars = array(
+    $loaded_jsvars = array(
         'ajaxurl' => admin_url('admin-ajax.php'));
 
 
