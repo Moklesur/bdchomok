@@ -656,3 +656,23 @@ add_action('init', 'function_to_add_author_woocommerce', 999 );
 function function_to_add_author_woocommerce() {
     add_post_type_support( 'product', 'author' );
 }
+
+// Remove Category Product Page
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+
+// Product Page ( Parent & Child Category )
+add_action( 'woocommerce_single_product_summary', 'bdchomok_product_page_category', 21 );
+function bdchomok_product_page_category(){
+    $parents = get_terms( 'product_cat', array( 'parent' => 0 ) );
+    $categories = get_the_terms( get_the_ID(), 'product_cat' );
+
+    foreach( $parents as $parent ):
+        foreach( $categories as $category ):
+            if( $parent->term_id == $category->parent ):
+                echo $parent->name;
+                echo '<a href="' . get_term_link( $category ) . '">' . $category->name .      '</a><br/> ';
+            endif;
+        endforeach;
+    endforeach;
+}
+

@@ -811,7 +811,7 @@ footer.site-footer{
 .site-footer h5{
 	color: #000;
 }
-.site-footer h5 {
+.site-footer .footer-middle h5 {
 	border-bottom: 1px solid #eee;
 	padding-bottom: 10px;
 }
