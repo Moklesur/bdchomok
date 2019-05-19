@@ -48,7 +48,7 @@
 
 <body <?php body_class(); ?>>
 
-<div class="text-center loading-wrap  d-none">
+<div class="text-center loading-wrap d-none">
     <div class="d-table">
         <div class="d-table-cell align-middle">
             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">

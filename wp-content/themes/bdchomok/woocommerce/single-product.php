@@ -47,10 +47,8 @@ get_header( 'shop' );  ?>
                  */
                 do_action( 'woocommerce_after_main_content' );
                 ?>
-
-
             </div>
-
+            <div class="widget-area col-lg-3 col-md-4 col-12">
             <?php
             /**
              * woocommerce_sidebar hook.
@@ -60,6 +58,7 @@ get_header( 'shop' );  ?>
             dynamic_sidebar( 'product-page' );
             //do_action( 'woocommerce_sidebar' );
             ?>
+            </div>
 
         </div>
     </div>

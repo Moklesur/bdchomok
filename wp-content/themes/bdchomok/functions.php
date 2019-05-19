@@ -358,19 +358,17 @@ function woocommerce_ajax_add_to_cart()
 
 
 //remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-add_action('woocommerce_after_shop_loop_item', 'custom_woocommerce_template_loop_add_to_cart', 10);
+add_action('woocommerce_after_shop_loop_item', 'bdchomok_woocommerce_template_loop_add_to_cart', 10);
 
-function custom_woocommerce_template_loop_add_to_cart()
+function bdchomok_woocommerce_template_loop_add_to_cart()
 {
     global $product; ?>
     <div class="overlay">
-        <button type="button" data-pid="<?php echo $product->id; ?>"
-                class="quick-view"><?php echo __('এক নজরে', 'woocommerce') ?></button>
+        <button type="button" data-pid="<?php echo $product->id; ?>" class="quick-view"><?php echo __('এক নজরে', 'woocommerce') ?></button>
     </div>
 
     <?php
 }
-
 
 function load_single_product()
 {
@@ -380,9 +378,7 @@ function load_single_product()
     );
     $product = wc_get_product($pid);
 
-
     $output = '<div class="woocommerce-notices-wrapper"></div>';
-
 
     $output .= '<div id="product-' . $product->get_id() . '" class="product type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">
 
@@ -412,8 +408,7 @@ function load_single_product()
 
     //$output .= do_action( 'woocommerce_product_thumbnails' );
 
-    $output .= '</figure>
-                                    </div>';
+    $output .= '</figure></div>';
 
     $attachment_ids = $product->get_gallery_image_ids();
 
