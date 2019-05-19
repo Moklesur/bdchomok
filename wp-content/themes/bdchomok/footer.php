@@ -40,24 +40,17 @@
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-nav">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 footer-nav">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-2' ) ) :
                         dynamic_sidebar( 'footer-widget-2' );
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-top-padding">
+                <div class="col-lg-5 col-md-6 col-sm-6 col-12 footer-top-padding">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-3' ) ) :
                         dynamic_sidebar( 'footer-widget-3' );
-                    endif;
-                    ?>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-6 col-12 footer-top-padding">
-                    <?php
-                    if ( is_active_sidebar( 'footer-widget-4' ) ) :
-                        dynamic_sidebar( 'footer-widget-4' );
                     endif;
                     ?>
                 </div>

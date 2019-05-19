@@ -26,10 +26,10 @@ class BDchomok_Widget_Address_Info extends WP_Widget {
         }
 
         echo $args['before_widget']; ?>
-
-
-
         <ul class="list-unstyled address-info">
+            <li>
+                <h5 class="widget-title">Stay With Us!</h5>
+            </li>
             <?php for ( $i=1; $i < 4; $i++ ) { ?>
 
                 <li class="media">

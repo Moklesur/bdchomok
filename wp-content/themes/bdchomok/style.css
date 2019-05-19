@@ -748,6 +748,9 @@ a:hover{
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
+footer#colophon .container {
+	max-width: 1140px;
+}
 .footer-middle {
 	padding: 40px 0;
 }
@@ -807,6 +810,10 @@ footer.site-footer{
 .site-footer a,
 .site-footer h5{
 	color: #000;
+}
+.site-footer h5 {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
 }
 
 .site-footer a:hover {
