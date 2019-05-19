@@ -702,10 +702,64 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 	color: #fff;
 }
 /*--------------------------------------------------------------
+# Plugins
+--------------------------------------------------------------*/
+.address-info {
+	margin-top: 30px;
+}
+.address-info li{
+	padding: 10px 0;
+}
+.address-info p{
+	margin-bottom: 0;
+}
+.address-info i{
+	font-size: 20px;
+}
+.social-links .list-inline-item:not(:last-child){
+	margin: 0;
+}
+a:hover{
+	text-decoration: none;
+}
+.social-links a{
+	display: block;
+	width: 35px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 50%;
+	background: #eee;
+	text-align: center;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.social-links li:hover a{
+	background: #000;
+	color: #fff;
+}
+.footer-nav li {
+	width: 50%;
+	float: left;
+	padding: 5px 0;
+}
+
+
+/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
+.footer-middle {
+	padding: 40px 0;
+}
+.footer-bottom {
+	padding: 10px 0;
+	background: #eee;
+}
+.footer-bottom p{
+	margin: 0;
+}
 footer.site-footer{
-	background-color: #000;
+	background-color: #fcfcfc;
 }
 .footer-top{
 	padding: 30px 0;
@@ -749,9 +803,6 @@ footer.site-footer{
 .footer-middle h3.widget-title{
 	color: #fff;
 	text-transform: uppercase;
-}
-.site-footer ul {
-	padding-left: 18px;
 }
 .site-footer a,
 .site-footer h5{

@@ -15,52 +15,21 @@
 </div><!-- #content -->
 
 <footer id="colophon" class="site-footer">
+    <?php
+    if ( is_active_sidebar( 'footer-top' ) ) :
+        ?>
     <div class="footer-top delivery-info">
         <div class="container">
-            <ul class="list-unstyled row">
-                <li class="media col-lg-3 col-sm-6 col-12">
-                    <p class="mr-3 align-self-center ">
-                        <i class="icofont-fast-delivery"></i>
-                    </p>
-
-                    <div class="media-body">
-                        <h5 class="mt-0 mb-1">Fast Delivery</h5>
-                        <p>Shipping in BD</p>
-                    </div>
-                </li>
-                <li class="media col-lg-3 col-sm-6 col-12">
-                    <p class="mr-3 align-self-center ">
-                        <i class="icofont-sale-discount"></i>
-                    </p>
-
-                    <div class="media-body">
-                        <h5 class="mt-0 mb-1">Open Discount</h5>
-                        <p>Offering Open Discount</p>
-                    </div>
-                </li>
-                <li class="media col-lg-3 col-sm-6 col-12">
-                    <p class="mr-3 align-self-center ">
-                        <i class="icofont-ui-love"></i>
-                    </p>
-
-                    <div class="media-body">
-                        <h5 class="mt-0 mb-1">Eyes On Quality</h5>
-                        <p>Publishing Quality Work</p>
-                    </div>
-                </li>
-                <li class="media col-lg-3 col-sm-6 col-12">
-                    <p class="mr-3 align-self-center ">
-                        <i class="icofont-support"></i>
-                    </p>
-
-                    <div class="media-body">
-                        <h5 class="mt-0 mb-1">24/7 Support</h5>
-                        <p>Saving Every Moments</p>
-                    </div>
-                </li>
-            </ul>
+            <?php
+                dynamic_sidebar( 'footer-top' );
+            ?>
         </div>
     </div><!-- .footer-top -->
+    <?php
+    endif;
+    ?>
+
+
     <div class="footer-middle">
         <div class="container">
             <div class="row">
@@ -71,7 +40,28 @@
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-top-padding">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
+
+                    <ul class="footer-nav text-capitalize">
+                        <li>
+                            <a href="#">home</a>
+                        </li>
+                        <li>
+                            <a href="#">about</a>
+                        </li>
+                        <li>
+                            <a href="#">contact</a>
+                        </li>
+                        <li>
+                            <a href="#">product</a>
+                        </li>
+                        <li>
+                            <a href="#">Service</a>
+                        </li>
+                        <li>
+                            <a href="#">Terms and condition</a>
+                        </li>
+                    </ul>
                     <?php
                     if ( is_active_sidebar( 'footer-widget-2' ) ) :
                         dynamic_sidebar( 'footer-widget-2' );
@@ -95,15 +85,17 @@
             </div>
         </div>
     </div><!-- .footer-top -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-12">
-                <div class="site-info text-center">
-                    <p><?php esc_html_e( '© 2019 bdchomok', 'bdchomok' ); ?></p>
-                </div><!-- .site-info -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="site-info text-center">
+                        <p><?php esc_html_e( '© 2019 bdchomok', 'bdchomok' ); ?></p>
+                    </div><!-- .site-info -->
+                </div>
             </div>
         </div>
-    </div>
+    </div><!-- .footer-bottom -->
 
 </footer><!-- #colophon -->
 </div><!-- #page -->

@@ -137,6 +137,17 @@ function bdchomok_widgets_init()
         'after_title' => '</h3>',
     ));
 
+    register_sidebar(array(
+        'name' => esc_html__('Footer Top', 'bdchomok'),
+        'id' => 'footer-top',
+        'description' => esc_html__('Add widgets here.', 'bdchomok'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ));
+
+
     $args_footer_widgets = array(
         'name'          => __( 'Footer %d', 'preferred-magazine' ),
         'id'            => 'footer-widget',
@@ -147,9 +158,20 @@ function bdchomok_widgets_init()
         'after_title' => '</h5>',
     );
     register_sidebars( 4, $args_footer_widgets );
+
+    register_widget( 'BDchomok_Widget_Services' );
+    register_widget( 'BDchomok_Widget_Address_Info' );
+    register_widget( 'BDchomok_Widget_Social_links' );
 }
 
 add_action('widgets_init', 'bdchomok_widgets_init');
+
+/**
+ * Widgets
+ */
+require get_template_directory() . '/plugins/address-info.php';
+require get_template_directory() . '/plugins/services.php';
+require get_template_directory() . '/plugins/social-links.php';
 
 /**
  * Enqueue scripts and styles.
