@@ -40,28 +40,7 @@
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-top-padding">
-
-                    <ul class="footer-nav text-capitalize">
-                        <li>
-                            <a href="#">home</a>
-                        </li>
-                        <li>
-                            <a href="#">about</a>
-                        </li>
-                        <li>
-                            <a href="#">contact</a>
-                        </li>
-                        <li>
-                            <a href="#">product</a>
-                        </li>
-                        <li>
-                            <a href="#">Service</a>
-                        </li>
-                        <li>
-                            <a href="#">Terms and condition</a>
-                        </li>
-                    </ul>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 footer-nav">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-2' ) ) :
                         dynamic_sidebar( 'footer-widget-2' );
