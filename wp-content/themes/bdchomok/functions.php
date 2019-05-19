@@ -167,7 +167,7 @@ function bdchomok_scripts()
     wp_enqueue_style('bdchomok-style', get_stylesheet_uri());
 
 
-        $loaded_jsvars = array(
+    $loaded_jsvars = array(
         'ajaxurl' => admin_url('admin-ajax.php'));
 
 
@@ -524,18 +524,11 @@ function load_add_cart_info_product()
     $output .= '</div>
 	<div class="summary entry-summary">
 	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
-     <p class="price">'.$product->get_price_html().'</p>
-<div class="woocommerce-product-details__short-description">';
-
-    $output .= '<a href="'.site_url().'/cart" 
-                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button added_to_cart wc-forward mb-3"
-                             >View Cart</a>';
+     <p class="price">'.$product->get_price_html().'</p>';
 
 
 
-
-
-    $output .= '</div> </div></div> </div>';
+    $output .= ' </div></div> </div>';
 
 
     $args = array(
