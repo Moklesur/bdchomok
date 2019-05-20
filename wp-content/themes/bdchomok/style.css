@@ -671,7 +671,20 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 .category-list-tab-wrap .tab-content ul>li{
 	margin-bottom: 10px;
 }
-
+.advance-search button.close{
+	position: absolute;
+	right: 0;
+	background-color: #51b848;
+	padding: 5px 10px;
+	z-index: 999999999999999999;
+	border: 0;
+}
+.advance-search button.close:hover{
+	background-color: #7a2983;
+}
+.advance-search .woocommerce-product-search input[type='search']:focus{
+	outline-color: #0A9400;
+}
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
