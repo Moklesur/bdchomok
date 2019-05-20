@@ -670,4 +670,3 @@ function bdchomok_product_page_category(){
         endforeach;
     endforeach;
 }
-
