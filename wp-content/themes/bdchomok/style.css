@@ -637,6 +637,41 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 	height: 82%;
 	background: rgba(11, 11, 11, 0.71);
 }
+
+.woocommerce div.product form.cart{
+	margin-top: 20px;
+}
+.category-list-tab-wrap h4{
+	color:#000000;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.category-list-tab-wrap h4:hover{
+	color:#51b848
+}
+.category-list-tab-wrap .nav-pills{
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.category-list-tab-wrap .tab-content{
+	max-width: 650px;
+	margin: 0 auto;
+	text-align: left;
+	min-height:300px;
+	border: 1px solid #51b848;
+	padding: 15px;
+}
+
+.category-list-tab-wrap  .nav-pills .nav-link.active, .category-list-tab-wrap .nav-pills .show > .nav-link{
+	background-color: #51b848;
+	border-radius: 0;
+}
+
+.category-list-tab-wrap .tab-content ul>li{
+	margin-bottom: 10px;
+}
+
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
@@ -858,6 +893,7 @@ footer.site-footer{
 .site-footer .footer-middle h5 {
 	border-bottom: 1px solid #eee;
 	padding-bottom: 10px;
+	color: #51b848;
 }
 
 .site-footer a:hover {
@@ -867,6 +903,12 @@ footer.site-footer{
 .site-footer .widget ul>li a {
 	font-size: 14px;
 }
+
+.site-footer .widget ul{
+	list-style: none;
+	padding: 0;
+}
+
 
 /*--------------------------------------------------------------
 # Media
