@@ -20,8 +20,11 @@
             });
         }
 
-        $('#category-list-tab li:first-child a').tab('show');
-        $('#category-list-tabContent .tab-pane:first-child').tab('show');
+        // List category tab
+        if ($('#category-list-tab').length) {
+            $('#category-list-tab li:first-child a').tab('show');
+            $('#category-list-tabContent .tab-pane:first-child').tab('show');
+        }
 
         /* Featured News*/
         if (('.category-filter').length) {
