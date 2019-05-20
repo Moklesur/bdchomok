@@ -20,6 +20,9 @@
             });
         }
 
+        $('#category-list-tab li:first-child a').tab('show');
+        $('#category-list-tabContent .tab-pane:first-child').tab('show');
+
         /* Featured News*/
         if (('.category-filter').length) {
             $('div.category-filter ul.products').each(function () {
