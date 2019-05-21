@@ -669,5 +669,5 @@ function bdchomok_product_page_category(){
                 echo '<a href="' . esc_url( get_term_link( $category ) ) . '">' . esc_html( $category->name ) .'</a><br/> ';
             endif;
         endforeach;
-    endforeach;
+    endforeach;K
 }
