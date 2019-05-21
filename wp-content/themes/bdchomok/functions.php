@@ -227,6 +227,7 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/category-post.php';
         require get_template_directory() . '/plugins/recent-products-woo.php';
         require get_template_directory() . '/plugins/author-list.php';
+        require get_template_directory() . '/plugins/list-category-woo.php';
     }
 }
 
@@ -664,9 +665,9 @@ function bdchomok_product_page_category(){
     foreach( $parents as $parent ):
         foreach( $categories as $category ):
             if( $parent->term_id == $category->parent ):
-                echo $parent->name;
-                echo '<a href="' . get_term_link( $category ) . '">' . $category->name .      '</a><br/> ';
+                echo esc_html( $parent->name ).' : ';
+                echo '<a href="' . esc_url( get_term_link( $category ) ) . '">' . esc_html( $category->name ) .'</a><br/> ';
             endif;
         endforeach;
-    endforeach;
+    endforeach;K
 }
