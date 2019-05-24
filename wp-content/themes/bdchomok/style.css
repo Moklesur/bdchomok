@@ -637,6 +637,54 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 	height: 82%;
 	background: rgba(11, 11, 11, 0.71);
 }
+
+.woocommerce div.product form.cart{
+	margin-top: 20px;
+}
+.category-list-tab-wrap h4{
+	color:#000000;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.category-list-tab-wrap h4:hover{
+	color:#51b848
+}
+.category-list-tab-wrap .nav-pills{
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.category-list-tab-wrap .tab-content{
+	max-width: 650px;
+	margin: 0 auto;
+	text-align: left;
+	min-height:300px;
+	border: 1px solid #eee;
+	padding: 15px;
+}
+
+.category-list-tab-wrap  .nav-pills .nav-link.active, .category-list-tab-wrap .nav-pills .show > .nav-link{
+	background-color: #51b848;
+	border-radius: 0;
+}
+
+.category-list-tab-wrap .tab-content ul>li{
+	margin-bottom: 10px;
+}
+.advance-search button.close{
+	position: absolute;
+	right: 0;
+	background-color: #51b848;
+	padding: 5px 10px;
+	z-index: 999999999999999999;
+	border: 0;
+}
+.advance-search button.close:hover{
+	background-color: #7a2983;
+}
+.advance-search .woocommerce-product-search input[type='search']:focus{
+	outline-color: #0A9400;
+}
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
@@ -858,6 +906,7 @@ footer.site-footer{
 .site-footer .footer-middle h5 {
 	border-bottom: 1px solid #eee;
 	padding-bottom: 10px;
+	color: #51b848;
 }
 
 .site-footer a:hover {
@@ -867,6 +916,12 @@ footer.site-footer{
 .site-footer .widget ul>li a {
 	font-size: 14px;
 }
+
+.site-footer .widget ul{
+	list-style: none;
+	padding: 0;
+}
+
 
 /*--------------------------------------------------------------
 # Media
@@ -1016,10 +1071,10 @@ object {
 	/*height: 67%;*/
 	/*background: rgba(11, 11, 11, 0.71);*/
 }
-.quick-view-modal .modal-header,.product-card-model .modal-header{
+.quick-view-modal .modal-header,.product-card-model .modal-header ,.success-modal .modal-header{
 	border-bottom: none;
 }
-.quick-view-modal .modal-header .close ,.product-card-model .modal-header .close{
+.quick-view-modal .modal-header .close ,.product-card-model .modal-header .close, .success-modal .modal-header .close{
 	height: 50px;
 	width: 50px;
 	line-height: 8px;
@@ -1028,6 +1083,11 @@ object {
 	opacity: 1;
 	color: white;
 	border: none
+
+}
+.success-modal .modal-body h2{
+	color: #0A9400;
+	font-size: 28px;
 }
 .quick-view-modal .modal-header .close:hover{
 	background: black;
@@ -1486,10 +1546,10 @@ h3.other-title{
 }
 button.slick-prev,button.slick-next{
 	position: absolute;
-	top: -56px;
+	top: -69px;
 }
 button.slick-prev{
-	right: 9%;
+	right: 6%;
 }
 button.slick-next{
 right: 0;
@@ -1509,6 +1569,11 @@ right: 0;
 }
 .woocommerce-Price-amount.amount{
 	color: #51b848;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current{
+	color: #fff;
+	background-color:#51b848;
 }
 
 /*--------------------------------------------------------------

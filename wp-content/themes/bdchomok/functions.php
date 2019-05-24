@@ -423,7 +423,7 @@ function load_single_product()
 	<div class="summary entry-summary">
 	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
      <p class="price">'.$product->get_price_html().'</p>
-<div class="woocommerce-product-details__short-description">';
+<div class="woocommerce-product-details__short-description mb-3">';
 
 
 
@@ -434,7 +434,7 @@ function load_single_product()
     $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1"
                                class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
                                data-product_id="'.$product->get_id().'" data-product_sku=""
-                               aria-label="Add “Product” to your cart" rel="nofollow"><img class="mr-2" src="'.URL.'/images/shop_cart.png" alt="">Add to
+                               aria-label="Add “Product” to your cart" rel="nofollow"><img class="mr-2" src="'.get_template_directory_uri().'/images/shop_cart.png" alt="">Add to
                     cart</a>';
 
 
@@ -461,21 +461,6 @@ function load_single_product()
 	
 </div>
 	</div>
-
-	
-	<div class="woocommerce-tabs wc-tabs-wrapper">
-		<ul class="tabs wc-tabs" role="tablist">
-				<li class="description_tab active" id="tab-title-description" role="tab" aria-controls="tab-description">
-					<a href="#tab-description">Description</a>
-				</li>
-					</ul>
-					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description" style="display: block;">
-				
-  <h2>Description</h2>'
-        .$product->get_description().'
-
-			</div>
-			</div>
 
 </div>';
 
@@ -556,7 +541,7 @@ function load_add_cart_info_product()
 
     $random_products = get_posts( $args );
     $single = '';
-    $output .='<h3 class="other-title">Other\'s Product </h3>';
+    $output .='<h3 class="other-title">আমাদের অন্যান্য পণ্য:</h3>';
     $output .= '<div class="clearfix"><ul class="list-inline random-product rand-slider">';
     foreach ( $random_products as $post ) : setup_postdata( $post );
         $permalink =  get_post_permalink($post->ID);
