@@ -33,18 +33,11 @@
                 $thisbutton.addClass('added').removeClass('loading');
             },
             success: function (response) {
-
-                var success_modal = $(".success-modal");
-                success_modal.modal("show");
-                setTimeout(function(){
-                    success_modal.hide();
-                }, 2000);
                 setTimeout(function() {
                         $(".loading-wrap").addClass("d-none");
                         var model = $(".product-card-model");
                         $('.product-card-model .modal-body').html(response.html);
                         model.modal("show");
-                        success_modal.hide();
                         var slider = model.find('.rand-slider');
                         slider.slick({
                             dots: false,
@@ -86,7 +79,7 @@
                             ]
                         });
 
-                    }, 2000);
+                    }, 1000);
 
                 if (response.error & response.product_url) {
                     window.location = response.product_url;
@@ -100,11 +93,7 @@
         return false;
     });
 
-    $(document).on('click', '.product-card-model .close', function (e) {
-        e.preventDefault();
-        var success_modal = $(".success-modal");
-        success_modal.modal("hide");
-    });
+
 
     $('.modal').on('shown.bs.modal', function (e) {
         $(".product-card-model").find('.rand-slider').slick("setPosition", 0);

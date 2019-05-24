@@ -90,7 +90,8 @@
 <div class="modal fade bd-example-modal-lg product-card-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header ml-auto">
+            <div class="modal-header">
+                <h3>আপনার পণ্যটি সফলভাবে কার্ডে যুক্ত হয়েছে</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -121,22 +122,6 @@
                     <h2>Our Other Products</h2>
                 </div>
             </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade bd-example-modal-lg success-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header ml-auto">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                 <h2>আপনার পণ্যটি সফলভাবে কার্ডে যুক্ত হয়েছে</h2>
             </div>
         </div>
     </div>

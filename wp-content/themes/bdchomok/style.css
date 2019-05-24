@@ -1602,12 +1602,15 @@ right: 0;
 	padding: 0;
 	margin-botom: 20px;
 }
+
 .post .entry-content {
 	padding: 0;
 }
 .post .entry-title {
 	font-size: 26px;
-	margin-bottom: 10px;
+}
+.entry-meta{
+	margin-bottom: 20px;
 }
 
 .blog .breadcrumb-wrap{
@@ -1621,7 +1624,10 @@ right: 0;
 	margin-bottom: 30px;
 }
 
-
+.blog .breadcrumb-wrap .woocommerce-breadcrumb{
+font-size: 24px;
+	color: #000000;
+}
 /*--------------------------------------------------------------
 
 	## Mobile

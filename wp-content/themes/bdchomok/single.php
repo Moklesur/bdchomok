@@ -15,11 +15,12 @@ get_header();
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-md-8 col-12">
+
                         <?php
                         while ( have_posts() ) :
                             the_post();
 
-                            get_template_part( 'template-parts/content', get_post_type() );
+                            get_template_part( 'template-parts', get_post_type() );
 
                             the_post_navigation();
 
