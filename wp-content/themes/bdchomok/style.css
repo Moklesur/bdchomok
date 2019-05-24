@@ -1575,6 +1575,29 @@ right: 0;
 	color: #fff;
 	background-color:#51b848;
 }
+.post .entry-header {
+	padding: 0;
+	margin-botom: 20px;
+}
+.post .entry-content {
+	padding: 0;
+}
+.post .entry-title {
+	font-size: 26px;
+	margin-bottom: 10px;
+}
+
+.blog .breadcrumb-wrap{
+	min-height: 200px;
+	padding: 100px 0;
+	text-align: center;
+	background: url('./images/banner.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-bottom: 30px;
+}
+
 
 /*--------------------------------------------------------------
 
