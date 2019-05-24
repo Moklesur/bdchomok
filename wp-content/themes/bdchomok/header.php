@@ -262,7 +262,7 @@
 
     </header><!-- #masthead -->
 
-    <!-- Modal -->
+    <!-- Advance Search Form -->
     <div class="modal fade advance-search" id="advance-search" tabindex="-1" role="dialog" aria-labelledby="advance-search" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
