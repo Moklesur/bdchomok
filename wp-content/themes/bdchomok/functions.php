@@ -434,8 +434,7 @@ function load_single_product()
     $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1"
                                class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
                                data-product_id="'.$product->get_id().'" data-product_sku=""
-                               aria-label="Add “Product” to your cart" rel="nofollow"><img class="mr-2" src="'.get_template_directory_uri().'/images/shop_cart.png" alt="">Add to
-                    cart</a>';
+                               aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a>';
 
 
     $output .= '.<div class="product_meta">';
@@ -600,6 +599,9 @@ add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
     <?php $fragments['div.mini-cart-fix'] = ob_get_clean();
     return $fragments;
 } );
+
+// Remove Breadcrumb'
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
 
 /**
  * woocommerce support

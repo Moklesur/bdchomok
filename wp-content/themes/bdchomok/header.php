@@ -284,4 +284,15 @@
         </div>
     </div>
 
+    <div class="breadcrumb-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <?php woocommerce_breadcrumb(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="content" class="site-content">
