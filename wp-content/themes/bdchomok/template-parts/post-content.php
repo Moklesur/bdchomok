@@ -13,7 +13,6 @@
 
   <div class="row mb-5">
       <div class="col-lg-6 col-6">
-          post
           <?php bdchomok_post_thumbnail(); ?>
       </div>
       <div class="col-6 col-6">
