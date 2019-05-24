@@ -497,10 +497,9 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 .product-border h5{
 	margin-bottom: 20px;
 	font-size: 24px;
-	color: #51b848;
 }
 .product-border ul.product_list_widget li {
-	border-bottom: 1px solid #51b848;;
+	border-bottom: 1px solid #eee;;
 }
 .product-border ul.product_list_widget li:last-child {
 	border-bottom: 0;
@@ -583,6 +582,7 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 }
 .woocommerce ul.products li.product .price del{
 	margin-right: 10px;
+	color: #989898;
 }
 .woocommerce ul.products li.product .price ins {
 	text-decoration: none;
@@ -1147,18 +1147,31 @@ object {
 .woocommerce div.product {
 	padding: 15px 30px;
 }
-.woocommerce .woocommerce-breadcrumb {
-	padding: 30px 0px;
-	font-size: 20px;
+.breadcrumb-wrap {
+	background: #fafafa;
+}
+.breadcrumb-wrap .woocommerce-breadcrumb {
+	padding: 15px 0;
+	font-size: 13px;
+	margin: 0;
+	text-transform: capitalize;
+	font-weight: 600;
 }
 
-.woocommerce .woocommerce-breadcrumb a {
+.breadcrumb-wrap .woocommerce-breadcrumb a {
 	color: #060606;
 	text-decoration: none;
-	text-transform: uppercase;
+	text-transform: capitalize;
 }
-.woocommerce .woocommerce-breadcrumb a:hover{
+.breadcrumb-wrap .woocommerce-breadcrumb a:hover{
 	color: #51b848;
+}
+.woocommerce-products-header {
+	margin-bottom: 30px;
+}
+
+.woocommerce ul.products li.product .button {
+	margin-top: 5px;
 }
 
 aside.widget-area{
@@ -1305,16 +1318,16 @@ aside.widget-area{
 }
 .woocommerce #review_form #respond textarea:focus {
 	outline-color:#51b848;
-	border-color:#51b848;
+	border-color:#eee;
 }
 
 .widget-area section .widget-title {
-	border-bottom: 1px solid #51b848;
+	border-bottom: 1px solid #eee;
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 	font-size: 22px;
 	text-transform: uppercase;
-	color: #51b848;
+	color: #000;
 }
 .widget ul>li a {
 	 text-decoration: none;
@@ -1515,6 +1528,14 @@ h3#order_review_heading{
 	padding: 5px 15px;
 	margin-bottom: 20px;
 	outline-color: #51b848;
+	width: 100%;
+}
+del{
+	color: #989898;
+	margin-right: 10px;
+}
+ins{
+	text-decoration: none;
 }
 .woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
 	background-color: #51b848;
@@ -1568,7 +1589,9 @@ right: 0;
 	color: #51b848;
 }
 .woocommerce-Price-amount.amount{
-	color: #51b848;
+	color: #7a2983;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current{
