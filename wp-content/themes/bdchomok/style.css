@@ -1628,6 +1628,12 @@ right: 0;
    font-size: 24px;
 	color: #000000;
 }
+.comments-area{
+	padding: 20px 0;
+}
+.comments-title{
+	margin-bottom: 20px;
+}
 /*--------------------------------------------------------------
 
 	## Mobile
