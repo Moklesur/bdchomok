@@ -1071,10 +1071,10 @@ object {
 	/*height: 67%;*/
 	/*background: rgba(11, 11, 11, 0.71);*/
 }
-.quick-view-modal .modal-header,.product-card-model .modal-header{
+.quick-view-modal .modal-header,.product-card-model .modal-header ,.success-modal .modal-header{
 	border-bottom: none;
 }
-.quick-view-modal .modal-header .close ,.product-card-model .modal-header .close{
+.quick-view-modal .modal-header .close ,.product-card-model .modal-header .close, .success-modal .modal-header .close{
 	height: 50px;
 	width: 50px;
 	line-height: 8px;
@@ -1083,6 +1083,11 @@ object {
 	opacity: 1;
 	color: white;
 	border: none
+
+}
+.success-modal .modal-body h2{
+	color: #0A9400;
+	font-size: 28px;
 }
 .quick-view-modal .modal-header .close:hover{
 	background: black;
@@ -1541,10 +1546,10 @@ h3.other-title{
 }
 button.slick-prev,button.slick-next{
 	position: absolute;
-	top: -56px;
+	top: -69px;
 }
 button.slick-prev{
-	right: 9%;
+	right: 6%;
 }
 button.slick-next{
 right: 0;
@@ -1564,6 +1569,11 @@ right: 0;
 }
 .woocommerce-Price-amount.amount{
 	color: #51b848;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current{
+	color: #fff;
+	background-color:#51b848;
 }
 
 /*--------------------------------------------------------------

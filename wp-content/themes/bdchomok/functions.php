@@ -423,7 +423,7 @@ function load_single_product()
 	<div class="summary entry-summary">
 	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
      <p class="price">'.$product->get_price_html().'</p>
-<div class="woocommerce-product-details__short-description">';
+<div class="woocommerce-product-details__short-description mb-3">';
 
 
 
@@ -541,7 +541,7 @@ function load_add_cart_info_product()
 
     $random_products = get_posts( $args );
     $single = '';
-    $output .='<h3 class="other-title">Other\'s Product </h3>';
+    $output .='<h3 class="other-title">আমাদের অন্যান্য পণ্য:</h3>';
     $output .= '<div class="clearfix"><ul class="list-inline random-product rand-slider">';
     foreach ( $random_products as $post ) : setup_postdata( $post );
         $permalink =  get_post_permalink($post->ID);
