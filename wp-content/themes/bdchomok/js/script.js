@@ -87,6 +87,40 @@
                 }
             });
         };
+
+
+        // Advance search ajax
+        $(".search-target .form-control").keyup( function () {
+            $(".search-target").addClass('active');
+            console.log($(".search-target .form-control").val());
+            var stem = $(".search-target .form-control").val();
+            $.ajax({
+                method: 'POST',
+                url: js_vars.ajaxurl,
+                data: {
+                    action: "advance_search",
+                    keyword: $(".search-target .form-control").val()
+                },
+                dataType: "json",
+                async:true,
+                success: function (response) {
+                    //var res_data = response.output;
+                    $('.product-search-content').html(response.output);
+                    // $('.mb-0.highlight span').text(stem);
+                    $(".search-target").removeClass('active');
+                }
+            });
+
+        });
+
+        // Quick View
+        $(".advance-search").modal("hide");
+        $(body).on('click', '.advance-search-tri', function (e) {
+            $(".advance-search").modal("show");
+        });
+        $(body).on('click', '.advance-search .close', function (e) {
+            $(".advance-search").modal("hide");
+        });
     });
 
 })(jQuery);

@@ -658,3 +658,6 @@ function bdchomok_product_page_category(){
         endforeach;
     endforeach;
 }
+
+// Ajax Search
+require get_template_directory() . '/ajax-search/functions.php';

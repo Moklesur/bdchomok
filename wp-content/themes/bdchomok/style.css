@@ -1711,3 +1711,26 @@ Max Width 480px
 		max-width: 100px;
 	}
 }
+
+
+.search-target #wait2 {
+	display: block;
+	opacity: 0;
+	visibility: hidden;
+	top: 0;
+	right: 0;
+	background-size: 68%;
+	min-height: 37px;
+	position: absolute;
+	width: 40px;
+}
+.search-target.active #wait2 { opacity: 1; visibility: visible; }
+.wait {
+	background: url('./images/rolling.gif') no-repeat center center;
+	-webkit-background-size: auto;
+	-moz-background-size: auto;
+	-o-background-size: auto;
+	background-size: auto;
+	min-height: 100px;
+	display: none;
+}

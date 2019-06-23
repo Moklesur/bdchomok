@@ -233,7 +233,7 @@
                     <div class="cart-search">
                         <ul class="list-inline mb-0 text-right">
                             <li class="list-inline-item ml-4">
-                                <a href="#" class="advance-search-tri" data-toggle="modal" data-target="#advance-search"><i class="icofont-search-2"></i></a>
+                                <a href="#" class="advance-search-tri" data-toggle="modal" data-target="#advance-search" ><i class="icofont-search-2"></i></a>
                             </li>
 
                             <?php if( class_exists( 'WooCommerce' ) ): ?>
@@ -263,21 +263,40 @@
     </header><!-- #masthead -->
 
     <!-- Advance Search Form -->
-    <div class="modal fade advance-search" id="advance-search" tabindex="-1" role="dialog" aria-labelledby="advance-search" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade advance-search" id="advance-search" tabindex="-1" role="dialog"  aria-labelledby="advance-search" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <div class="modal-body">
                     <form role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
-                        <div class="input-group mb-3 mt-4">
-                            <input type="search" class="form-control m-0" placeholder="<?php echo esc_attr_x( 'Search Products&hellip;', 'placeholder', 'woocommerce' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'woocommerce' ); ?>" />
-                            <div class="input-group-append">
-                                <button type="submit" id="button-addon2"><i class="icofont-search-2"></i></button>
-                            </div>
+
+                        <div class="position-relative search-target">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <input type="text" class="form-control" value="" name="s">
+                            <span class="wait" id="wait2"></span>
                         </div>
-                        <input type="hidden" name="post_type" value="product" />
+
+                        <div class="advanced-search-wrapper">
+                            <!-- /.search-padding start -->
+                            <div class="search-padding product-search-content mb-4">
+
+
+                            </div>
+
+                            <!-- /.search-padding end -->
+                        </div>
+
+<!--                        <div class="input-group mb-3 mt-4">-->
+<!--                            <input type="search" class="form-control m-0" placeholder="--><?php //echo esc_attr_x( 'Search Products&hellip;', 'placeholder', 'woocommerce' ); ?><!--" value="--><?php //echo get_search_query(); ?><!--" name="s" title="--><?php //echo esc_attr_x( 'Search for:', 'label', 'woocommerce' ); ?><!--" />-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button type="submit" id="button-addon2"><i class="icofont-search-2"></i></button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <input type="hidden" name="post_type" value="product" />-->
                     </form>
                 </div>
             </div>
