@@ -7,15 +7,17 @@
  * @package bdchomok
  */
 
+$class[] = 'mt-30';
+
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $class ); ?>>
 
   <div class="row mb-5">
-      <div class="col-lg-6 col-6">
+      <div class="col-lg-6 col-sm-12 col-12 mb-xs-30">
           <?php bdchomok_post_thumbnail(); ?>
       </div>
-      <div class="col-6 col-6">
+      <div class="col-lg-6 col-sm-12 col-12">
           <header class="entry-header">
               <?php
               if ( is_singular() ) :

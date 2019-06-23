@@ -59,6 +59,80 @@
             });
         }
 
+        /* Author Slider */
+        if (('.author-slider').length) {
+            $('.author-slider').each(function () {
+                $(this).slick({
+                    slidesToShow: 6,
+                    autoplay: true,
+                    nextArrow: '<i class="icofont-long-arrow-right slider-right arrow-position f-2x"></i>',
+                    prevArrow: '<i class="icofont-long-arrow-left arrow-position f-2x"></i>',
+                    centerPadding: '0px',
+                    centerMode: true,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 4
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        }]
+                });
+            });
+        }
+
+        // Product List Slider
+        $( '.on-sale-product .product_list_widget' ).each( function() {
+            $( this ).slick( {
+                vertical: true,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                centerPadding: '0px',
+                autoplay: true,
+                centerMode: true,
+                nextArrow: '<i class="ion-ios-arrow-up f-2x"></i>',
+                prevArrow: '<i class="ion-ios-arrow-down f-2x"></i>',
+                autoplaySpeed: 2000,
+                dot: false,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 5,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: false
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            } );
+        } );
+
         // Quick View
         $(document).on('click', '.quick-view', function (e) {
             $(".loading-wrap").removeClass("d-none");

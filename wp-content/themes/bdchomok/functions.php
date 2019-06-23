@@ -658,3 +658,9 @@ function bdchomok_product_page_category(){
         endforeach;
     endforeach;
 }
+
+// ACF page option
+if( function_exists('acf_add_options_page') ) {
+    acf_add_options_page();
+
+}
