@@ -29,7 +29,6 @@
     endif;
     ?>
 
-
     <div class="footer-middle">
         <div class="container">
             <div class="row">

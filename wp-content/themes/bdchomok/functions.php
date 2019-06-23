@@ -659,5 +659,8 @@ function bdchomok_product_page_category(){
     endforeach;
 }
 
-// Ajax Search
-require get_template_directory() . '/ajax-search/functions.php';
+// ACF page option
+if( function_exists('acf_add_options_page') ) {
+    acf_add_options_page();
+
+}
