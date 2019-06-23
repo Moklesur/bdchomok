@@ -664,3 +664,5 @@ if( function_exists('acf_add_options_page') ) {
     acf_add_options_page();
 
 }
+// Ajax Search
+require get_template_directory() . '/ajax-search/functions.php';

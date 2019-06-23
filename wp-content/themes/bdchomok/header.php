@@ -272,18 +272,23 @@
                 <div class="modal-body">
                     <form role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
 
-                        <div class="position-relative search-target">
+                        <div class="position-relative search-target mb-3">
+
+                            <input type="text" class="form-control" placeholder="বইয়ের নাম ও লেখক দিয়ে অনুসন্ধান করুন" value="" name="s">
+
                             <button type="submit">
-                                <i class="fa fa-search"></i>
+                                <i class="icofont-search-1"></i>
                             </button>
-                            <input type="text" class="form-control" value="" name="s">
-                            <span class="wait" id="wait2"></span>
+
+                            <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
+
                         </div>
 
                         <div class="advanced-search-wrapper">
+
+
                             <!-- /.search-padding start -->
                             <div class="search-padding product-search-content mb-4">
-
 
                             </div>
 

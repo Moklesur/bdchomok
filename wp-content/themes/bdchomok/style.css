@@ -1914,17 +1914,19 @@ Max Width 480px
 
 
 .search-target #wait2 {
-	display: block;
 	opacity: 0;
 	visibility: hidden;
-	top: 0;
-	right: 0;
 	background-size: 68%;
 	min-height: 37px;
-	position: absolute;
+	margin: 0 auto;
+	position: relative;
 	width: 40px;
+	display: none;
 }
-.search-target.active #wait2 { opacity: 1; visibility: visible; }
+.search-target.active #wait2 {
+	opacity: 1; visibility: visible;
+	display: block;
+}
 .wait {
 	background: url('./images/rolling.gif') no-repeat center center;
 	-webkit-background-size: auto;
@@ -1933,4 +1935,15 @@ Max Width 480px
 	background-size: auto;
 	min-height: 100px;
 	display: none;
+}
+.search-target button[type='submit']{
+	line-height: 1.5;
+}
+.advance-search .form-control{
+	width: 90%;
+	display: inline-block;
+}
+.advance-search .table td, .advance-search .table th {
+	padding: .75rem;
+	vertical-align: middle;
 }

@@ -18,6 +18,10 @@ function advance_search(){
             $output .= '<h6 class="text-uppercase">shop</h6>';
 
             $product_count = 1;
+            $output .= '   <div class="table-responsive">
+                     <table class="table table-hover">
+                           
+                            <tbody>';
 
             while ($productLoop->have_posts()) : $productLoop->the_post();
 
@@ -41,14 +45,26 @@ function advance_search(){
                         break;
                     }
 
-                    $output .= '<div class="search-product-items d-flex align-items-center"><div class="product-thumbs mr-lg-5 mr-sm-2 mr-1">
-                        <span></span>
-                        <a href="'.get_post_permalink($productLoop->post->id).'" class="load_popup" data-pid="'.$productLoop->post->ID.'">' . $productImage . '</a>
-                    </div>
-                    <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title mr-lg-5 mr-sm-2 mr-1 load_popup" data-pid="'.$productLoop->post->ID.'">' . get_the_title() . '</a>
-                    <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat mr-lg-5 mr-sm-2 mr-1">' . implode(', ', $category_name) . '</a>
-                    <p> tk. '.$product->get_regular_price().'</p>
-                    <p class="mb-0 highlight"><span></span></p></div>';
+                    $output .= '<div class="search-product-items  align-items-center">
+                 
+                              <tr class="aligncenter">
+                                <td width="10%">
+                                    <a href="'.get_post_permalink($productLoop->post->id).'" class="load_popup" data-pid="'.$productLoop->post->ID.'">' . $productImage . '</a>
+                  
+                                  </td>
+                                <td width="70%">
+                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() . '</a>
+                     
+                                <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat d-block ">' . implode(', ', $category_name) . '</a>
+                              
+                                   </td>
+                                <td width="30%"> <p class="float-right"> ৳. '.$product->get_regular_price().'</p>
+                   </td>
+                              </tr>
+                           
+                 
+                
+                   </div>';
                 }
 
 
@@ -56,7 +72,10 @@ function advance_search(){
             wp_reset_postdata();
 
             if ($productLoop->post_count > 10) {
-                $output .= ' <div class="show-more-search"><span><span></span></span><a href="'.get_bloginfo('url').'?s='.$search_term.'&p_type=product">Show all ' . $productLoop->post_count . ' results</a></div>';
+                $output .= '  </tbody>
+                          </table>
+                    </div>
+                      <div class="show-more-search"><span><span></span></span><a href="'.get_bloginfo('url').'?s='.$search_term.'&p_type=product">Show all ' . $productLoop->post_count . ' results</a></div>';
             }
         }
 
