@@ -91,7 +91,14 @@ div.category-filter ul.products.slick-initialized {
 	background: #fff;
 }
 .header-top {
-	border-bottom: 1px solid #e7e7e7;
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	line-height: 0;
+	padding: 10px 0;
+}
+.header-top p{
+	margin: 0;
 }
 .info-box i{
 	margin-right: 10px;
@@ -125,15 +132,18 @@ div.category-filter ul.products.slick-initialized {
 	display: none;
 }
 .account-login-dropdown a {
-	background: #51b848;
 	color: #fff;
-	padding: 20px 35px;
 }
 .account-login-dropdown a:hover {
 	background: #000;
 }
 .logo img{
 	max-width: 140px;
+}
+
+.header-middle{
+	padding: 30px 0;
+	background-color: rgba(236, 215, 223, 0.22);
 }
 /*--------------------------------------------------------------
 # Main Menu
@@ -178,14 +188,36 @@ div.category-filter ul.products.slick-initialized {
 	-webkit-box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.04);
 	-o-box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.04);
 	margin: 0;
+	border-top: 1px solid #ddd;
 }
 .main-menu .navbar-nav .nav-link{
 	font-size: 15px;
 	font-weight: 600;
 	letter-spacing: .8px;
-	padding: 35px 25px;
+	padding: 15px 25px;
 	text-transform: uppercase;
-	display: block;;
+	display: block;
+	border-left: 1px solid #ddd;
+}
+
+.search-content{
+	position: absolute;
+	top: 100%;
+	background: #fff;
+	z-index: 9999;
+	padding: 20px;
+	height: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	opacity: 0;
+}
+.search-content.active{
+	opacity: 1;
+}
+.main-menu .navbar-nav .nav-link:hover{
+	border-color: transparent;
+	background-color: #0A9400;
+	color: #fff;
 }
 .cart-search a.advance-search-tri,
 .cart-search li a.cart-contents{
@@ -1800,6 +1832,9 @@ Min Width 768px And Max Width 991px
 Max Width 767px
 --------------------------------------------------------------*/
 @media only screen and (max-width:767px) {
+	.d-sm-none{
+		display: none;
+	}
 	.entry-header {
 		padding: 30px 0 10px;
 	}
