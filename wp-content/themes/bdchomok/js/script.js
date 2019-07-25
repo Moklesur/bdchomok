@@ -189,10 +189,10 @@
 
         // Quick View
         $(".advance-search").modal("hide");
-        $(body).on('click', '.advance-search-tri', function (e) {
+        $('body').on('click', '.advance-search-tri', function (e) {
             $(".advance-search").modal("show");
         });
-        $(body).on('click', '.advance-search .close', function (e) {
+        $('body').on('click', '.advance-search .close', function (e) {
             $(".advance-search").modal("hide");
         });
     });
