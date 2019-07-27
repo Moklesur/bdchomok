@@ -666,3 +666,13 @@ if( function_exists('acf_add_options_page') ) {
 }
 // Ajax Search
 require get_template_directory() . '/ajax-search/functions.php';
+add_filter('the_title', 'single_product_page_title', 10, 2);
+
+function single_product_page_title($title, $id) {
+    if(is_product_category() || is_page() ) {
+        $title = mb_strimwidth($title, 0, 18, '...');
+        return $title;
+    }
+
+    return $title;
+}
