@@ -151,7 +151,11 @@
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
                                 </div>
+                                <div class="search-target text-center">
+                                    <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
+                                </div>
                                 <div class="search-content">
+
 
                                 </div>
                             </div>
@@ -210,6 +214,7 @@
                     wp_nav_menu( array(
                             'theme_location'    => 'menu-1',
                             'container'			=> 'div',
+                            'depth' => 2,
                             'container_class'	=> 'collapse navbar-collapse',
                             'container_id'		=> 'bdchomok-main-menu-id',
                             'menu_class'		=> 'navbar-nav ',

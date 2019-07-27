@@ -56,6 +56,19 @@
             </div>
         </div>
     </div><!-- .footer-top -->
+    <div class="footer-paymenthod">
+        <div class="row">
+            <div class="col-12">
+                <ul class="payment-method list-inline pt-3 pb-4 border-top border-bottom">
+                    <li class="list-inline-item"><p class="m-0">We accept payment via</p></li>
+                    <li class="list-inline-item"><img src="<?php echo get_template_directory_uri();?>/images/amex-card.jpg" alt=""></li>
+                    <li class="list-inline-item"><img src="<?php echo get_template_directory_uri();?>/images/bkash.jpg" alt=""></li>
+                    <li class="list-inline-item"><img src="<?php echo get_template_directory_uri();?>/images/city-bank.jpg" alt=""></li>
+                    <li class="list-inline-item"><img src="<?php echo get_template_directory_uri();?>/images/master-card.jpg" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
@@ -128,6 +141,5 @@
 
 
 <?php wp_footer(); ?>
-
 </body>
 </html>
