@@ -1,6 +1,37 @@
 (function ($) {
     $(document).ready(function () {
 
+        var toggleAffix = function(affixElement, scrollElement, wrapper) {
+
+            var height = affixElement.outerHeight(),
+                top = wrapper.offset().top;
+
+            if (scrollElement.scrollTop() >= top){
+                wrapper.height(height);
+                affixElement.addClass("affix");
+            }
+            else {
+                affixElement.removeClass("affix");
+                wrapper.height('auto');
+            }
+
+        };
+
+
+        $('[data-toggle="affix"]').each(function() {
+            var ele = $(this),
+                wrapper = $('<div></div>');
+
+            ele.before(wrapper);
+            $(window).on('scroll resize', function() {
+                toggleAffix(ele, $(this), wrapper);
+            });
+
+            // init
+            toggleAffix(ele, $(window), wrapper);
+        });
+
+
         if ($('#back-to-top').length) {
             var scrollTrigger = 100, /* px*/ backToTop = function () {
                 var scrollTop = $(window).scrollTop();
@@ -26,11 +57,19 @@
             $('#category-list-tabContent .tab-pane:first-child').tab('show');
         }
 
+
+        var  data = $('.cat-filter').attr('data_limit');
+        var show = "";
+        if (data !== "" ){
+            show = data-1;
+        }else{
+            show = data;
+        }
         /* Featured News*/
         if (('.category-filter').length) {
             $('div.category-filter ul.products').each(function () {
                 $(this).slick({
-                    slidesToShow: 5,
+                    slidesToShow: show,
                     autoplay: false,
                     nextArrow: '<i class="icofont-long-arrow-right slider-right arrow-position f-2x"></i>',
                     prevArrow: '<i class="icofont-long-arrow-left arrow-position f-2x"></i>',
@@ -163,38 +202,38 @@
         };
 
 
-        // Advance search ajax
-        $(".search-target .form-control").keyup( function () {
-            $(".search-target").addClass('active');
-            console.log($(".search-target .form-control").val());
-            var stem = $(".search-target .form-control").val();
-            $.ajax({
-                method: 'POST',
-                url: js_vars.ajaxurl,
-                data: {
-                    action: "advance_search",
-                    keyword: $(".search-target .form-control").val()
-                },
-                dataType: "json",
-                async:true,
-                success: function (response) {
-                    //var res_data = response.output;
-                    $('.product-search-content').html(response.output);
-                    // $('.mb-0.highlight span').text(stem);
-                    $(".search-target").removeClass('active');
-                }
-            });
+
+
+        $('.advance-search-tri').bind('input', function(){
+            if ($(this).val() !== null || $(this).val() !== 'undefined') {
+
+                // $(".search-target").addClass('active');
+                $.ajax({
+                    method: 'POST',
+                    url: js_vars.ajaxurl,
+                    data: {
+                        action: "advance_search",
+                        keyword: $(this).val()
+                    },
+                    dataType: "json",
+                    async:true,
+                    success: function (response) {
+                        //var res_data = response.output;
+                        if (response.output != null) {
+
+                            $('.search-content').addClass('active').html(response.output);
+                            // $(".search-target").removeClass('active');
+                        }else{
+                            $('.search-content').removeClass('active');
+                            // $(".search-target").removeClass('active');
+                        }
+                    }
+                });
+            }
 
         });
 
-        // Quick View
-        $(".advance-search").modal("hide");
-        $('body').on('click', '.advance-search-tri', function (e) {
-            $(".advance-search").modal("show");
-        });
-        $('body').on('click', '.advance-search .close', function (e) {
-            $(".advance-search").modal("hide");
-        });
+
     });
 
 })(jQuery);

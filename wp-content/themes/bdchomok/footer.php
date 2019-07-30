@@ -56,6 +56,36 @@
             </div>
         </div>
     </div><!-- .footer-top -->
+    <div class="footer-paymenthod">
+        <div class="pt-3 pb-3 border-top border-bottom mb-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+
+                    <?php if(get_field('payment_method_images','option')): ?>
+                        <ul class="payment-method list-inline p-0 m-0 ">
+                            <li class="list-inline-item pl-2 pr-2"><p class="m-0"><?php the_field('payment_method_text','option');?></p></li>
+                            <?php while(has_sub_field('payment_method_images','option')): ?>
+                                <li class="list-inline-item pl-2 pr-2"><img src="<?php the_sub_field('image'); ?>" alt=""></li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        </div>
+        </div>
+        <?php
+        if (get_field('footer_content_area')){?>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <?php echo get_field('footer_content_area','option');?>
+                </div>
+            </div>
+        </div>
+        <?php }?>
+    </div>
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
@@ -128,6 +158,5 @@
 
 
 <?php wp_footer(); ?>
-
 </body>
 </html>

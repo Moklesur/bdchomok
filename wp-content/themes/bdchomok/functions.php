@@ -45,7 +45,7 @@ if (!function_exists('bdchomok_setup')) :
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
-            'menu-1' => esc_html__('Primary', 'bdchomok'),
+            'menu-1' => esc_html__('Primary', 'bdchomok')
         ));
 
         /*
@@ -278,6 +278,12 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {
     require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * Load Custom acf setting compatibility file.
+// */
+    require get_template_directory() . '/inc/acf-custom.php';
+
 
 
 /**
@@ -643,6 +649,25 @@ function function_to_add_author_woocommerce() {
 // Remove Category Product Page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
+
+function my_custom_action() {
+
+    global $product;
+
+   $offer_content =  get_field('offer_content', $product->get_id());
+
+   if ($offer_content){?>
+       <div class="offer">
+           <div class="d-flex green-text">
+               <span class="icofont-volume-off  icofont-1x mr-2"></span>
+               <span><?php  echo $offer_content;?></span>
+           </div>
+       </div>
+   <?php }
+
+};
+add_action( 'woocommerce_single_product_summary', 'my_custom_action', 15 );
+
 // Product Page ( Parent & Child Category )
 add_action( 'woocommerce_single_product_summary', 'bdchomok_product_page_category', 21 );
 function bdchomok_product_page_category(){
@@ -659,10 +684,174 @@ function bdchomok_product_page_category(){
     endforeach;
 }
 
-// ACF page option
-if( function_exists('acf_add_options_page') ) {
-    acf_add_options_page();
 
-}
+
 // Ajax Search
 require get_template_directory() . '/ajax-search/functions.php';
+add_filter('the_title', 'single_product_page_title', 10, 2);
+
+function single_product_page_title($title, $id) {
+    if(is_product_category() || is_page() ) {
+        $title = mb_strimwidth($title, 0, 18, '...');
+        return $title;
+    }
+
+    return $title;
+}
+
+add_filter( 'woocommerce_get_related_product_tag_terms','related_product_page_title', 10, 2 );
+function related_product_page_title($title, $id) {
+    if(is_product_category() || is_page() ) {
+        $title = mb_strimwidth($title, 0, 18, '...');
+        return $title;
+    }
+
+    return $title;
+}
+
+
+add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
+function woo_custom_product_tabs( $tabs ) {
+
+    global $product;
+
+    $product_specifications = get_field('product_specifications',$product->id);
+    $authors = get_field('authors',$product->id);
+
+           // Remove the description tab
+    // unset( $tabs['reviews'] );               // Remove the reviews tab
+    unset( $tabs['additional_information'] );   // Remove the additional information tab
+
+
+    // 2 Adding new tabs and set the right order
+
+
+    if (!empty($product_specifications)){
+        // Adds the qty pricing  tab
+        $tabs['qty_pricing_tab'] = array(
+            'title'     => __( 'Specifications', 'woocommerce' ),
+            'priority'  => 110,
+            'callback'  => 'product_specifications_tab_content'
+        );
+    }
+
+
+    if (!empty($authors)) {
+        // Adds the other products tab
+        $tabs['other_products_tab'] = array(
+            'title' => __('Author', 'woocommerce'),
+            'priority' => 120,
+            'callback' => 'woo_other_products_tab_content'
+        );
+    }
+    return $tabs;
+
+}
+
+function product_specifications_tab_content() {
+    global $product;
+    $product_specifications = get_field('product_specifications',$product->id);
+    ?>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+
+        <?php
+
+        if (!empty($product_specifications)){
+            foreach ($product_specifications as $key => $specification){
+
+                ?>
+                <tr>
+                    <td><?php
+                        if ($key === 'title'){
+                          echo   $title = "Title";
+                        }
+                        if ($key === 'author'){
+                            echo   $title = "Author";
+                        }
+                        if ($key === 'publisher'){
+                            echo   $title = "Publisher";
+                        }
+                        if ($key === 'edition'){
+                            echo   $title = "Edition";
+                        }
+                        if ($key === 'number_of_pages'){
+                            echo   $title = "Number Of Pages";
+                        }
+                        if ($key === 'country'){
+                            echo   $title = "Country";
+                        }
+                        if ($key === 'language'){
+                            echo   $title = "Language";
+                        }?></td>
+                    <td><?php echo $specification; ?></td>
+                </tr>
+
+         <?php   }
+        }
+        ?>
+
+
+        </tbody></table>
+<?php
+
+}
+function woo_other_products_tab_content() {
+    global $product;
+    $authors = get_field('authors',$product->id);
+
+    ?>
+
+    <div class="book-author__content-author">
+        <div class="row no-gutters">
+    <?php
+
+    if (!empty($authors)){
+        $author_name = $authors['author_name'];
+        $image = $authors['author_image'];
+        $author_description = $authors['author_description'];
+        $author_url = $authors['author_url'];
+
+            if (!empty($image)) {
+            ?>
+            <div class="col-2">
+                    <img style="height: 200px; width: 200px" class="img-fluid rounded-circle" src="<?php echo $image; ?>" alt="<?php echo $author_name; ?>">
+
+            </div>
+            <div class="col author_des">
+                <p><a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a></p>
+                <div class="author-description-wrapper">
+                    <div class="author-description" id="js--author-description">
+
+                        <?php echo $author_description; ?>
+                    </div>
+
+                </div>
+
+            </div>
+
+        <?php }  }
+    ?>
+        </div>
+    </div>
+
+<?php
+}
+// Product sale price
+function bdchomok_product_sale_flash( $output, $post, $product ) {
+    global $product;
+    if($product->is_on_sale()) {
+        if($product->is_type( 'variable' ) )
+        {
+            $regular_price = $product->get_variation_regular_price();
+            $sale_price = $product->get_variation_price();
+        } else {
+            $regular_price = $product->get_regular_price();
+            $sale_price = $product->get_sale_price();
+        }
+        $percent_off = (($regular_price - $sale_price) / $regular_price) * 100;
+        return '<span class="onsale">' . round($percent_off) . '% OFF</span>';
+    }
+}
+add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );
