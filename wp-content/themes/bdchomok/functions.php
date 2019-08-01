@@ -649,6 +649,25 @@ function function_to_add_author_woocommerce() {
 // Remove Category Product Page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
+
+function my_custom_action() {
+
+    global $product;
+
+   $offer_content =  get_field('offer_content', $product->get_id());
+
+   if ($offer_content){?>
+       <div class="offer">
+           <div class="d-flex green-text">
+               <span class="icofont-volume-off  icofont-1x mr-2"></span>
+               <span><?php  echo $offer_content;?></span>
+           </div>
+       </div>
+   <?php }
+
+};
+add_action( 'woocommerce_single_product_summary', 'my_custom_action', 15 );
+
 // Product Page ( Parent & Child Category )
 add_action( 'woocommerce_single_product_summary', 'bdchomok_product_page_category', 21 );
 function bdchomok_product_page_category(){
@@ -819,3 +838,20 @@ function woo_other_products_tab_content() {
 
 <?php
 }
+// Product sale price
+function bdchomok_product_sale_flash( $output, $post, $product ) {
+    global $product;
+    if($product->is_on_sale()) {
+        if($product->is_type( 'variable' ) )
+        {
+            $regular_price = $product->get_variation_regular_price();
+            $sale_price = $product->get_variation_price();
+        } else {
+            $regular_price = $product->get_regular_price();
+            $sale_price = $product->get_sale_price();
+        }
+        $percent_off = (($regular_price - $sale_price) / $regular_price) * 100;
+        return '<span class="onsale">' . round($percent_off) . '% OFF</span>';
+    }
+}
+add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );

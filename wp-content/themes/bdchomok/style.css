@@ -1807,7 +1807,10 @@ h1.entry-title {
     color: #000;
     font-size: 18px;
 }
-
+.woocommerce span.onsale {
+    min-height: 45px;
+    min-width: 45px;
+}
 .woocommerce form .form-row textarea {
     height: 7em;
     line-height: 1.5;
