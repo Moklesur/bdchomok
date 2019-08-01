@@ -61,29 +61,30 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <ul class="payment-method list-inline p-0 m-0 ">
-                        <li class="list-inline-item pl-2 pr-2"><p class="m-0">We accept payment via</p></li>
-                        <li class="list-inline-item pl-2 pr-2"><img src="<?php echo get_template_directory_uri();?>/images/amex-card.jpg" alt=""></li>
-                        <li class="list-inline-item pl-2 pr-2"><img src="<?php echo get_template_directory_uri();?>/images/bkash.jpg" alt=""></li>
-                        <li class="list-inline-item pl-2 pr-2"><img src="<?php echo get_template_directory_uri();?>/images/city-bank.jpg" alt=""></li>
-                        <li class="list-inline-item pl-2 pr-2"><img src="<?php echo get_template_directory_uri();?>/images/master-card.jpg" alt=""></li>
-                    </ul>
+
+                    <?php if(get_field('payment_method_images','option')): ?>
+                        <ul class="payment-method list-inline p-0 m-0 ">
+                            <li class="list-inline-item pl-2 pr-2"><p class="m-0"><?php the_field('payment_method_text','option');?></p></li>
+                            <?php while(has_sub_field('payment_method_images','option')): ?>
+                                <li class="list-inline-item pl-2 pr-2"><img src="<?php the_sub_field('image'); ?>" alt=""></li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </div>
         </div>
+        <?php
+        if (get_field('footer_content_area')){?>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col text-center">
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text
-                        ever since the 1500Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500
-                    </p>
+                    <?php echo get_field('footer_content_area','option');?>
                 </div>
             </div>
         </div>
+        <?php }?>
     </div>
     <div class="footer-bottom">
         <div class="container">

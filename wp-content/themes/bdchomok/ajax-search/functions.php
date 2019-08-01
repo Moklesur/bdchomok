@@ -57,10 +57,13 @@ function advance_search(){
                      
                                 <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat d-block ">' . implode(', ', $category_name) . '</a>
                               
-                                   </td>
-                                <td width="30%"> <p class="float-right"> ৳. '.$product->get_regular_price().'</p>
-                   </td>
-                              </tr>
+                                   </td>';
+                    if ($product->get_regular_price()){
+                        $output .='  <td width="30%"> <p class="float-right"> ৳. '.$product->get_regular_price().'</p>
+                   </td>';
+                    }
+
+                    $output .='   </tr>
                            
                  
                 

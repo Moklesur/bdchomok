@@ -73,10 +73,16 @@
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center">
                         <!-- .information start -->
-                        <div class="col-lg-6 col-sm-6 col-6 text-left">
-                            <p><i class="fa fa-mobile mr-2"></i> ১০০০ টাকার পণ্য কিনলে সারাদেশে ডেলিভারি একদম ফ্রি।</p>
-                        </div>
-                        <!-- .information end -->
+
+                        <?php
+                        if (get_field('delivery_offer','option')){?>
+                            <div class="col-lg-6 col-sm-6 col-6 text-left">
+                            <p><i class="fa fa-mobile mr-2"></i>  <?php echo get_field('delivery_offer','option');?></p>
+                    </div>
+                    <!-- .information end -->
+                   <?php     }
+                        ?>
+
 
                         <!-- .cart-account start -->
                         <div class="col-lg-6 col-sm-6 col-6 text-right">
@@ -95,24 +101,17 @@
                                 </li>
                             </ul>
 
-                            <ul class="list-inline social-links d-inline-block m-0 p-0 text-right">
 
-                                <li class="list-inline-item">
-                                    <a href="https://www.facebook.com/bdchmk/"><i class="icofont-facebook"></i></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><i class="icofont-twitter"></i></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><i class="icofont-linkedin"></i></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><i class="icofont-pinterest"></i></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><i class="icofont-instagram"></i></a>
-                                </li>
-                            </ul>
+                                <?php if(get_field('social_links','option')): ?>
+                                    <ul class="list-inline social-links d-inline-block m-0 p-0 text-right">
+                                    <?php while(has_sub_field('social_links','option')): ?>
+                                            <li class="list-inline-item">
+                                                <a href=" <?php the_sub_field('social_url'); ?>"><i class=" <?php the_sub_field('social_icon_name'); ?>"></i></a>
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+
                         </div>
                         <!-- .cart-account end -->
                     </div>
@@ -169,17 +168,19 @@
                         <!-- .cart-account start -->
                         <div class="col-lg-3 col-sm-4 col-6 cart-account order-lg-2 order-1">
                             <ul class="list-inline mb-0 ">
+
+                                <?php
+                                if (get_field('mobile_order_number','option')){?>
                                 <li class="list-inline-item ml-2">
                                     <div class="d-inline-block">
-                                        <p class="m-1">মোবাইলে অর্ডার দিন</p>
-                                        <p class="m-0">০১৭ ৯৯৯২ ৫০৫০</p>
+                                        <p class="m-1"><?php echo get_field('mobile_order_text','option');?></p>
+                                        <p class="m-0"><?php echo get_field('mobile_order_number','option');?></p>
 
                                     </div>
                                     <i class="icofont-support icofont-3x" ></i>
 
-
-
                                 </li>
+                               <?php } ?>
                                 <?php if( class_exists( 'WooCommerce' ) ): ?>
                                     <li class="list-inline-item ml-2">
                                         <div class="cart-wrap position-relative">
