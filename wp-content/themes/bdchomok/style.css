@@ -2366,3 +2366,6 @@ Max Width 480px
 .affix.header-bottom .navbar-nav .navbar-brand {
     color: #fff;
 }
+.overflow-inherit{
+    overflow: inherit !important;
+}
