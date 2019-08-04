@@ -1124,25 +1124,43 @@ a:hover {
     margin-top: 5px;
 }
 
+.social-links .facebook {
+    background: #3b5998;
+    color: #fff;
+}
+.social-links .twitter {
+    background: #1da1f2;
+    color: #fff;
+}
+.social-links .linkedin {
+    background: #0077b5;
+    color: #fff;
+}
+.social-links .pinterest {
+    background: #bd081c;
+    color: #fff;
+}
+.social-links .instagram {
+    background: #405de6;
+    color: #fff;
+}
+
 .social-links li:hover a {
     background: #000;
     color: #fff;
 }
 
 .footer-nav li {
-    width: 50%;
-    float: left;
-    padding: 5px 0;
+    padding: 2px 0;
 }
 
+.footer-nav > section:nth-child(3n+1) {
+    clear: both;
+}
 
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-
-footer#colophon .container {
-    max-width: 1140px;
-}
 
 .footer-middle {
     padding: 40px 0;
@@ -1164,7 +1182,6 @@ footer.site-footer {
 .footer-top {
     padding: 30px 0;
     background: #fff;
-    border-top: 2px solid #eee
 }
 
 .delivery-info i {
@@ -1212,11 +1229,14 @@ footer.site-footer {
 }
 
 .site-footer .footer-middle h5 {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    color: #51b848;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px
 }
-
+.site-footer .widget {
+    margin-bottom: 20px;
+}
 .site-footer a:hover {
     color: #51b848;
 }
@@ -1230,7 +1250,12 @@ footer.site-footer {
     padding: 0;
 }
 
-
+.footer-nav > section {
+    width: 33%;
+    overflow: hidden;
+    padding: 0 15px;
+    float: left;
+}
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/
