@@ -6,7 +6,8 @@ function advance_search(){
         $productArgs = array(
             'posts_per_page' => -1,
             'post_type' => array( 'product' ),
-            's' => $search_term
+            's' => $search_term,
+            'slug' =>$search_term
         );
 
         $productLoop = new WP_Query( $productArgs );
@@ -24,6 +25,9 @@ function advance_search(){
                             <tbody>';
 
             while ($productLoop->have_posts()) : $productLoop->the_post();
+
+                global $post;
+                $post_slug=$post->post_name;
 
                 // Product Data
                 if ($product_count <= 10 ) {
@@ -53,7 +57,7 @@ function advance_search(){
                   
                                   </td>
                                 <td width="70%">
-                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() . '</a>
+                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() .'('.strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', ' ', $post_slug))).')'.'</a>
                      
                                 <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat d-block ">' . implode(', ', $category_name) . '</a>
                               
