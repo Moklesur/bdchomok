@@ -234,12 +234,12 @@ div.category-filter ul.products.slick-initialized {
     position: absolute;
     top: 100%;
     background: #fff;
-    z-index: 9999;
     padding: 20px;
-    height: 300px;
+    height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
     opacity: 0;
+    z-index: 9999;
 }
 
 .search-content.active {
@@ -873,7 +873,7 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
     flex-basis: 100%;
     clear: inherit;
     margin: 0 10px 10px;
-    padding: 15px;
+    padding: 15px !important;
     outline: none;
 }
 
@@ -2350,17 +2350,17 @@ Max Width 767px
         margin-top: 30px;
         margin-bottom: 30px;
     }
-    .woocommerce #content div.product div.images,
-    .woocommerce div.product div.images,
-    .woocommerce-page #content div.product div.images,
-    .woocommerce-page div.product div.images,
-    .woocommerce #content div.product div.summary,
-    .woocommerce div.product div.summary,
-    .woocommerce-page #content div.product div.summary,
-    .woocommerce-page div.product div.summary {
-        float: none;
-        width: 100%;
-    }
+    /*.woocommerce #content div.product div.images,*/
+    /*.woocommerce div.product div.images,*/
+    /*.woocommerce-page #content div.product div.images,*/
+    /*.woocommerce-page div.product div.images,*/
+    /*.woocommerce #content div.product div.summary,*/
+    /*.woocommerce div.product div.summary,*/
+    /*.woocommerce-page #content div.product div.summary,*/
+    /*.woocommerce-page div.product div.summary {*/
+    /*    float: none;*/
+    /*    width: 100%;*/
+    /*}*/
     .mb-xs-30 {
         margin-bottom: 30px;
     }
