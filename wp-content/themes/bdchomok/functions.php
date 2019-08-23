@@ -203,7 +203,7 @@ function bdchomok_scripts()
     //wp_enqueue_script( 'jquery-isotope', get_template_directory_uri() . '/js/isotope.pkgd.js', array('jquery'), '3.0.4', true );
     wp_enqueue_script('jquery-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('slick-js', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), '4.1.3', true);
-    wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/custom.js', array('jquery'), '1.0', true);
 
     wp_enqueue_script('bdchomok-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true);
 
@@ -801,3 +801,56 @@ function bdchomok_product_sale_flash( $output, $post, $product ) {
     }
 }
 add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );
+
+/**
+ * Opening div for our content wrapper
+ */
+add_action('woocommerce_before_main_content', 'ushop_open_div', 5);
+
+function ushop_open_div() {
+    echo '<div class="col-lg-9 col-md-12 col-12 archive-woo  order-1">';
+}
+
+/**
+ * Closing div for our content wrapper
+ */
+add_action('woocommerce_after_main_content', 'ushop_close_div', 50);
+
+function ushop_close_div() {
+    echo '</div>';
+}
+
+/**
+ * Added Row
+ */
+add_action( 'woocommerce_before_single_product_summary', 'ushop_product_wrapper_start', 1 );
+function ushop_product_wrapper_start() {
+    echo '<div class="row">';
+}
+add_action( 'woocommerce_after_single_product_summary', 'ushop_product_wrapper_end', 1 );
+function ushop_product_wrapper_end() {
+    echo '</div>';
+}
+
+/**
+ * Single Product
+ * Added classes in product images
+ */
+add_action( 'woocommerce_before_single_product_summary', 'ushop_product_images_start', 1 );
+function ushop_product_images_start() {
+    echo '<div class="col-lg-6 col-sm-6 col-12 margin-top single-product-images">';
+}
+
+/**
+ * Single Product
+ * Added classes in product description
+ */
+add_action( 'woocommerce_before_single_product_summary', 'ushop_product_summary_start', 999 );
+function ushop_product_summary_start() {
+    echo '</div>';
+    echo '<div class="col-lg-6 col-sm-6 col-12 single-product-summary margin-top">';
+}
+add_action( 'woocommerce_after_single_product_summary', 'ushop_product_summary_end', 0 );
+function ushop_product_summary_end() {
+    echo '</div>';
+}

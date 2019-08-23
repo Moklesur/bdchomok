@@ -30,7 +30,7 @@ class BDchomok_Widget_Social_links extends WP_Widget {
         <ul class="list-inline social-links">
             <?php for ( $i=1; $i < 6; $i++ ) { ?>
                 <li class="list-inline-item">
-                    <a href="<?php echo ${'content' . $i}; ?>"><i class="<?php echo ${'icon' . $i}; ?>"></i></a>
+                    <a class="<?php echo ${'icon' . $i}; ?>" href="<?php echo ${'content' . $i}; ?>"><i class="icofont-<?php echo ${'icon' . $i}; ?>"></i></a>
                 </li>
             <?php } ?>
         </ul>

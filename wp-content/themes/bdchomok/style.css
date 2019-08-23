@@ -454,11 +454,61 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
     font-size: 24px;
 }
 
-
 /*--------------------------------------------------------------
 # Woo Sidebar
 --------------------------------------------------------------*/
-
+.archive-woo .site-main > .woof,
+.woof_edit_view,
+.woof_list_checkbox li.woof_term_15,
+.woof_list_checkbox li.woof_term_857,
+.woof_childs_list_opener,
+.woof_childs_list_li > input{
+    display: none !important;
+}
+.woof_list label{
+    margin: 0;
+}
+#text-8{
+    padding: 0;
+    border: 0;
+}
+.woof_list_checkbox .woof_list li,
+.woof_list_checkbox .woof_childs_list,
+.woof_redraw_zone .woof_list li{
+    margin: 0 !important;
+    position: relative;
+}
+.woof_redraw_zone .woof_list_checkbox > li{
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #eee;
+    margin-bottom: 30px !important;
+}
+.woof_redraw_zone .woof_list_checkbox > li > label{
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    pointer-events: none;
+    margin-bottom: 0;
+    background: #eee;
+}
+.woof_childs_list input{
+    top: 9px;
+    float: left;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+}
+.woof_childs_list label{
+    font-size: 13px;
+    padding-left: 20px;
+}
+.woof_list_checkbox .woof_childs_list {
+    display: block !important;
+    padding: 15px;
+    max-height: 400px;
+    overflow: auto;
+}
 .woocommerce ul.cart_list li,
 .woocommerce ul.product_list_widget li {
     padding: 10px 0;
@@ -1124,25 +1174,43 @@ a:hover {
     margin-top: 5px;
 }
 
+.social-links .facebook {
+    background: #3b5998;
+    color: #fff;
+}
+.social-links .twitter {
+    background: #1da1f2;
+    color: #fff;
+}
+.social-links .linkedin {
+    background: #0077b5;
+    color: #fff;
+}
+.social-links .pinterest {
+    background: #bd081c;
+    color: #fff;
+}
+.social-links .instagram {
+    background: #405de6;
+    color: #fff;
+}
+
 .social-links li:hover a {
     background: #000;
     color: #fff;
 }
 
 .footer-nav li {
-    width: 50%;
-    float: left;
-    padding: 5px 0;
+    padding: 2px 0;
 }
 
+.footer-nav > section:nth-child(3n+1) {
+    clear: both;
+}
 
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-
-footer#colophon .container {
-    max-width: 1140px;
-}
 
 .footer-middle {
     padding: 40px 0;
@@ -1164,7 +1232,6 @@ footer.site-footer {
 .footer-top {
     padding: 30px 0;
     background: #fff;
-    border-top: 2px solid #eee
 }
 
 .delivery-info i {
@@ -1212,11 +1279,14 @@ footer.site-footer {
 }
 
 .site-footer .footer-middle h5 {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    color: #51b848;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px
 }
-
+.site-footer .widget {
+    margin-bottom: 20px;
+}
 .site-footer a:hover {
     color: #51b848;
 }
@@ -1230,7 +1300,12 @@ footer.site-footer {
     padding: 0;
 }
 
-
+.footer-nav > section {
+    width: 33%;
+    overflow: hidden;
+    padding: 0 15px;
+    float: left;
+}
 /*--------------------------------------------------------------
 # Media
 --------------------------------------------------------------*/

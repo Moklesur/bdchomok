@@ -39,14 +39,14 @@
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12 footer-nav">
+                <div class="col-lg-5 col-md-6 col-sm-6 col-12 footer-nav">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-2' ) ) :
                         dynamic_sidebar( 'footer-widget-2' );
                     endif;
                     ?>
                 </div>
-                <div class="col-lg-5 col-md-6 col-sm-6 col-12 footer-top-padding">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 footer-top-padding">
                     <?php
                     if ( is_active_sidebar( 'footer-widget-3' ) ) :
                         dynamic_sidebar( 'footer-widget-3' );
@@ -62,22 +62,21 @@
             <div class="row align-items-center">
                 <div class="col-12">
 
-                    <?php if(get_field('payment_method_images','option')): ?>
-                        <ul class="payment-method list-inline p-0 m-0 ">
+                    <?php if( get_field('payment_method_images','option') ): ?>
+                        <ul class="payment-method list-inline p-0 m-0 text-center ">
                             <li class="list-inline-item pl-2 pr-2"><p class="m-0"><?php the_field('payment_method_text','option');?></p></li>
                             <?php while(has_sub_field('payment_method_images','option')): ?>
                                 <li class="list-inline-item pl-2 pr-2"><img src="<?php the_sub_field('image'); ?>" alt=""></li>
                             <?php endwhile; ?>
                         </ul>
                     <?php endif; ?>
-
                 </div>
             </div>
         </div>
         </div>
         <?php
-        if (get_field('footer_content_area')){?>
-        <div class="container">
+        if (get_field('footer_content_area','option')){?>
+        <div class="container pb-4 pt-1">
             <div class="row align-items-center">
                 <div class="col text-center">
                     <?php echo get_field('footer_content_area','option');?>
