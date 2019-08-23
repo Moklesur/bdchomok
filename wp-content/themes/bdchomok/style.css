@@ -713,30 +713,33 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 /*--------------------------------------------------------------
 # Woocommerce
 --------------------------------------------------------------*/
-
 .product-template-default .summary .woocommerce-Price-amount.amount {
     color: #000;
+}
+.product-template-default .summary del .woocommerce-Price-amount.amount{
+    font-size: 18px;
+}
+.product-template-default .summary ins .woocommerce-Price-amount.amount{
     font-size: 24px;
 }
-
 .product-border {
     border: 1px solid #eee;
     padding: 30px;
 }
-
 .product-border ul.product_list_widget li a {
     font-size: 14px;
     margin-bottom: 5px;
 }
-
 .product-border h5 {
     margin-bottom: 20px;
     font-size: 24px;
 }
-
 .product-border ul.product_list_widget li {
     border-bottom: 1px solid #eee;
-    ;
+}
+
+.discount-skl {
+    font-size: 16px;
 }
 
 .product-border ul.product_list_widget li:last-child {
@@ -847,13 +850,14 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
     font-weight: normal;
 }
 
-.woocommerce ul.products li.product .onsale {
-    right: 8px;
+.woocommerce ul.products li.product .onsale,
+.woocommerce span.onsale{
+    right: 0;
     margin: 0;
-    padding: 0;
+    padding: 4px 0 0;
     width: 45px;
     height: 45px;
-    line-height: 45px;
+    line-height: inherit;
     text-align: center;
 }
 
@@ -1567,7 +1571,7 @@ object {
 .woocommerce-page #content div.product div.images,
 .woocommerce-page div.product div.images {
     float: left;
-    width: 32%;
+    width: 100%;
 }
 
 .woocommerce #content div.product div.summary,
@@ -1575,7 +1579,7 @@ object {
 .woocommerce-page #content div.product div.summary,
 .woocommerce-page div.product div.summary {
     float: right;
-    width: 64%;
+    width: 100%;
     clear: none;
 }
 
@@ -1616,9 +1620,10 @@ aside.widget-area {
 
 .woocommerce div.product .product_title {
     color: #000000;
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 500;
 }
+
 
 .woocommerce div.product p.price ins,
 .woocommerce div.product span.price ins,
