@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'shop' ); ?>
 <div class="container">
+    <div class="row">
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.
@@ -57,5 +58,6 @@ get_header( 'shop' ); ?>
 
 <?php get_footer( 'shop' );
 ?>
+    </div>
 </div>
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

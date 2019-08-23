@@ -203,7 +203,7 @@ function bdchomok_scripts()
     //wp_enqueue_script( 'jquery-isotope', get_template_directory_uri() . '/js/isotope.pkgd.js', array('jquery'), '3.0.4', true );
     wp_enqueue_script('jquery-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('slick-js', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), '4.1.3', true);
-    wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/custom.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
 
     wp_enqueue_script('bdchomok-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true);
 
@@ -797,18 +797,36 @@ function bdchomok_product_sale_flash( $output, $post, $product ) {
             $sale_price = $product->get_sale_price();
         }
         $percent_off = (($regular_price - $sale_price) / $regular_price) * 100;
-        return '<span class="onsale">' . round($percent_off) . '% OFF</span>';
+        return '<span class="onsale">' . round($percent_off) . '% <br/>ছাড়</span>';
     }
 }
 add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );
 
+
+add_filter( 'woocommerce_format_sale_price', 'woocommerce_custom_sales_price', 10, 3 );
+function woocommerce_custom_sales_price( $price, $regular_price, $sale_price ) {
+    // Getting the clean numeric prices (without html and currency)
+    $regular_price = floatval( strip_tags($regular_price) );
+    $sale_price = floatval( strip_tags($sale_price) );
+
+    // Percentage calculation and text
+    $percentage = round( ( $regular_price - $sale_price ) / $regular_price * 100 ).'%';
+    $percentage_txt = $percentage.__(' ছাড়ে', 'woocommerce' );
+
+    return '<ins>' . wc_price( $sale_price ) . '</ins><del class="ml-2">' . wc_price( $regular_price ) . '</del><span class="discount-skl">( '.$percentage_txt . ' )</span>';
+}
+
 /**
  * Opening div for our content wrapper
  */
-add_action('woocommerce_before_main_content', 'ushop_open_div', 5);
+add_action('woocommerce_before_main_content', 'bdchomok_open_div', 5);
 
-function ushop_open_div() {
-    echo '<div class="col-lg-9 col-md-12 col-12 archive-woo  order-1">';
+function bdchomok_open_div() {
+    $order = ' order-lg-1';
+    if( is_product() ){
+        $order = '';
+    }
+    echo '<div class="col-lg-9 col-md-12 col-12 archive-woo'.$order.'">';
 }
 
 /**
@@ -838,7 +856,7 @@ function ushop_product_wrapper_end() {
  */
 add_action( 'woocommerce_before_single_product_summary', 'ushop_product_images_start', 1 );
 function ushop_product_images_start() {
-    echo '<div class="col-lg-6 col-sm-6 col-12 margin-top single-product-images">';
+    echo '<div class="col-lg-5 col-sm-5 col-12 margin-top single-product-images">';
 }
 
 /**
@@ -848,7 +866,7 @@ function ushop_product_images_start() {
 add_action( 'woocommerce_before_single_product_summary', 'ushop_product_summary_start', 999 );
 function ushop_product_summary_start() {
     echo '</div>';
-    echo '<div class="col-lg-6 col-sm-6 col-12 single-product-summary margin-top">';
+    echo '<div class="col-lg-7 col-sm-7 col-12 single-product-summary margin-top">';
 }
 add_action( 'woocommerce_after_single_product_summary', 'ushop_product_summary_end', 0 );
 function ushop_product_summary_end() {
