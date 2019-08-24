@@ -804,7 +804,9 @@ add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );
 
 
 add_filter( 'woocommerce_format_sale_price', 'woocommerce_custom_sales_price', 10, 3 );
+
 function woocommerce_custom_sales_price( $price, $regular_price, $sale_price ) {
+
     // Getting the clean numeric prices (without html and currency)
     $regular_price = floatval( strip_tags($regular_price) );
     $sale_price = floatval( strip_tags($sale_price) );
@@ -814,6 +816,7 @@ function woocommerce_custom_sales_price( $price, $regular_price, $sale_price ) {
     $percentage_txt = $percentage.__(' ছাড়ে', 'woocommerce' );
 
     return '<ins>' . wc_price( $sale_price ) . '</ins><del class="ml-2">' . wc_price( $regular_price ) . '</del><span class="discount-skl">( '.$percentage_txt . ' )</span>';
+
 }
 
 /**

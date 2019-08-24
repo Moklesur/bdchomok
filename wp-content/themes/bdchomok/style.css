@@ -721,6 +721,7 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 }
 .product-template-default .summary ins .woocommerce-Price-amount.amount{
     font-size: 24px;
+    color: #51b848;
 }
 .product-border {
     border: 1px solid #eee;
@@ -737,9 +738,12 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 .product-border ul.product_list_widget li {
     border-bottom: 1px solid #eee;
 }
-
+li .discount-skl{
+   display: none;
+}
 .discount-skl {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .product-border ul.product_list_widget li:last-child {
