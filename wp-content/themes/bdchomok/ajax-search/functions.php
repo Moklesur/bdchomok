@@ -2,8 +2,7 @@
 //Add Ajax Actions
 function advance_search(){
         $search_term = esc_attr( $_POST['keyword'] );
-
-
+        
         if(!empty($search_term)):
         $productArgs = array(
             'posts_per_page' => -1,
