@@ -166,7 +166,7 @@
                         </div>
                         <!-- .advance-search end -->
                         <!-- .cart-account start -->
-                        <div class="col-lg-3 col-sm-4 col-6 cart-account order-lg-2 order-1">
+                        <div class="col-lg-3 col-md-3 col-sm-12 cart-account order-lg-2 order-1">
                             <ul class="list-inline mb-0 ">
 
                                 <?php
@@ -182,7 +182,7 @@
                                 </li>
                                <?php } ?>
                                 <?php if( class_exists( 'WooCommerce' ) ): ?>
-                                    <li class="list-inline-item ml-2">
+                                    <li class="list-inline-item ml-2 float-right">
                                         <div class="cart-wrap position-relative">
                                             <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
                                                 <i class="icofont-shopping-cart"></i>
@@ -210,7 +210,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg p-0 " >
 
-                    <button class="navbar-toggler d-lg-none d-inline-block" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler d-lg-none  d-none" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
                         <span></span>
                         <span></span>
                         <span></span>
