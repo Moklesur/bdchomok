@@ -10,7 +10,6 @@ function advance_search(){
             's' => $search_term,
             'slug' =>$search_term
         );
-
         $productLoop = new WP_Query( $productArgs );
 
         if ( $productLoop->have_posts() ) {

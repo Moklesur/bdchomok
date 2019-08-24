@@ -586,7 +586,6 @@ function bdchomok_cart_button_text() {
     return __( 'ক্রয় করুন', 'bdchomok' );
 }
 
-
 add_action('init', 'function_to_add_author_woocommerce', 999 );
 function function_to_add_author_woocommerce() {
     add_post_type_support( 'product', 'author' );
@@ -594,7 +593,6 @@ function function_to_add_author_woocommerce() {
 
 // Remove Category Product Page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-
 
 function my_custom_action() {
 
@@ -630,8 +628,6 @@ function bdchomok_product_page_category(){
     endforeach;
 }
 
-
-
 // Ajax Search
 require get_template_directory() . '/ajax-search/functions.php';
 add_filter('the_title', 'single_product_page_title', 10, 2);
@@ -654,7 +650,6 @@ function related_product_page_title($title, $id) {
 
     return $title;
 }
-
 
 add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
 function woo_custom_product_tabs( $tabs ) {
@@ -873,4 +868,34 @@ function ushop_product_summary_start() {
 add_action( 'woocommerce_after_single_product_summary', 'ushop_product_summary_end', 0 );
 function ushop_product_summary_end() {
     echo '</div>';
+}
+
+/**
+ *
+ */
+remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+
+
+if ( ! function_exists( 'woocommerce_template_loop_product_thumbnail' ) ) {
+    function woocommerce_template_loop_product_thumbnail() {
+        echo woocommerce_get_product_thumbnail();
+    }
+}
+
+if ( ! function_exists( 'woocommerce_get_product_thumbnail' ) ) {
+    function woocommerce_get_product_thumbnail( $size = 'shop_catalog' ) {
+        global $post, $woocommerce;
+        $output = '<div class="product-thumbs">';
+
+        if ( has_post_thumbnail() ) {
+            $output .= get_the_post_thumbnail( $post->ID, $size );
+        } else {
+            $output .= wc_placeholder_img( $size );
+            // Or alternatively setting yours width and height shop_catalog dimensions.
+            // $output .= '<img src="' . woocommerce_placeholder_img_src() . '" alt="Placeholder" width="300px" height="300px" />';
+        }
+        $output .= '</div>';
+        return $output;
+    }
 }
