@@ -2,11 +2,14 @@
 //Add Ajax Actions
 function advance_search(){
         $search_term = esc_attr( $_POST['keyword'] );
+
+
         if(!empty($search_term)):
         $productArgs = array(
             'posts_per_page' => -1,
             'post_type' => array( 'product' ),
-            's' => $search_term
+            's' => $search_term,
+            'slug' =>$search_term
         );
 
         $productLoop = new WP_Query( $productArgs );
@@ -24,6 +27,9 @@ function advance_search(){
                             <tbody>';
 
             while ($productLoop->have_posts()) : $productLoop->the_post();
+
+                global $post;
+                $post_slug=$post->post_name;
 
                 // Product Data
                 if ($product_count <= 10 ) {
@@ -45,6 +51,9 @@ function advance_search(){
                         break;
                     }
 
+
+
+
                     $output .= '<div class="search-product-items  align-items-center">
                  
                               <tr class="aligncenter">
@@ -53,13 +62,13 @@ function advance_search(){
                   
                                   </td>
                                 <td width="70%">
-                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() . '</a>
+                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() .'('.strtolower(trim( $post_slug)).')'.'</a>
                      
                                 <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat d-block ">' . implode(', ', $category_name) . '</a>
                               
                                    </td>';
                     if ($product->get_regular_price()){
-                        $output .='  <td width="30%"> <p class="float-right"> ৳. '.$product->get_regular_price().'</p>
+                        $output .='  <td width="30%"> <p class="float-right ">  <span class="woocommerce-Price-amount amount"> '.$product->get_price().'</span> <span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></p>
                    </td>';
                     }
 
