@@ -239,11 +239,11 @@ div.category-filter ul.products.slick-initialized {
     overflow-y: scroll;
     overflow-x: hidden;
     opacity: 0;
-    z-index: 9999;
 }
 
 .search-content.active {
     opacity: 1;
+    z-index: 9999;
 }
 
 .main-menu .navbar-nav .nav-link:hover {
@@ -2376,19 +2376,6 @@ Max Width 767px
 }
 
 
-/*--------------------------------------------------------------
-Max Width 480px
---------------------------------------------------------------*/
-
-@media only screen and (max-width:480px) {
-    .woocommerce ul.products[class*="columns-"] li.product,
-    .woocommerce-page ul.products[class*="columns-"] li.product {
-        width: 100%;
-    }
-    .custom-logo-link {
-        max-width: 100px;
-    }
-}
 
 .search-target #wait2 {
     opacity: 0;
@@ -2452,4 +2439,51 @@ Max Width 480px
 }
 .overflow-inherit{
     overflow: inherit !important;
+}
+
+#mega-menu-wrap-menu-1 .mega-menu-toggle .mega-toggle-block-1 .mega-toggle-label {
+    color: #000;
+}
+#mega-menu-wrap-menu-1 .mega-menu-toggle .mega-toggle-block-1:after {
+    color: #000;
+}
+ul.mega-sub-menu .mega-menu-item{
+    padding: 5px!important;
+}
+ul.mega-sub-menu .mega-menu-item a{
+  font-size: 12px !important;
+}
+
+#mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-megamenu > ul.mega-sub-menu > li.mega-menu-item > a.mega-menu-link,
+#mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-megamenu > ul.mega-sub-menu li.mega-menu-column > ul.mega-sub-menu > li.mega-menu-item > a.mega-menu-link {
+    color: #000;
+}
+#mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-megamenu > ul.mega-sub-menu > li.mega-menu-item > a.mega-menu-link:hover,
+#mega-menu-wrap-menu-1 #mega-menu-menu-1 > li.mega-menu-megamenu > ul.mega-sub-menu li.mega-menu-column > ul.mega-sub-menu > li.mega-menu-item > a.mega-menu-link:hover {
+    color: #16ad03;
+}
+/*--------------------------------------------------------------
+Max Width 480px
+--------------------------------------------------------------*/
+
+@media only screen and (max-width:480px) {
+    .woocommerce ul.products[class*="columns-"] li.product,
+    .woocommerce-page ul.products[class*="columns-"] li.product {
+        width: 100%;
+    }
+    .custom-logo-link {
+        max-width: 100px;
+    }
+    .advance-search .form-control {
+        width: 50%;
+    }
+
+    .footer-nav > section {
+        width: 50%;
+    }
+
+    #mega-menu-wrap-menu-1, #mega-menu-wrap-menu-1 #mega-menu-menu-1, #mega-menu-wrap-menu-1 #mega-menu-menu-1 ul.mega-sub-menu, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-item, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-row, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-column, #mega-menu-wrap-menu-1 #mega-menu-menu-1 a.mega-menu-link{
+        float: right !important;
+        width: 100% !important;
+    }
 }
