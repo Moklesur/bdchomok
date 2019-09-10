@@ -155,7 +155,12 @@
     </div>
 </div>
 
-
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="266866433725283"
+     theme_color="#106f5a">
+</div>
 <?php wp_footer(); ?>
 </body>
 </html>

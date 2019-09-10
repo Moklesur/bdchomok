@@ -16,11 +16,6 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
-
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -37,12 +32,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-    <!-- Your customer chat code -->
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="266866433725283"
-         theme_color="#51b848">
-    </div>
+
     <?php wp_head(); ?>
 </head>
 
@@ -147,7 +137,8 @@
                         </div>
                         <!-- .logo end -->
                         <!-- .advance-search start -->
-                        <div class="col-lg-6 col-sm-4 col-12 advance-search order-lg-1 order-2">
+                        <div class="col-lg-6 col-sm-4 d-lg-inline-block d-none col-12 advance-search order-lg-1 order-2">
+                            <?php //echo do_shortcode('[yith_woocommerce_ajax_search]');?>
                             <form class="advance-search-form" action="">
                                 <div class="input-group">
                                     <input type="text"   class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
@@ -166,23 +157,24 @@
                         </div>
                         <!-- .advance-search end -->
                         <!-- .cart-account start -->
-                        <div class="col-lg-3 col-md-3 col-sm-12 cart-account order-lg-2 order-1">
-                            <ul class="list-inline mb-0 ">
+                        <div class="col-lg-3 col-md-3 col-6 cart-account order-lg-2 order-1">
+                            <ul class="list-inline mb-0 d-flex align-items-center mb-m-r">
 
                                 <?php
                                 if (get_field('mobile_order_number','option')){?>
-                                <li class="list-inline-item ml-2">
-                                    <div class="d-inline-block">
-                                        <p class="m-1"><?php echo get_field('mobile_order_text','option');?></p>
-                                        <p class="m-0"><?php echo get_field('mobile_order_number','option');?></p>
-
+                                <li class="list-inline-item ml-auto d-lg-inline-block d-none">
+                                    <div class="call-us d-flex align-content-center">
+                                        <div class="d-inline-block mr-2 text-center">
+                                            <p class="m-0"><?php echo get_field('mobile_order_text','option');?></p>
+                                            <p class="m-0 mob-order"><?php echo get_field('mobile_order_number','option');?></p>
+                                        </div>
+                                        <i class="icofont-support icofont-3x"></i>
                                     </div>
-                                    <i class="icofont-support icofont-3x" ></i>
-
                                 </li>
                                <?php } ?>
+
                                 <?php if( class_exists( 'WooCommerce' ) ): ?>
-                                    <li class="list-inline-item ml-2 float-right">
+                                    <li class="list-inline-item ml-auto">
                                         <div class="cart-wrap position-relative">
                                             <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
                                                 <i class="icofont-shopping-cart"></i>
@@ -204,17 +196,16 @@
             </div>
             <!-- .header-top end -->
 
-
         <!-- .header-bottom start -->
         <div class="header-bottom main-menu " data-toggle="affix">
             <div class="container">
                 <nav class="navbar navbar-expand-lg p-0 " >
 
-                    <button class="navbar-toggler d-lg-none  d-none" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+<!--                    <button class="navbar-toggler d-lg-none  d-none" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                        <span></span>-->
+<!--                        <span></span>-->
+<!--                        <span></span>-->
+<!--                    </button>-->
 
                     <?php
                     wp_nav_menu( array(
@@ -235,6 +226,28 @@
         </div>
         <!-- .header-bottom end -->
 
+        <!-- .advance-search start -->
+        <div class="container d-lg-none d-block">
+            <div class="advance-search">
+                <?php //echo do_shortcode('[yith_woocommerce_ajax_search]');?>
+                <form class="advance-search-form" action="">
+                    <div class="input-group">
+                        <input type="text"   class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
+                        </div>
+                        <div class="search-target text-center">
+                            <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
+                        </div>
+                        <div class="search-content">
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- .advance-search end -->
     </header><!-- #masthead -->
 
     <!-- Advance Search Form -->

@@ -228,6 +228,7 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/recent-products-woo.php';
         require get_template_directory() . '/plugins/author-list.php';
         require get_template_directory() . '/plugins/list-category-woo.php';
+        require get_template_directory() . '/plugins/list-category-woo-count.php';
     }
 }
 
@@ -825,7 +826,7 @@ function ushop_close_div() {
  */
 add_action( 'woocommerce_before_single_product_summary', 'ushop_product_wrapper_start', 1 );
 function ushop_product_wrapper_start() {
-    echo '<div class="row">';
+    echo '<div class="row product-thumb-content">';
 }
 add_action( 'woocommerce_after_single_product_summary', 'ushop_product_wrapper_end', 1 );
 function ushop_product_wrapper_end() {
@@ -943,3 +944,42 @@ function checkout_create_account( $translated_text, $text, $domain ) {
 }
 
 add_filter( 'gettext', 'checkout_create_account', 20, 3 );
+
+
+add_filter( 'jetpack_lazy_images_blacklisted_classes', 'bbloomer_exclude_custom_logo_class_from_lazy_load', 999, 1 );
+
+function bbloomer_exclude_custom_logo_class_from_lazy_load( $classes ) {
+    $classes[] = 'custom-logo';
+    return $classes;
+}
+
+
+function ewos_send_sms( $order_id, $old_status, $new_status ) {
+
+    $order = new WC_Order( $order_id );
+
+    $user      = $order->get_user;
+
+    $ewos_domain = 'http://www.bangladeshsms.com/';
+    $ewos_api_key = 'C20000635d6bf0e1601273.18949602';
+    $ewos_sender_id = '8809612446000';
+    //$ewos_message = 'Thank you for ordering from XXXXXXXXXX! Your order number is #' . $order_id . '. For any help call us at 01xxxxxxxxx.';
+
+
+    $ewos_message = 'Hi '. $order->get_billing_first_name(). ' Your Order ('. $order->get_id() .') Placed Properly. We will contact with you soon. bdchomok.com';
+
+    $ewos_send_to = get_post_meta( $order->ID, '_billing_phone', true );
+
+    $api_url = $ewos_domain . 'smsapi?api_key=' . $ewos_api_key . '&type=text&contacts=' . $ewos_send_to . '&senderid=' . rawurlencode($ewos_sender_id) . '&msg=' . rawurlencode($ewos_message);
+
+    if ( !($old_status == 'pending' && $new_status == 'on-hold')) {
+        file_get_contents($api_url);
+    }
+
+// 	$to = '';
+// 	$subject = 'Order Notification';
+// 	$headers = array('Content-Type: text/html; charset=UTF-8');
+// 	wp_mail( $to, $subject, $ewos_message, $headers );
+
+}
+add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
