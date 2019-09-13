@@ -162,5 +162,7 @@
      theme_color="#106f5a">
 </div>
 <?php wp_footer(); ?>
+
+
 </body>
 </html>

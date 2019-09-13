@@ -616,8 +616,8 @@ function bdchomok_product_page_category(){
 
 // Ajax Search
 require get_template_directory() . '/ajax-search/functions.php';
-add_filter('the_title', 'single_product_page_title', 10, 2);
 
+//add_filter('the_title', 'single_product_page_title', 10, 2);
 function single_product_page_title($title, $id) {
     if(is_product_category() || is_page() || is_shop() ) {
         $title = mb_strimwidth($title, 0, 18, '...');
@@ -983,3 +983,4 @@ function ewos_send_sms( $order_id, $old_status, $new_status ) {
 
 }
 add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
+

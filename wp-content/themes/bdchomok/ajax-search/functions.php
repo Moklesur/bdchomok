@@ -1,9 +1,9 @@
 <?php
 //Add Ajax Actions
 function advance_search(){
-        $search_term = esc_attr( $_POST['keyword'] );
-        
-        if(!empty($search_term)):
+    $search_term = esc_attr( $_POST['keyword'] );
+
+    if(!empty($search_term)):
         $productArgs = array(
             'posts_per_page' => -1,
             'post_type' => array( 'product' ),
@@ -89,11 +89,40 @@ function advance_search(){
             }
         }
 
-        endif;
+    endif;
     echo json_encode(array('output' => $output));
     exit();
 
 }
 
 add_action( 'wp_ajax_advance_search', 'advance_search' );
-add_action( 'wp_ajax_nopriv_advance_search', 'advance_search' );
+add_action( 'wp_ajax_nopriv_advance_search', 'advance_search');
+
+//Cat Filer
+function cat_filter(){
+    
+    $tex_id = $_POST['cat_ID'];
+    $get_cat = array (
+        'post_per_page' => -1,
+        'post_type' => 'product',
+        'tax_query' => array(
+            array(
+                'taxonomy'  => 'product_cat',
+                'field'     => 'term_id',
+                'terms'     => array( $tex_id ),
+            )
+        ),
+    );
+
+    $loop = new WP_Query( $get_cat );
+
+    if ( $loop->have_posts() ) {
+        while ($loop->have_posts()) : $loop->the_post();
+           wc_get_template_part( 'content', 'product' );
+        endwhile;
+        wp_reset_postdata();
+    }
+}
+
+add_action( 'wp_ajax_cat_filter', 'cat_filter' );
+add_action( 'wp_ajax_nopriv_cat_filter', 'cat_filter' );

@@ -17,6 +17,7 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 --------------------------------------------------------------*/
 
 body {
+    overflow-x: hidden;
     background: #fff;
     color: #666;
     font-family: 'Open Sans', sans-serif;
@@ -231,13 +232,13 @@ div.category-filter ul.products.slick-initialized {
     border-radius: 0;
 }
 .main-menu .navbar-nav .nav-link {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: .8px;
     padding: 15px 25px;
     text-transform: uppercase;
     display: block;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid #eee;
 }
 
 .search-content {
@@ -298,6 +299,82 @@ div.category-filter ul.products.slick-initialized {
 
 .random-product .slick-arrow i{
     font-size: 16px;
+}
+
+@media (min-width: 992px){
+
+    nav.navbar > div > ul > li.current-menu-item > ul {
+        display: block;
+    }
+
+    nav.navbar > div > ul > li{
+        position: static;
+    }
+    nav.navbar > div > ul > li > ul {
+        left: 0;
+        right: 0;
+    }
+    nav.navbar > div > ul > li > ul > li {
+        display: inline-block;
+        position: static;
+    }
+
+    nav.navbar > div > ul > li > ul > li > ul {
+        left: 0;
+        right: 0;
+    }
+    nav.navbar > div > ul > li > ul > li:hover > ul {
+        display: block;
+    }
+
+    nav.navbar > div > ul > li > ul > li > ul > li {
+        display: block;
+        width: 25%;
+        float: left;
+    }
+    nav.navbar > div > ul > li > .dropdown-menu:before {
+        content: '';
+        width: 80%;
+        left: -30%;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+    }
+    nav.navbar > div > ul > li > .dropdown-menu:after {
+        content: '';
+        width: 80%;
+        right: -30%;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+    }
+    .navbar-expand-lg .navbar-nav .dropdown-menu {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+    .dropdown-item {
+        padding: 12px 1.5rem;
+        white-space: inherit;
+    }
+    nav.navbar li ul li ul .dropdown-item{
+        padding: 5px .5rem;
+        font-size: 12px;
+    }
+    nav.navbar > div > ul > li > .dropdown-menu:after,
+    nav.navbar > div > ul > li > .dropdown-menu:before{
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+    }
+    .navbar-expand-lg.navbar > div > ul > li > ul > li:hover > ul{
+        padding: 20px 10px;
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.01);
+        background: #fff;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -2114,6 +2191,8 @@ h3#order_review_heading {
 .woocommerce #payment #place_order,
 .woocommerce-page #payment #place_order {
     float: right;
+    text-transform: uppercase;
+    padding: 15px 30px;
     border: 1px solid #fff;
 }
 

@@ -201,17 +201,17 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg p-0 " >
 
-<!--                    <button class="navbar-toggler d-lg-none  d-none" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                        <span></span>-->
-<!--                        <span></span>-->
-<!--                        <span></span>-->
-<!--                    </button>-->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
 
                     <?php
                     wp_nav_menu( array(
                             'theme_location'    => 'menu-1',
                             'container'			=> 'div',
-                            'depth' => 2,
+                            'depth' => 10,
                             'container_class'	=> 'collapse navbar-collapse',
                             'container_id'		=> 'bdchomok-main-menu-id',
                             'menu_class'		=> 'navbar-nav ',
@@ -221,7 +221,6 @@
                     ); ?>
 
                 </nav>
-
             </div>
         </div>
         <!-- .header-bottom end -->

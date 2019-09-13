@@ -233,6 +233,28 @@
 
         });
 
+        $( 'body' ).on( 'click', '.bd-cat-filter', function(e) {
+         e.preventDefault();
+         var catURL = $( this ).attr('data-cat-url' );
+         console.log( catURL );
+
+         $.ajax({
+            method: 'POST',
+             url: js_vars.ajaxurl,
+             data: {
+                 action: "cat_filter",
+                 cat_ID: catURL
+             },
+             //dataType: "json",
+             success: function (response) {
+                 console.log(response);
+                 response = response.substring(0, response.length - 1);
+                 $('ul.products').html(response);
+             }
+         });
+
+        })
+
 
     });
 
