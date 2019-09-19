@@ -1,101 +1,138 @@
 <?php
 //Add Ajax Actions
 function advance_search(){
-        $search_term = esc_attr( $_POST['keyword'] );
+    $search_term = $_POST['keyword'];
+    $search_term_slug = implode("-", explode(" ",$search_term));
 
+    global $wpdb;
+    $query = "select ID from a2f_posts where post_type='product' and post_status='publish' and (post_name like '%" . $search_term_slug . "%' or post_title like '%" . $search_term . "%') limit 10";
 
-        if(!empty($search_term)):
-        $productArgs = array(
-            'posts_per_page' => -1,
-            'post_type' => array( 'product' ),
-            's' => $search_term,
-            'slug' =>$search_term
-        );
+    $results = $wpdb->get_results($query);
 
-        $productLoop = new WP_Query( $productArgs );
+    $product_ids = [];
+    foreach( $results as $product ){
+        $product_ids[] = $product->ID;
+    }
 
-        if ( $productLoop->have_posts() ) {
+    $args = array(
+        'post_type' => 'product',
+        'orderby' => 'ASC',
+        'post__in' => $product_ids
+    );
 
-            $output = $productImage = '';
+    $output = $productImage = $price ='';
+    $output .= '<ul  class="list-group list-group-flush ">';
 
-            $output .= '<h6 class="text-uppercase">shop</h6>';
+    $loop = new WP_Query( $args );
 
-            $product_count = 1;
-            $output .= '   <div class="table-responsive">
-                     <table class="table table-hover">
-                           
-                            <tbody>';
+    if ( $loop->have_posts() ) : while( $loop->have_posts() ) : $loop->the_post();
 
-            while ($productLoop->have_posts()) : $productLoop->the_post();
-
-                global $post;
-                $post_slug=$post->post_name;
-
-                // Product Data
-                if ($product_count <= 10 ) {
-                    $product_count++;
-                    if (has_post_thumbnail($productLoop->post->ID)) {
-                        $productImage = get_the_post_thumbnail($productLoop->post->ID, array(60, 60), array('class' => 'img-fluid'));
-                    }
-
-                    $terms = get_the_terms($productLoop->post->ID, 'product_cat');
-
-                    $product = wc_get_product( $productLoop->post->ID );
-                    $category_name = [];
-                    $termLink = [];
-                    foreach ($terms as $term) {
-                        if ($term->parent == 0):
-                            $category_name[] = $term->name;
-                            $termLink = $term->slug;
-                        endif;
-                        break;
-                    }
-
-
-
-
-                    $output .= '<div class="search-product-items  align-items-center">
-                 
-                              <tr class="aligncenter">
-                                <td width="10%">
-                                    <a href="'.get_post_permalink($productLoop->post->id).'" class="load_popup" data-pid="'.$productLoop->post->ID.'">' . $productImage . '</a>
-                  
-                                  </td>
-                                <td width="70%">
-                                  <a href="'.get_post_permalink($productLoop->post->id).'" class="product-title d-block " data-pid="'.$productLoop->post->ID.'">' . get_the_title() .'('.strtolower(trim( $post_slug)).')'.'</a>
-                     
-                                <a href="'.site_url().'/product-category/'.$termLink.'" class="product-cat d-block ">' . implode(', ', $category_name) . '</a>
-                              
-                                   </td>';
-                    if ($product->get_regular_price()){
-                        $output .='  <td width="30%"> <p class="float-right ">  <span class="woocommerce-Price-amount amount"> '.$product->get_price().'</span> <span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></p>
-                   </td>';
-                    }
-
-                    $output .='   </tr>
-                           
-                 
-                
-                   </div>';
-                }
-
-
-            endwhile;
-            wp_reset_postdata();
-
-            if ($productLoop->post_count > 10) {
-                $output .= '  </tbody>
-                          </table>
-                    </div>
-                      <div class="show-more-search"><span><span></span></span><a href="'.get_bloginfo('url').'?s='.$search_term.'&p_type=product">Show all ' . $productLoop->post_count . ' results</a></div>';
-            }
+        if (has_post_thumbnail($loop->post->ID)) {
+            $productImage = get_the_post_thumbnail($loop->post->ID, array(60, 60), array('class' => 'img-fluid'));
         }
 
-        endif;
-    echo json_encode(array('output' => $output));
+        $product_cat = wc_get_product_category_list($loop->post->ID);
+
+        $product = wc_get_product( $loop->post->ID );
+
+        if ($product->get_regular_price()){
+            $price ='<div class="search-product-price ml-auto"><span class="woocommerce-Price-amount amount"> '.$product->get_price().'</span><span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></div>';
+        }
+
+        $output .= '<li class="list-group-item position-relative"><a class="position-absolute d-block search-link" href="' . esc_url( get_the_permalink() ) . '"></a>';
+        $output .= '<div class="d-flex align-content-center">';
+        $output .= $productImage;
+        $output .= '<div class="pl-3 pr-4"><h5 class="m-0">' . esc_html( get_the_title() ) . '</h5>';
+        $output .= '<p class="search-product-cat">'.$product_cat.'</p></div>';
+        $output .= $price;
+        $output .= '</div>';
+        $output .= '</li>';
+
+    endwhile;
+    endif;
+    wp_reset_query();
+
+    $output .= '</ul>';
+
+    if (!empty($results)) {
+        echo json_encode(array('output' => $output ));
+    } else {
+        echo json_encode(array('output' => 'no result found.'));
+    }
+
     exit();
 
 }
 
 add_action( 'wp_ajax_advance_search', 'advance_search' );
-add_action( 'wp_ajax_nopriv_advance_search', 'advance_search' );
+add_action( 'wp_ajax_nopriv_advance_search', 'advance_search');
+
+//Cat Filer
+function cat_filter(){
+    
+    $tex_id = $_POST['cat_ID'];
+    $get_cat = array (
+        'post_per_page' => -1,
+        'post_type' => 'product',
+        'tax_query' => array(
+            array(
+                'taxonomy'  => 'product_cat',
+                'field'     => 'term_id',
+                'terms'     => array( $tex_id ),
+            )
+        ),
+    );
+
+    $loop = new WP_Query( $get_cat );
+
+
+    if ( $loop->have_posts() ) {
+        while ($loop->have_posts()) : $loop->the_post();
+
+
+            $post_id = $loop->post->ID;
+
+            $cats =  wp_get_post_terms( $post_id, 'product_cat' );
+//            var_dump($cats);
+            $term_id = '';
+
+            foreach ($cats as $cat){
+                $term_id = $cat->term_id;
+            }
+
+
+
+            $subcats = wp_get_post_terms( $term_id, 'product_cat' );;
+
+
+
+
+            echo '<div class="product-cat-filter-list">';
+            foreach ($subcats as $sc) {
+                $link = get_term_link($sc->slug, $sc->taxonomy);
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.esc_html( $sc->name ).'</h3>';
+
+                $args2 = get_terms('product_cat',array(
+                    'child_of' => $sc->term_id,
+                    'hierarchical' => 1,
+                    'hide_empty' => 1,
+                ));
+                foreach ($args2 as $subsubCats) {
+
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$subsubCats->term_id.'" href=' . $subsubCats->slug . '><span>' . $subsubCats->name . '</span><span class="badge badge-danger float-right">'.$subsubCats->count.'</span></a>';
+                }
+                echo '</section>';
+            }
+
+            echo '</div>';
+
+
+
+           wc_get_template_part( 'content', 'product' );
+        endwhile;
+        wp_reset_postdata();
+    }
+}
+
+add_action( 'wp_ajax_cat_filter', 'cat_filter' );
+add_action( 'wp_ajax_nopriv_cat_filter', 'cat_filter' );

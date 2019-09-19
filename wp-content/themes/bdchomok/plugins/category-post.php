@@ -198,7 +198,7 @@ class BDchomok_Product_Filter extends Widget_Base {
             </div>
 
             <div class="cat-link text-center text-uppercase">
-                <a href="/product-category/<?php echo $woo_cat_slug; ?>"><?php esc_html_e( 'View All', 'bdchomok' ); ?></a>
+                <a href="/product-category/<?php echo $woo_cat_slug; ?>"><?php esc_html_e( 'সব দেখ', 'bdchomok' ); ?></a>
             </div>
         </div>
         <?php

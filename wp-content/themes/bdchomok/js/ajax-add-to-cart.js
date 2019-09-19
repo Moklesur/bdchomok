@@ -48,8 +48,8 @@
                             autoplaySpeed: 2000,
                             slidesToShow: 4,
                             slidesToScroll: 1,
-                            prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-2x fa-angle-left' aria-hidden='true'></i></button>",
-                            nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-2x fa-angle-right' aria-hidden='true'></i></button>",
+                            prevArrow:"<button type='button' class='slick-prev pull-left'><i class='icofont-long-arrow-left f-2x slick-arrow' aria-hidden='true'></i></button>",
+                            nextArrow:"<button type='button' class='slick-next pull-right'><i class='icofont-long-arrow-right slider-right f-2x slick-arrow' aria-hidden='true'></i></button>",
                             responsive: [
                                 {
                                     breakpoint: 1024,

@@ -1,6 +1,5 @@
 (function ($) {
     $(document).ready(function () {
-
         var toggleAffix = function(affixElement, scrollElement, wrapper) {
 
             var height = affixElement.outerHeight(),
@@ -57,7 +56,6 @@
             $('#category-list-tabContent .tab-pane:first-child').tab('show');
         }
 
-
         var  data = $('.cat-filter').attr('data_limit');
         var show = "";
         if (data !== "" ){
@@ -97,7 +95,6 @@
                 });
             });
         }
-
         /* Author Slider */
         if (('.author-slider').length) {
             $('.author-slider').each(function () {
@@ -179,7 +176,7 @@
 
             load_ajax_product_pp(pid);
 
-            // $(".quick-view-modal").modal("show");
+            $(".quick-view-modal").modal("show");
         });
 
         // Quick View Function
@@ -201,9 +198,6 @@
             });
         };
 
-
-
-
         $('.advance-search-tri').bind('input', function(){
             if ($(this).val() !== null || $(this).val() !== 'undefined') {
 
@@ -218,6 +212,7 @@
                     dataType: "json",
                     async:true,
                     success: function (response) {
+                        //console.log( response.output );
                         //var res_data = response.output;
                         if (response.output != null) {
 
@@ -233,7 +228,28 @@
 
         });
 
+        // Cat filter Js
+        $( 'body' ).on( 'click', '.product-filter-js', function(e) {
+         e.preventDefault();
+         var catURL = $( this ).attr('data-cat-id' );
+         console.log( catURL );
 
+         $.ajax({
+            method: 'POST',
+             url: js_vars.ajaxurl,
+             data: {
+                 action: "cat_filter",
+                 cat_ID: catURL
+             },
+             //dataType: "json",
+             success: function (response) {
+                 console.log(response);
+                 response = response.substring(0, response.length - 1);
+                 $('ul.products').html(response);
+             }
+         });
+
+        });
     });
 
 })(jQuery);

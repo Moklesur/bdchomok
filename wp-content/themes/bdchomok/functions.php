@@ -179,7 +179,7 @@ require get_template_directory() . '/plugins/social-links.php';
 function bdchomok_scripts()
 {
 
-    wp_enqueue_style('bdchomok-body-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700');
+    wp_enqueue_style('bdchomok-body-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600');
 
     wp_enqueue_style('icofont', get_template_directory_uri() . '/css/icofont.min.css', array(), '4.7.0');
     wp_enqueue_style('ionicons', 'https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css', array(), '4.7.0');
@@ -188,18 +188,11 @@ function bdchomok_scripts()
 
     wp_enqueue_style('bdchomok-style', get_stylesheet_uri());
 
-
-    $loaded_jsvars = array(
-        'ajaxurl' => admin_url('admin-ajax.php'));
-
-
-    wp_localize_script('jquery', 'js_vars',
-        $loaded_jsvars
-    );
-
+    $loaded_jsvars = array('ajaxurl' => admin_url('admin-ajax.php'));
+    wp_localize_script('jquery', 'js_vars', $loaded_jsvars);
 
     // JS
-    //wp_enqueue_script( 'jquery-popper', get_template_directory_uri() . '/js/popper.min.js', array('jquery'), '1.12.5', true );
+    wp_enqueue_script( 'jquery-nicescroll', get_template_directory_uri() . '/js/jquery.nicescroll.js', array('jquery'), '3.7.6', true );
     //wp_enqueue_script( 'jquery-isotope', get_template_directory_uri() . '/js/isotope.pkgd.js', array('jquery'), '3.0.4', true );
     wp_enqueue_script('jquery-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('slick-js', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), '4.1.3', true);
@@ -228,6 +221,7 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/recent-products-woo.php';
         require get_template_directory() . '/plugins/author-list.php';
         require get_template_directory() . '/plugins/list-category-woo.php';
+        require get_template_directory() . '/plugins/list-category-woo-count.php';
     }
 }
 
@@ -281,10 +275,8 @@ if (defined('JETPACK__VERSION')) {
 
 /**
  * Load Custom acf setting compatibility file.
-// */
+*/
     require get_template_directory() . '/inc/acf-custom.php';
-
-
 
 /**
  * Load WP Bootstrap Nav Walker file.
@@ -362,9 +354,6 @@ function woocommerce_ajax_add_to_cart()
 
     wp_die();
 }
-
-
-//remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 add_action('woocommerce_after_shop_loop_item', 'bdchomok_woocommerce_template_loop_add_to_cart', 10);
 
 function bdchomok_woocommerce_template_loop_add_to_cart()
@@ -387,28 +376,15 @@ function load_single_product()
 
     $output = '<div class="woocommerce-notices-wrapper"></div>';
 
-    $output .= '<div id="product-' . $product->get_id() . '" class="product  type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">';
+    $output .= '<div class="woocommerce "><div id="product-' . $product->get_id() . '" class="product row type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">';
 
             //echo wc_get_gallery_image_html( $attachment_id );die();
-    $output .= '<div class="images text-center"> <img src=" '.wp_get_attachment_url( $product->get_image_id() ).'" />';
+    $output .= '<div class="images text-center col-lg-5 col-12"><img src=" '.wp_get_attachment_url( $product->get_image_id() ).'" />';
 
-    $output .= '</div>
-	<div class="summary entry-summary">
-	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
-     <p class="price">'.$product->get_price_html().'</p>
-<div class="woocommerce-product-details__short-description mb-3">';
-
-
-
-
+    $output .= '</div><div class="summary entry-summary col-lg-7 col-12"><h2 class="product_title entry-title">'.$product->get_name().'</h2><p class="price">'.$product->get_price_html().'</p><div class="woocommerce-product-details__short-description mb-3">';
     $output .= '.'.$product->get_short_description() .'</div>';
 
-
-    $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1"
-                               class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
-                               data-product_id="'.$product->get_id().'" data-product_sku=""
-                               aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a>';
-
+    $output .= '<a href="'.$product->add_to_cart_url().'" data-quantity="1" class="text-center alt custom-btn btn product_type_'.$product->get_type().' add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3" data-product_id="'.$product->get_id().'" data-product_sku="" aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a>';
 
     $output .= '.<div class="product_meta">';
     $catIds = $product->get_category_ids();
@@ -426,15 +402,7 @@ function load_single_product()
 
         }
     }
-
-
-    $output .= ' <span class="posted_in">Category: <a href='.site_url().'/product-category/'.$category_slug.' rel="tag">'. implode(', ', $category_name).'</a></span>
-	
-	
-</div>
-	</div>
-
-</div>';
+    $output .= ' <span class="posted_in">Category: <a href='.site_url().'/product-category/'.$category_slug.' rel="tag">'. implode(', ', $category_name).'</a></span></div></div></div></div>';
 
     $output .= '</div>';
     $response['html'] = $output;
@@ -453,24 +421,21 @@ function load_add_cart_info_product()
     );
     $product = wc_get_product($pid);
 
-
     $output = '<div class="woocommerce-notices-wrapper"></div>';
-
 
     $output .= '<div id="product-' . $product->get_id() . '" class="product type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">
 
-	<div>';
+	<div class="d-flex aligns-center justify-content-center">';
 
     $output .= '<div class="images text-center"> <img src=" '.wp_get_attachment_url( $product->get_image_id() ).'" />';
 
     $output .= '</div>
 	<div class="summary entry-summary">
 	 <h2 class="product_title entry-title">'.$product->get_name().'</h2>
-     <p class="price">'.$product->get_price_html().'</p>
-     <p class="mt-2">'.$product->get_description().'</p>';
+    <p class="price discount-hide">'.$product->get_price_html().'</p>
+<p class="btn-close-checkout"><a href="/checkout" class="btn btn-checkout">অর্ডার সম্পন্ন করুন</a><a href="#" class="close btn btn-close" data-dismiss="modal" aria-label="Close">আরও কিনুন</a></p>';
 
     $output .= ' </div></div> </div>';
-
 
                 $args = array(
                     'post_type'             => 'product',
@@ -495,17 +460,12 @@ function load_add_cart_info_product()
 
                      <a href='.$product->get_permalink().' class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                             '.$product->get_image('woocommerce_thumbnail').'</a>
-
                                    <p class="m-0"><a href='.$product->get_permalink().'>'.$title.'</a></p>          
                                    <p class="price">'.$product->get_price_html().'</p>   
-                                   <p><a href="'.wc_get_cart_url().'" data-quantity="1"
-                               class="text-center alt  btn add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed mb-3"
+                                   <p class="m-0"><a href="'.wc_get_cart_url().'" data-quantity="1"
+                               class="text-center alt  button add_to_cart_button ajax_add_to_cart  wc-variation-selection-needed"
                                data-product_id="'.$product->get_id().'" data-product_sku=""
-                               aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a></p>
-                              <div class="overlay">
-        <button type="button" data-pid="560" class="quick-view" tabindex="0">এক নজরে</button>
-    </div>
-                               </li>';
+                               aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a></p></li>';
 
                     endwhile;
                     wp_reset_query();
@@ -521,9 +481,6 @@ function load_add_cart_info_product()
 
 add_action('wp_ajax_nopriv_load_add_cart_info_product', 'load_add_cart_info_product');
 add_action('wp_ajax_load_add_cart_info_product', 'load_add_cart_info_product');
-
-
-
 
 /**
  * Update contents count via AJAX
@@ -586,7 +543,6 @@ function bdchomok_cart_button_text() {
     return __( 'ক্রয় করুন', 'bdchomok' );
 }
 
-
 add_action('init', 'function_to_add_author_woocommerce', 999 );
 function function_to_add_author_woocommerce() {
     add_post_type_support( 'product', 'author' );
@@ -594,7 +550,6 @@ function function_to_add_author_woocommerce() {
 
 // Remove Category Product Page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-
 
 function my_custom_action() {
 
@@ -630,20 +585,9 @@ function bdchomok_product_page_category(){
     endforeach;
 }
 
-
-
 // Ajax Search
 require get_template_directory() . '/ajax-search/functions.php';
-add_filter('the_title', 'single_product_page_title', 10, 2);
 
-function single_product_page_title($title, $id) {
-    if(is_product_category() || is_page() || is_shop() ) {
-        $title = mb_strimwidth($title, 0, 18, '...');
-        return $title;
-    }
-
-    return $title;
-}
 
 add_filter( 'woocommerce_get_related_product_tag_terms','related_product_page_title', 10, 2 );
 function related_product_page_title($title, $id) {
@@ -654,7 +598,6 @@ function related_product_page_title($title, $id) {
 
     return $title;
 }
-
 
 add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
 function woo_custom_product_tabs( $tabs ) {
@@ -802,7 +745,6 @@ function bdchomok_product_sale_flash( $output, $post, $product ) {
 }
 add_filter( 'woocommerce_sale_flash', 'bdchomok_product_sale_flash', 11, 3 );
 
-
 add_filter( 'woocommerce_format_sale_price', 'woocommerce_custom_sales_price', 10, 3 );
 
 function woocommerce_custom_sales_price( $price, $regular_price, $sale_price ) {
@@ -846,7 +788,7 @@ function ushop_close_div() {
  */
 add_action( 'woocommerce_before_single_product_summary', 'ushop_product_wrapper_start', 1 );
 function ushop_product_wrapper_start() {
-    echo '<div class="row">';
+    echo '<div class="row product-thumb-content">';
 }
 add_action( 'woocommerce_after_single_product_summary', 'ushop_product_wrapper_end', 1 );
 function ushop_product_wrapper_end() {
@@ -875,3 +817,132 @@ add_action( 'woocommerce_after_single_product_summary', 'ushop_product_summary_e
 function ushop_product_summary_end() {
     echo '</div>';
 }
+
+/**
+ * Product Thumbs
+ * add div
+ */
+remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+
+if ( ! function_exists( 'woocommerce_template_loop_product_thumbnail' ) ) {
+    function woocommerce_template_loop_product_thumbnail() {
+        echo woocommerce_get_product_thumbnail();
+    }
+}
+
+if ( ! function_exists( 'woocommerce_get_product_thumbnail' ) ) {
+    function woocommerce_get_product_thumbnail( $size = 'shop_catalog' ) {
+        global $post, $woocommerce;
+        $output = '<div class="product-thumbs">';
+
+        if ( has_post_thumbnail() ) {
+            $output .= get_the_post_thumbnail( $post->ID, $size );
+        } else {
+            $output .= wc_placeholder_img( $size );
+            // Or alternatively setting yours width and height shop_catalog dimensions.
+            // $output .= '<img src="' . woocommerce_placeholder_img_src() . '" alt="Placeholder" width="300px" height="300px" />';
+        }
+        $output .= '</div>';
+        return $output;
+    }
+}
+
+
+/**
+ * Checkout Page
+ */
+
+// Unset woo fields
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+function custom_override_checkout_fields( $fields ) {
+
+    // remove fields
+    $billing_order = array(
+        "billing_last_name",
+        "billing_company",
+        "billing_address_2",
+        "billing_country",
+        "billing_city",
+        "billing_postcode"
+    );
+    $shipping_order = array(
+        "shipping_last_name",
+        "shipping_company",
+        "shipping_address_2",
+        "shipping_country",
+        "shipping_city",
+        "shipping_postcode"
+    );
+    foreach($billing_order as $billing_field) {
+        unset($fields['billing'][$billing_field]);
+    }
+
+    foreach($shipping_order as $shipping_field) {
+        unset($fields['shipping'][$shipping_field]);
+    }
+
+    // Change placeholder
+    $fields['billing']['billing_first_name']['label'] = 'নাম';
+    $fields['billing']['billing_address_1']['label'] = 'ঠিকানা';
+    $fields['billing']['billing_state']['label'] = 'জেলা';
+    $fields['billing']['billing_email']['label'] = 'ইমেইল';
+    $fields['billing']['billing_phone']['label'] = 'ফোন নাম্বার';
+    $fields['billing']['billing_phone']['label'] = 'ফোন নাম্বার';
+
+    $fields['order']['order_comments']['placeholder'] = 'অর্ডার বা পণ্য ডেলিভারি সংক্রান্ত আরো কোনো তথ্য থাকলে দিন';
+    $fields['order']['order_comments']['label'] = 'অন্যান্য তথ্য';
+
+    return $fields;
+}
+
+function checkout_create_account( $translated_text, $text, $domain ) {
+    switch ( $translated_text ) {
+        case 'Create an account?' :
+            $translated_text = 'নতুন অ্যাকাউন্ট তৈরি করতে টিক দিন। অ্যাকাউন্ট তৈরি করে আপনি পরবর্তীতে দ্রুত কেনাকাটা করতে পারবেন এবং সবগুলি অর্ডারের সম্পর্কে বিস্তারিত দেখতে পারবেন অথবা ইতিমধ্যে অ্যাকাউন্ট তৈরি করে থাকলে';
+            break;
+    }
+    return $translated_text;
+}
+
+add_filter( 'gettext', 'checkout_create_account', 20, 3 );
+
+
+add_filter( 'jetpack_lazy_images_blacklisted_classes', 'bbloomer_exclude_custom_logo_class_from_lazy_load', 999, 1 );
+
+function bbloomer_exclude_custom_logo_class_from_lazy_load( $classes ) {
+    $classes[] = 'custom-logo';
+    return $classes;
+}
+
+
+function ewos_send_sms( $order_id, $old_status, $new_status ) {
+
+    $order = new WC_Order( $order_id );
+
+    $user      = $order->get_user;
+
+    $ewos_domain = 'http://www.bangladeshsms.com/';
+    $ewos_api_key = 'C20000635d6bf0e1601273.18949602';
+    $ewos_sender_id = '8809612446000';
+    //$ewos_message = 'Thank you for ordering from XXXXXXXXXX! Your order number is #' . $order_id . '. For any help call us at 01xxxxxxxxx.';
+
+
+    $ewos_message = 'Hi '. $order->get_billing_first_name(). ' Your Order ('. $order->get_id() .') Placed Properly. We will contact with you soon. bdchomok.com';
+
+    $ewos_send_to = get_post_meta( $order->ID, '_billing_phone', true );
+
+    $api_url = $ewos_domain . 'smsapi?api_key=' . $ewos_api_key . '&type=text&contacts=' . $ewos_send_to . '&senderid=' . rawurlencode($ewos_sender_id) . '&msg=' . rawurlencode($ewos_message);
+
+    if ( !($old_status == 'pending' && $new_status == 'on-hold')) {
+        file_get_contents($api_url);
+    }
+
+// 	$to = '';
+// 	$subject = 'Order Notification';
+// 	$headers = array('Content-Type: text/html; charset=UTF-8');
+// 	wp_mail( $to, $subject, $ewos_message, $headers );
+
+}
+add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
+
