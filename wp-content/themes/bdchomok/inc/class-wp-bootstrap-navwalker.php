@@ -51,7 +51,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';
 			}
 
-			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu dropdown-arrow-right\" " . $labledby . ">\n";
+			$output .= "\n$indent<ul role=\"menu\" class=\" dropdown-menu xs-dropdown-menu dropdown-arrow-right\" " . $labledby . ">\n";
 		}
 
 		/**
@@ -110,8 +110,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
                     $depth_active .= ' menu-xs-tri-xs';
                 }
 
-				$class_names .= ' dropdown dropdown-arrow-down';
-                $dropdown_icon .= '<i class="menu-xs-tri ion-arrow-down-b ml-2'.$depth_active.'"></i>';
+				$class_names .= ' dropdown-arrow-down';
+                $dropdown_icon .= '<i class="ml-2 xs-angle-down icofont-thin-down '.$depth_active.'"></i>';
 			}
 
             if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
@@ -133,11 +133,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$atts['rel']    = ! empty( $item->xfn )		? $item->xfn	: '';
 			// If item has_children add atts to a.
 			if ( $args->has_children && 0 === $depth && $args->depth > 1 ) {
-				$atts['href']   		= '#';
-				$atts['data-toggle']	= 'dropdown';
-				$atts['aria-haspopup']	= 'true';
-				$atts['aria-expanded']	= 'false';
-				$atts['class']			= 'dropdown-toggle nav-link';
+				$atts['href']   		= ! empty( $item->url ) ? $item->url : '';;
+				$atts['data-toggle']	= '';
+				$atts['aria-haspopup']	= '';
+				$atts['aria-expanded']	= '';
+				$atts['class']			= 'main-dropdown nav-link';
 				$atts['id']				= 'menu-item-dropdown-' . $item->ID;
 			} else {
 				$atts['href'] 	= ! empty( $item->url ) ? $item->url : '';

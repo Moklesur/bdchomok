@@ -162,7 +162,7 @@
      theme_color="#106f5a">
 </div>
 <?php wp_footer(); ?>
-
+<a href="#" id="back-to-top" title="<?php esc_attr_e( 'Back to top', 'preferred-magazine' ); ?>">&uarr;</a>
 
 </body>
 </html>

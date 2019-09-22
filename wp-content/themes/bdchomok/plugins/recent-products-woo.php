@@ -165,7 +165,7 @@ class BDchomok_Recent_Products_Woo extends Widget_Base {
 
             <div class="category-filter-wrap mb-3 col-12 cat-tab">
                 <div class="d-block text-center">
-                    <a class="text-uppercase position-relative" href="/shop">
+                    <a class="text-uppercase position-relative" style="color: #000;">
                         <span><?php echo $settings['title']; ?></span>
                         <i class="icofont-read-book"></i>
                     </a>
@@ -176,10 +176,6 @@ class BDchomok_Recent_Products_Woo extends Widget_Base {
             <div class="category-filter-wrap cat-filter" data_limit="<?php echo $settings['limit'];?>">
                 <?php
                 echo do_shortcode( '[recent_products limit="'.$settings['limit'].'" class="category-filter" columns="4"]' );  ?>
-            </div>
-
-            <div class="cat-link text-center text-uppercase">
-                <a href="/shop"><?php esc_html_e( 'View All', 'bdchomok' ); ?></a>
             </div>
         </div>
         <?php

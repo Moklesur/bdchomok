@@ -139,27 +139,36 @@
                         <!-- .advance-search start -->
                         <div class="col-lg-6 col-sm-4 d-lg-inline-block d-none col-12 advance-search order-lg-1 order-2">
                             <?php //echo do_shortcode('[yith_woocommerce_ajax_search]');?>
-                            <form class="advance-search-form" action="">
+                            <form class="advance-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
                                 <div class="input-group">
-                                    <input type="text"   class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
+                                    <input type="text" name="s" class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
                                     </div>
                                     <div class="search-target text-center">
                                         <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
                                     </div>
-                                    <div class="search-content">
-
-
-                                    </div>
+                                    <div class="search-content"></div>
                                 </div>
                             </form>
                         </div>
                         <!-- .advance-search end -->
                         <!-- .cart-account start -->
                         <div class="col-lg-3 col-md-3 col-6 cart-account order-lg-2 order-1">
-                            <ul class="list-inline mb-0 d-flex align-items-center mb-m-r">
+                            <ul class="list-inline mb-0 d-flex align-items-center justify-content-end xs-padding-fix">
+                                <li class="list-inline-item d-lg-none d-inline-block">
+                                    <a class="mobile-account" href="#"><i class="icofont-login"></i></a>
+                                    <div class="account-login-dropdown shadow-skl" aria-labelledby="dropdownMenuLink">
+                                        <?php if ( is_user_logged_in() ) { ?>
+                                            <a class="mr-2" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id' ) ) ); ?>"><i class="ion-ios-person-outline"></i> <?php esc_html_e( 'অ্যাকাউন্ট','bdchomok'); ?></a>
+                                            <a  href="<?php echo esc_url( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><i class="ion-log-out"></i> <?php esc_html_e( 'বাহির','bdchomok' ); ?></a>
+                                        <?php }
+                                        else { ?>
+                                            <a href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id') ) ); ?>"><?php esc_html_e( 'প্রবেশ / নিবন্ধন','bdchomok' ); ?></a>
+                                        <?php } ?>
+                                    </div>
 
+                                </li>
                                 <?php
                                 if (get_field('mobile_order_number','option')){?>
                                 <li class="list-inline-item ml-auto d-lg-inline-block d-none">
@@ -172,9 +181,8 @@
                                     </div>
                                 </li>
                                <?php } ?>
-
                                 <?php if( class_exists( 'WooCommerce' ) ): ?>
-                                    <li class="list-inline-item ml-auto">
+                                    <li class="list-inline-item ml-lg-auto">
                                         <div class="cart-wrap position-relative">
                                             <a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" >
                                                 <i class="icofont-shopping-cart"></i>
@@ -188,6 +196,14 @@
                                         </div>
                                     </li>
                                 <?php endif; ?>
+                                <li class="d-inline-block d-lg-none">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <p class="menu-xs">মেন্যু</p>
+                                    </button>
+                                </li>
                             </ul>
                         </div>
                         <!-- .cart-account end -->
@@ -199,14 +215,25 @@
         <!-- .header-bottom start -->
         <div class="header-bottom main-menu " data-toggle="affix">
             <div class="container">
-                <nav class="navbar navbar-expand-lg p-0 " >
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bdchomok-main-menu-id" aria-controls="bdchomok-main-menu-id" aria-expanded="false" aria-label="Toggle navigation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-
+                <nav class="navbar navbar-expand-lg p-0">
+                    <div class="navbar-brand">
+                        <?php
+                        the_custom_logo();
+                        if ( is_front_page() && is_home() ) :
+                            ?>
+                            <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                        <?php
+                        else :
+                            ?>
+                            <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+                        <?php
+                        endif;
+                        $bdchomok_description = get_bloginfo( 'description', 'display' );
+                        if ( $bdchomok_description || is_customize_preview() ) :
+                            ?>
+                            <p class="site-description"><?php echo $bdchomok_description; /* WPCS: xss ok. */ ?></p>
+                        <?php endif; ?>
+                    </div>
                     <?php
                     wp_nav_menu( array(
                             'theme_location'    => 'menu-1',
@@ -229,9 +256,9 @@
         <div class="container d-lg-none d-block">
             <div class="advance-search">
                 <?php //echo do_shortcode('[yith_woocommerce_ajax_search]');?>
-                <form class="advance-search-form" action="">
+                <form class="advance-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
                     <div class="input-group">
-                        <input type="text"   class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
+                        <input type="text" name="s"  class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
                         <div class="input-group-append">
                             <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
                         </div>
@@ -239,7 +266,6 @@
                             <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
                         </div>
                         <div class="search-content">
-
 
                         </div>
                     </div>

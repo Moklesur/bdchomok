@@ -25,7 +25,26 @@ form#search-form button{
     background: transparent;
     color: #000;
 }
-
+.entry-meta a, .entry-meta{
+    color: #555555;
+}
+.has-items-thumb .block-cats{
+     bottom: unset;
+    left: 15px;
+    top: 0;
+}
+.page-header, .woocommerce-products-header__title{
+    padding: 30px 0 !important;
+}
+.page-header .entry-title, .woocommerce-products-header__title {
+    font-size: 24px !important;
+}
+.block-contents h2 {
+    font-size: 18px;
+}
+.blog-content-wrap {
+    padding: 30px;
+}
 .trading-post-wrap ul{
     height: 0;
     overflow: hidden;

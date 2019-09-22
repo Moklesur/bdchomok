@@ -175,17 +175,10 @@ class BDchomok_Product_Filter extends Widget_Base {
                         'include' => $category_slider,
                         'empty'        => 0
                     );
-
-                    $woo_categories = get_categories( $prod_cat_args );
-
+                    $woo_categories = get_terms( $prod_cat_args );
                     foreach ( $woo_categories as $woo_cat ) {
-                        //$woo_cat_id = $woo_cat->term_id; //category ID
                         $woo_cat_name = $woo_cat->name; //category name
-                        $woo_cat_slug = $woo_cat->slug; //category slug
-                        echo '<a class="text-uppercase position-relative" href="/product-category/'. $woo_cat_slug.'" data-filter=".product_cat">
-<span>'. $woo_cat_name.'</span>
-<i class="icofont-read-book"></i>
-</a>';
+                        echo '<a class="text-uppercase position-relative" href="'. get_term_link($woo_cat->slug, 'product_cat').'" data-filter=".product_cat"><span>'. $woo_cat_name.'</span><i class="icofont-read-book"></i></a>';
                     }
                     ?>
                     <span class="seperater"></span>
@@ -198,12 +191,11 @@ class BDchomok_Product_Filter extends Widget_Base {
             </div>
 
             <div class="cat-link text-center text-uppercase">
-                <a href="/product-category/<?php echo $woo_cat_slug; ?>"><?php esc_html_e( 'সব দেখ', 'bdchomok' ); ?></a>
+                <a href="<?php echo get_term_link($woo_cat->slug, 'product_cat'); ?>"><?php esc_html_e( 'সব দেখুন', 'bdchomok' ); ?></a>
             </div>
         </div>
         <?php
     }
-
     /**
      * Prepare posts to be used in the SELECT2 field
      */
