@@ -135,69 +135,40 @@ class BDchomok_List_Category_Woo extends Widget_Base {
         $settings = $this->get_settings_for_display();
 
         $get_category_list = is_array( $settings['product_category_id'] ) ? implode( ',', $settings['product_category_id'] ) : $settings['product_category_id'];
+
+        $prod_cat_args = array(
+            'taxonomy'     => 'product_cat',
+            'orderby'      => 'name',
+            'include' => $get_category_list,
+            'empty'        => 0
+        );
+
+        $woo_categories = get_categories( $prod_cat_args );
+        $taxonomy_name = 'product_cat';
         ?>
-
-        <div class="category-list-tab-wrap">
-            <h4>
-                <?php echo esc_html( $settings['title'] ); ?>
-            </h4>
-            <ul class="nav nav-pills" id="category-list-tab" role="tablist">
-                <?php
-                $prod_cat_args = array(
-                    'taxonomy'     => 'product_cat',
-                    'orderby'      => 'name',
-                    'include' => $get_category_list,
-                    'empty'        => 0
-                );
-
-                $woo_categories = get_categories( $prod_cat_args );
-                $taxonomy_name = 'product_cat';
-
-                foreach ( $woo_categories as $woo_cat ) {
-
-                    $catName = str_replace(' ','-', $woo_cat->name );
-
-                    ?>
-
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-<?php echo esc_html( $catName ); ?>-tab" data-toggle="pill" href="#<?php echo esc_html( $catName ); ?>" role="tab" aria-controls="pills-<?php echo esc_html( $catName ); ?>" aria-selected="true">
-                            <?php echo esc_html( $woo_cat->name ); ?>
-                        </a>
-                    </li>
-
-                <?php } ?>
-            </ul>
-            <div class="tab-content" id="category-list-tabContent">
-                <?php
-                foreach ( $woo_categories as $woo_cat ) {
-
-                    $term_id = $woo_cat->term_id;
-                    $catName = str_replace(' ','-', $woo_cat->name );
-
-                    $term_children = get_term_children($term_id, $taxonomy_name);
-                    ?>
-
-                    <div class="tab-pane fade" id="<?php echo esc_html( $catName ); ?>" role="tabpanel" aria-labelledby="<?php echo esc_html( $catName ); ?>-tab">
-                        <ul class="list-unstyled category-content">
-
-                            <?php
-                            foreach ($term_children as $child) {
-                                $term = get_term_by('id', $child, $taxonomy_name);
-                                ?>
-
-                                <li>
-                                    <a href="<?php echo esc_url( get_term_link( $child, $taxonomy_name ) ); ?>"><?php echo esc_html( $term->name ); ?></a>
-                                </li>
-
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
+        <div class="widget-area">
+            <section class="widget pr-3">
+                <h3 class="category-parent widget-title">
+                    <?php echo esc_html( $settings['title'] ); ?>
+                </h3>
+                <div class="cat-list-items">
                     <?php
-                }
-                ?>
-            </div>
+                    foreach ( $woo_categories as $woo_cat ) {
+
+                        $term_id = $woo_cat->term_id;
+                        $term_children = get_term_children($term_id, $taxonomy_name);
+
+                        foreach ($term_children as $child) {
+                            $term = get_term_by('id', $child, $taxonomy_name);
+                            ?>
+                            <a class="d-block pt-1 pb-1 pr-0" href="<?php echo esc_url( get_term_link( $child, $taxonomy_name ) ); ?>"><?php echo esc_html( $term->name ); ?></a>
+                            <?php
+                        }
+
+                    }
+                    ?>
+                </div>
+            </section>
         </div>
         <?php
     }

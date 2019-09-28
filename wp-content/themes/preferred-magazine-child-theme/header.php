@@ -46,10 +46,9 @@
                 </div>
             </section><!-- .top-bar -->
         <?php endif; ?>
-
         <section class="header-main pt-3 pb-3">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row d-flex">
                     <div class="col-md-3 col-12">
                         <div class="site-branding">
                             <?php

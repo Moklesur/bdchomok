@@ -70,7 +70,7 @@ form#search-form button{
 }
 
 .header-main li a {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .pm-block-category-2 .featured-post-2 .block-category-contents{
@@ -80,4 +80,14 @@ form#search-form button{
 .post-views {
     display: inline-block;
     margin-right: 10px;
+}
+.blog-content-single {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.social-top-bar a {
+    font-size: 18px;
+}
+form#search-form {
+    margin-top: 15px;
 }

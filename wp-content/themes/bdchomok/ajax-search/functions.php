@@ -9,19 +9,20 @@ function advance_search(){
 
     $results = $wpdb->get_results($query);
 
-    $product_ids = [];
+    $product_ids = [987567888];
     foreach( $results as $product ){
         $product_ids[] = $product->ID;
     }
 
     $args = array(
-        'post_type' => 'product',
+        'post_type' => array('product'),
+        'post_status'           => 'publish',
         'orderby' => 'ASC',
         'post__in' => $product_ids
     );
 
     $output = $productImage = $price ='';
-    $output .= '<ul  class="list-group list-group-flush ">';
+    $output .= '<ul class="list-group list-group-flush">';
 
     $loop = new WP_Query( $args );
 
@@ -47,14 +48,47 @@ function advance_search(){
         $output .= $price;
         $output .= '</div>';
         $output .= '</li>';
+    endwhile;
+    endif;
+    wp_reset_query();
 
+
+    $all_cats = get_categories(['taxonomy' => 'product_cat']);
+    $search_result_cats = [];
+    $cat_name = '';
+    foreach ($all_cats as $single_cat) {
+        if (strpos($single_cat->name, $search_term) !== false || strpos($single_cat->slug, $search_term_slug) !== false) {
+            $search_result_cats[] = $single_cat->cat_ID;
+            $cat_name = $single_cat->name;
+        }
+    }
+
+    $args2 = array(
+        'post_type'             => 'product',
+        'post_status'           => 'publish',
+        'ignore_sticky_posts'   => 1,
+        'orderby'               => 'ASC',
+        'tax_query'             => array(
+            array(
+                'taxonomy'      => 'product_cat',
+                'field' => 'term_id', //This is optional, as it defaults to 'term_id'
+                'terms'         => $search_result_cats,
+                'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+            )
+        )
+    );
+
+    $loop2 = new WP_Query( $args2 );
+
+    if ( $loop2->have_posts() ) : while( $loop2->have_posts() ) : $loop2->the_post();
+        $output .= '<li class="list-group-item position-relative"><h5 class="m-0"><a href="'.get_the_permalink().'">'.  get_the_title() . '</a></h5><p class="search-product-cat">'.$cat_name.'</p></li>';
     endwhile;
     endif;
     wp_reset_query();
 
     $output .= '</ul>';
 
-    if (!empty($results)) {
+    if ($output != '<ul class="list-group list-group-flush"></ul>') {
         echo json_encode(array('output' => $output ));
     } else {
         echo json_encode(array('output' => 'no result found.'));
@@ -69,7 +103,7 @@ add_action( 'wp_ajax_nopriv_advance_search', 'advance_search');
 
 //Cat Filer
 function cat_filter(){
-    
+
     $tex_id = $_POST['cat_ID'];
     $get_cat = array (
         'post_per_page' => -1,
@@ -87,7 +121,7 @@ function cat_filter(){
 
     if ( $loop->have_posts() ) {
         while ($loop->have_posts()) : $loop->the_post();
-           wc_get_template_part( 'content', 'product' );
+            wc_get_template_part( 'content', 'product' );
         endwhile;
         wp_reset_postdata();
     }

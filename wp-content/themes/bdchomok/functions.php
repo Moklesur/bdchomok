@@ -221,6 +221,8 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/author-list.php';
         require get_template_directory() . '/plugins/list-category-woo.php';
         require get_template_directory() . '/plugins/list-category-woo-count.php';
+        require get_template_directory() . '/plugins/brand-logo.php';
+        require get_template_directory() . '/plugins/slideshow.php';
     }
 }
 

@@ -22,8 +22,10 @@ $class[] = 'block-contents mb-30';
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    <div class="blog-content-wrap">
+    <div class="blog-content-wrap blog-content-single">
+
         <?php
+        the_title( '<h1 class="entry-title">', '</h1>' );
         if ( ! has_post_thumbnail() && absint( get_theme_mod('single_post_meta', true ) ) ) : ?>
             <div class="block-cats">
                 <?php preferred_magazine_cat_bg(); ?>
@@ -43,6 +45,18 @@ $class[] = 'block-contents mb-30';
                     preferred_magazine_posted_by();
 
                     ?>
+                    <ul class="social-share list-inline float-lg-right">
+                        <li class="list-inline-item">Social Share : </li>
+                       <li class="list-inline-item">
+                           <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url( get_the_permalink() ); ?>"><i class="ion-social-facebook"></i></a>
+                       </li>
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/home?status=<?php echo esc_url( get_the_permalink() ); ?>"><i class="ion-social-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo esc_url( get_the_permalink() ); ?>&title=&summary=&source="><i class="ion-social-linkedin"></i></a>
+                        </li>
+                    </ul>
                 </div><!-- .entry-meta -->
             </div><!-- .entry-header -->
         <?php endif; ?>

@@ -188,6 +188,12 @@ div.category-filter ul.products.slick-initialized {
 /*--------------------------------------------------------------
 # Main Menu
 --------------------------------------------------------------*/
+.xs-dropdown-menu .dropdown-item:focus,
+.xs-dropdown-menu  .dropdown-item:hover {
+    color: #106f5a;
+    text-decoration: none;
+    background-color: #fff;
+}
 .navbar-brand {
     max-width: 75px;
     display: none;
@@ -333,6 +339,13 @@ div.category-filter ul.products.slick-initialized {
     font-size: 16px;
 }
 
+nav.navbar li ul li ul .see-more-label a:before {
+    display: none;
+}
+.see-more-label a{
+    color: #f00;
+    font-weight: bold;
+}
 @media (min-width: 992px){
 
     nav.navbar > div > ul > li.current-menu-item > ul {
@@ -394,6 +407,17 @@ div.category-filter ul.products.slick-initialized {
     nav.navbar li ul li ul .dropdown-item{
         padding: 5px .5rem;
         font-size: 12px;
+    }
+    nav.navbar li ul li ul .dropdown-item:before{
+        content: '';
+        background: #000;
+        width: 5px;
+        height: 5px;
+        display: inline-block;
+        border-radius: 50%;
+        position: relative;
+        top: -1px;
+        margin-right: 10px;
     }
     nav.navbar > div > ul > li > .dropdown-menu:after,
     nav.navbar > div > ul > li > .dropdown-menu:before{
@@ -530,6 +554,11 @@ textarea {
     z-index: 1;
     right: -10px;
 }
+.cat-list-items{
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
 .arrow-position {
     opacity: 0;
     color: #fff;
@@ -960,7 +989,7 @@ li .discount-skl{
 .woocommerce ul.products li.product .woocommerce-loop-category__title,
 .woocommerce ul.products li.product .woocommerce-loop-product__title,
 .woocommerce ul.products li.product h3 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -970,7 +999,9 @@ li .discount-skl{
 
 .woocommerce ul.products li.product .price,
 .widget_recently_viewed_products ins{
+    font-size: 15px;
     color: #ff0000;
+    font-weight: bold;
 }
 
 .woocommerce ul.products li.product .price del {
@@ -1023,9 +1054,7 @@ li .discount-skl{
 }
 
 .woocommerce ul.products li.product .woocommerce-loop-category__title, .woocommerce ul.products li.product .woocommerce-loop-product__title, .woocommerce ul.products li.product h3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    min-height: 45px;
 }
 
 .woocommerce ul.products li.product a {
@@ -2625,6 +2654,67 @@ Max Width 767px
 --------------------------------------------------------------*/
 
 @media only screen and (max-width:767px) {
+    .footer-nav > section {
+        width: 100%;
+    }
+    .footer-nav .widget_nav_menu > div{
+        display: none;
+    }
+
+    .footer-nav .widget-title.has-active:after{
+        transform: rotate(180deg);
+    }
+    .widget_media_image {
+        text-align: center;
+    }
+    #text-6{
+        text-align: center;
+    }
+
+    .footer-nav .widget-title:after {
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+        content: "\eac8";
+        font-family: IcoFont!important;
+        speak: none;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        line-height: 1;
+        -webkit-font-feature-settings: "liga";
+        -webkit-font-smoothing: antialiased;
+        float: right;
+        font-size: 20px;
+        position: relative;
+        top: -2px;
+    }
+    .footer-nav > section {
+        padding: 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+    .woocommerce ul.products li.product a.woocommerce-LoopProduct-link .product-thumbs img{
+        position: relative;
+        top: unset;
+        left: unset;
+    }
+    .woocommerce ul.products li.product a.woocommerce-LoopProduct-link .product-thumbs {
+        height: auto;
+    }
+    .woocommerce ul.products li.product a img {
+        width: 85%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 0;
+    }
     .affix {
         position: relative;
         z-index: initial;
@@ -2917,12 +3007,207 @@ Max Width 480px
         width: 50%;
     }
 
-    .footer-nav > section {
-        width: 50%;
-    }
-
     #mega-menu-wrap-menu-1, #mega-menu-wrap-menu-1 #mega-menu-menu-1, #mega-menu-wrap-menu-1 #mega-menu-menu-1 ul.mega-sub-menu, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-item, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-row, #mega-menu-wrap-menu-1 #mega-menu-menu-1 li.mega-menu-column, #mega-menu-wrap-menu-1 #mega-menu-menu-1 a.mega-menu-link{
         float: right !important;
         width: 100% !important;
     }
+}
+
+
+@charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list
+{
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
+}
+
+/* Icons */
+@font-face
+{
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('./fonts/slick.eot');
+    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+}
+/* Arrows */
+.slick-prev,
+.slick-next
+{
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+    top: 50%;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+    color: transparent;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+
+    opacity: .75;
+    color: white;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev
+{
+    left: -25px;
+}
+[dir='rtl'] .slick-prev
+{
+    right: -25px;
+    left: auto;
+}
+.slick-prev:before
+{
+    content: '←';
+}
+[dir='rtl'] .slick-prev:before
+{
+    content: '→';
+}
+
+.slick-next
+{
+    right: -25px;
+}
+[dir='rtl'] .slick-next
+{
+    right: auto;
+    left: -25px;
+}
+.slick-next:before
+{
+    content: '→';
+}
+[dir='rtl'] .slick-next:before
+{
+    content: '←';
+}
+
+.slick-dots
+{
+    position: absolute;
+    bottom: 25px;
+
+    display: block;
+
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+.slick-dots li
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+
+    cursor: pointer;
+}
+.slick-dots li button
+{
+    font-size: 0;
+    line-height: 0;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+
+    cursor: pointer;
+
+    border: 0;
+    outline: none;
+    border-radius: 50%;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus
+{
+    outline: none;
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before
+{
+    opacity: 1;
+}
+.slick-dots li button:before
+{
+    border-radius: 50%;
+    font-family: 'slick';
+    font-size: 6px;
+    line-height: 20px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+
+    content: '';
+    text-align: center;
+    background: #000;
+    opacity: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots li.slick-active button:before
+{
+    opacity: 1;
+    background: #f00;
 }

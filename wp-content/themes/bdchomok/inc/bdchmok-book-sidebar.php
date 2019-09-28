@@ -35,11 +35,6 @@ class BD_Chomok_Sidebar {
 				'product_cat'
 			);
 
-
-			// for showing the terms parent uncomment the line below and change the parent compare numbers
-			//echo '<pre>', print_r($terms, 1), '</pre>';
-
-
 			foreach($terms as $term) {
 				
 				if(isset($term->parent)) {
