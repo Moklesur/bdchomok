@@ -63,19 +63,8 @@
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center">
                         <!-- .information start -->
-
-                        <?php
-                        if (get_field('delivery_offer','option')){?>
-                            <div class="col-lg-6 col-sm-6 col-6 text-left">
-                            <p><i class="fa fa-mobile mr-2"></i>  <?php echo get_field('delivery_offer','option');?></p>
-                    </div>
-                    <!-- .information end -->
-                   <?php     }
-                        ?>
-
-
                         <!-- .cart-account start -->
-                        <div class="col-lg-6 col-sm-6 col-6 text-right">
+                        <div class="col-lg-8 col-sm-6 col-8 text-right m-auto">
                             <ul class="list-inline m-0 pr-2 text-right d-inline-block ">
                                 <li class="list-inline-item">
                                     <div class="account-login-dropdown ">
@@ -91,26 +80,40 @@
                                 </li>
                             </ul>
 
+                            <?php
 
-                                <?php if(get_field('social_links','option')): ?>
+                            wp_nav_menu( array(
+                                'menu'           => 'Top Bar Menu', // Do not fall back to first non-empty menu.
+                                'theme_location' => 'top-menu',
+                                'fallback_cb'    => false ,
+                                'menu_class'		=> 'list-inline top-menu',
+                                'container_class'   => "d-inline-block",
+                            ) );
+
+                            ?>
+
+
+                               <!-- <?php /*if(get_field('social_links','option')): */?>
                                     <ul class="list-inline social-links d-inline-block m-0 p-0 text-right">
-                                    <?php while(has_sub_field('social_links','option')): ?>
+                                    <?php /*while(has_sub_field('social_links','option')): */?>
                                             <li class="list-inline-item">
-                                                <a href=" <?php the_sub_field('social_url'); ?>"><i class=" <?php the_sub_field('social_icon_name'); ?>"></i></a>
+                                                <a href=" <?php /*the_sub_field('social_url'); */?>"><i class=" <?php /*the_sub_field('social_icon_name'); */?>"></i></a>
                                             </li>
-                                        <?php endwhile; ?>
+                                        <?php /*endwhile; */?>
                                     </ul>
-                                <?php endif; ?>
+                                --><?php /*endif; */?>
 
                         </div>
+
                         <!-- .cart-account end -->
+
                     </div>
                 </div>
             </div>
             <!-- .header-top end -->
 
             <!-- .header-top start -->
-            <div class="header-middle ">
+            <div class="header-middle" data-toggle="affix">
                 <div class="container">
                     <div class="row d-flex align-items-center">
                         <!-- .logo start -->
@@ -213,7 +216,7 @@
             <!-- .header-top end -->
 
         <!-- .header-bottom start -->
-        <div class="header-bottom main-menu " data-toggle="affix">
+        <div class="header-bottom main-menu " >
             <div class="container">
                 <nav class="navbar navbar-expand-lg p-0">
                     <div class="navbar-brand">
