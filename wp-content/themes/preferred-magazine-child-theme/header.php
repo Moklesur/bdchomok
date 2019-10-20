@@ -29,7 +29,7 @@
     <header id="masthead" class="site-header">
 
         <?php if ( absint( get_theme_mod( 'hide_top_bar', true ) ) ) : ?>
-            <section class="top-bar pt-2 pb-2">
+            <section class="top-bar pt-2 pb-2 d-lg-block d-none">
                 <div class="container-fluid">
                     <div class="row">
                         <?php do_action( 'preferred_magazine_news_feed' ); ?>
@@ -46,10 +46,11 @@
                 </div>
             </section><!-- .top-bar -->
         <?php endif; ?>
+        <div class="sticky-open"></div>
         <section class="header-main pt-3 pb-3">
             <div class="container-fluid">
-                <div class="row d-flex">
-                    <div class="col-md-3 col-12">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-3 col-3">
                         <div class="site-branding">
                             <?php
                             the_custom_logo();
@@ -70,15 +71,14 @@
 
                         </div><!-- .site-branding -->
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-5 col-12">
                         <form method="get" id="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
                             <input type="text" name="s" id="search" placeholder="খুজুন ...." value="<?php the_search_query(); ?>" />
                             <button type="submit"><i class="ion-search"></i></button>
                         </form><!-- .search-form -->
                     </div>
-
-                    <div class="col-md-5 col-12 text-right">
-                        <ul class="list-inline">
+                    <div class="col-md-4 col-9 text-right boi-blog-subscribe">
+                        <ul class="list-inline mb-0">
                             <li class="list-inline-item">
                                 <a href="https://bdchomok.com/" target="_blank">বই কিনুন</a>
                             </li>
@@ -88,14 +88,17 @@
                             <li class="list-inline-item">
                                 <a href="/subscribe" class="btn subscribe-btn">সাবস্ক্রাইব করুন</a>
                             </li>
+                            <li class="d-lg-none d-inline-block">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#preferred-magazine-navbar-collapse" aria-controls="preferred-magazine-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                                    <i class="ion-android-menu"></i>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
         </section><!-- .header-main -->
-
-        <section class="bg-light pt-3 pb-3 main-menu">
+        <section class="bg-light pt-lg-3 pb-lg-3 main-menu">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 col-12">
@@ -127,8 +130,6 @@
 
     <?php
 
-
-
     if ( get_theme_mod( 'header_ads_show' ) ) : ?>
 
         <div class="ads-banner text-center">
@@ -141,7 +142,7 @@
 
     <?php endif; ?>
     <?php if( is_front_page() ) : ?>
-    <div class="trading-post mb-5">
+    <div class="trading-post mb-lg-5">
         <div class="trading-post-wrap pt-3">
             <ul class="m-0 p-0">
 
@@ -201,7 +202,3 @@
         </div>
     </div>
     <?php endif; ?>
-
-    <div class="container p-0">
-            <?php do_action( 'preferred_magazine_block_category' ); ?>
-    </div>
