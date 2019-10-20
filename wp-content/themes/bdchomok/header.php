@@ -138,10 +138,9 @@
                         <!-- .logo end -->
                         <!-- .advance-search start -->
                         <div class="col-lg-6 col-sm-4 d-lg-inline-block d-none col-12 advance-search order-lg-1 order-2">
-                            <?php //echo do_shortcode('[yith_woocommerce_ajax_search]');?>
-                            <form class="advance-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                            <form method="get" class="advance-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
                                 <div class="input-group">
-                                    <input type="text" name="s" class="form-control advance-search-tri" placeholder="অনুসন্ধান করুন ..">
+                                    <input type="search" name="s" class="form-control advance-search-tri" value="<?php echo get_search_query(); ?>" placeholder="অনুসন্ধান করুন ..">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-success" type="submit"><i class="icofont-search-2"></i></button>
                                     </div>
@@ -150,6 +149,7 @@
                                     </div>
                                     <div class="search-content"></div>
                                 </div>
+<!--                                <input type="hidden" name="post_type" value="product" />-->
                             </form>
                         </div>
                         <!-- .advance-search end -->
@@ -265,9 +265,7 @@
                         <div class="search-target text-center">
                             <p class="wait h-100  pt-2 pb-2 text-center" id="wait2"></p>
                         </div>
-                        <div class="search-content">
-
-                        </div>
+                        <div class="search-content"></div>
                     </div>
                 </form>
             </div>

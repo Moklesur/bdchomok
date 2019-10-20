@@ -223,6 +223,7 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/list-category-woo-count.php';
         require get_template_directory() . '/plugins/brand-logo.php';
         require get_template_directory() . '/plugins/slideshow.php';
+        require get_template_directory() . '/plugins/best-selling.php';
     }
 }
 
@@ -319,6 +320,38 @@ function bdchomok_active_plugins()
     tgmpa($plugins);
 }
 
+// Product page Image,Title, Cart Button Sticky
+add_action( 'woocommerce_after_single_product_summary', 'product_sticky', 10 );
+function product_sticky(){
+    global $post;
+    $product = wc_get_product( $post->ID );
+    ?>
+    <div class="product-sticky d-none">
+        <div class="container">
+            <div class="row align-items-center d-flex">
+                <div class="col-lg-4 d-lg-inline d-none">
+                    <div class="sticky-pro-img" style="max-width: 38px; display: inline-block; margin-right: 10px">
+                        <?php
+                        echo $product->get_image();
+                        ?>
+                    </div>
+                    <?php
+                    echo '<span class="pl-60">'.$product->get_name().'</span><span class="author-pro pl-60"></span>';
+                    ?>
+                </div>
+                <div class="col-lg-4 d-lg-inline d-none text-center">
+                    <p class="price">
+                        <?php echo $product->get_price_html(); ?>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-12 d-lg-inline d-none text-lg-right">
+                    <a class="button add-to-cart" href="<?php echo $product->add_to_cart_url(); ?>"><?php _e( 'ক্রয় করুন', 'bdchomok' ); ?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 
 function woocommerce_ajax_add_to_cart_js()
 {
@@ -593,7 +626,7 @@ function bdchomok_product_page_category(){
         }
         $term_link = get_term_link( $term, array( 'product_cat') );
         // display child term name
-        echo '<a style="color: #ff0000;" href="'.esc_url( $term_link ).'">'.$term->name.'</a></p>';
+        echo '<a class="'.$parent->slug.'" style="color: #ff0000;" href="'.esc_url( $term_link ).'">'.$term->name.'</a></p>';
     }
 
 }
@@ -612,43 +645,35 @@ function related_product_page_title($title, $id) {
     return $title;
 }
 
-add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
-function woo_custom_product_tabs( $tabs ) {
 
-    global $product;
-
-    $product_specifications = get_field('product_specifications',$product->id);
-    $authors = get_field('authors',$product->id);
-
-    // Remove the description tab
-    // unset( $tabs['reviews'] );               // Remove the reviews tab
-    unset( $tabs['additional_information'] );   // Remove the additional information tab
-
-
-    // 2 Adding new tabs and set the right order
-
-
-    if (!empty($product_specifications)){
-        // Adds the qty pricing  tab
-        $tabs['qty_pricing_tab'] = array(
-            'title'     => __( 'Specifications', 'woocommerce' ),
-            'priority'  => 110,
-            'callback'  => 'product_specifications_tab_content'
-        );
-    }
-
-
-    if (!empty($authors)) {
-        // Adds the other products tab
-        $tabs['other_products_tab'] = array(
-            'title' => __('Author', 'woocommerce'),
-            'priority' => 120,
-            'callback' => 'woo_other_products_tab_content'
-        );
-    }
-    return $tabs;
-
-}
+//
+//add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
+//function woo_custom_product_tabs( $tabs ) {
+//
+//    global $product;
+//
+//    $product_specifications = get_field('product_specifications',$product->id);
+//
+//    // Remove the description tab
+//    // unset( $tabs['reviews'] );               // Remove the reviews tab
+//    unset( $tabs['additional_information'] );   // Remove the additional information tab
+//
+//
+//    // 2 Adding new tabs and set the right order
+//
+//
+//    if (!empty($product_specifications)){
+//        // Adds the qty pricing  tab
+//        $tabs['qty_pricing_tab'] = array(
+//            'title'     => __( 'Specifications', 'woocommerce' ),
+//            'priority'  => 110,
+//            'callback'  => 'product_specifications_tab_content'
+//        );
+//    }
+//
+//    return $tabs;
+//
+//}
 
 function product_specifications_tab_content() {
     global $product;
@@ -957,16 +982,14 @@ function ewos_send_sms( $order_id, $old_status, $new_status ) {
 // 	wp_mail( $to, $subject, $ewos_message, $headers );
 
 }
-add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
-
-
+//add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
 
 
 //add_filter( 'woocommerce_product_categories_widget_args', 'widget_arguments' );
 
 function widget_arguments( $args ) {
 
-    bdchomok_get_terms_by_handler();
+    //bdchomok_get_terms_by_handler();
 
     //return $args;
 }

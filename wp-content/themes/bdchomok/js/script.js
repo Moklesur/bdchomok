@@ -5,6 +5,21 @@
         $(document).on('click', '.main-menu .xs-dropdown-menu', function(e) {
             e.stopPropagation();
         });
+
+
+
+
+        //$('.product-sticky').addClass( 'd-lg-block' );
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > $(window).height() ) {
+                $('.product-sticky').addClass( 'd-block' );
+            }
+            else {
+                $('.product-sticky').removeClass( 'd-block' );
+            }
+        });
+
+
         $('.main-menu .xs-dropdown-menu').parent().hover(function() {
             var menu = $(this).find("ul");
             var menupos = $(menu).offset();
@@ -56,16 +71,10 @@
             });
         }
 
-
-
         $('.mobile-account').on( 'click', function (e) {
             e.preventDefault();
             $(this).next().toggle();
         });
-
-
-
-
 
         if ($('#back-to-top').length) {
             var scrollTrigger = 1000, /* px*/ backToTop = function () {
@@ -104,7 +113,7 @@
             $('div.category-filter ul.products').each(function () {
                 $(this).slick({
                     slidesToShow: show,
-                    autoplay: false,
+                    autoplay: true,
                     nextArrow: '<i class="icofont-long-arrow-right slider-right arrow-position f-2x"></i>',
                     prevArrow: '<i class="icofont-long-arrow-left arrow-position f-2x"></i>',
                     centerPadding: '0px',
@@ -204,6 +213,7 @@
                     dots: true,
                     arrows: false,
                     infinite: true,
+                    autoplay: true,
                     speed: 300,
                     slidesToShow: 1,
                     adaptiveHeight: true
@@ -280,6 +290,7 @@
             });
         };
 
+        // Advance search
         $('.advance-search-tri').bind('input', function(){
 
             if( $(this).val() == '' ){
@@ -346,6 +357,13 @@
         //  });
         //
         // });
+    });
+
+    // Product page sticky header
+    $( window ).load( function () {
+        var author = $('.author').clone();
+        $('.author-pro').append(author);
+        console.log( author );
     });
 
 })(jQuery);

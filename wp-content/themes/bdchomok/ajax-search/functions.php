@@ -81,7 +81,30 @@ function advance_search(){
     $loop2 = new WP_Query( $args2 );
 
     if ( $loop2->have_posts() ) : while( $loop2->have_posts() ) : $loop2->the_post();
-        $output .= '<li class="list-group-item position-relative"><h5 class="m-0"><a href="'.get_the_permalink().'">'.  get_the_title() . '</a></h5><p class="search-product-cat">'.$cat_name.'</p></li>';
+
+
+
+        if (has_post_thumbnail($loop2->post->ID)) {
+            $productImage = get_the_post_thumbnail($loop2->post->ID, array(60, 60), array('class' => 'img-fluid'));
+        }
+
+        $product_cat = wc_get_product_category_list($loop2->post->ID);
+
+        $product = wc_get_product( $loop2->post->ID );
+
+        if ($product->get_regular_price()){
+            $price ='<div class="search-product-price ml-auto"><span class="woocommerce-Price-amount amount"> '.$product->get_price().'</span><span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></div>';
+        }
+
+        $output .= '<li class="list-group-item position-relative"><a class="position-absolute d-block search-link" href="' . esc_url( get_the_permalink() ) . '"></a>';
+        $output .= '<div class="d-flex align-content-center">';
+        $output .= $productImage;
+        $output .= '<div class="pl-3 pr-4"><h5 class="m-0">' . esc_html( get_the_title() ) . '</h5>';
+        $output .= '<p class="search-product-cat">'.$product_cat.'</p></div>';
+        $output .= $price;
+        $output .= '</div>';
+        $output .= '</li>';
+
     endwhile;
     endif;
     wp_reset_query();

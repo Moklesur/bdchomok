@@ -16,7 +16,7 @@
 function bdchomok_body_classes( $classes ) {
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
-		$classes[] = 'hfeed';
+		$classes[] = 'hfeed woocommerce woocommerce-page woocommerce-js';
 	}
 
 	if( is_front_page() ){
