@@ -193,7 +193,6 @@ function bdchomok_scripts()
 
     // JS
     wp_enqueue_script( 'jquery-nicescroll', get_template_directory_uri() . '/js/jquery.nicescroll.js', array('jquery'), '3.7.6', true );
-    //wp_enqueue_script( 'jquery-isotope', get_template_directory_uri() . '/js/isotope.pkgd.js', array('jquery'), '3.0.4', true );
     wp_enqueue_script('jquery-bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('slick-js', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), '4.1.3', true);
     wp_enqueue_script('bdchomok-script', get_template_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
@@ -222,6 +221,9 @@ function bdchomok_register_elementor_widgets()
         require get_template_directory() . '/plugins/author-list.php';
         require get_template_directory() . '/plugins/list-category-woo.php';
         require get_template_directory() . '/plugins/list-category-woo-count.php';
+        require get_template_directory() . '/plugins/brand-logo.php';
+        require get_template_directory() . '/plugins/slideshow.php';
+        require get_template_directory() . '/plugins/best-selling.php';
     }
 }
 
@@ -266,6 +268,12 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+/*
+ * Sidebar widgets for books
+ *
+ */
+require get_template_directory() . '/inc/bdchmok-book-sidebar.php';
+
 /**
  * Load Jetpack compatibility file.
  */
@@ -275,8 +283,8 @@ if (defined('JETPACK__VERSION')) {
 
 /**
  * Load Custom acf setting compatibility file.
-*/
-    require get_template_directory() . '/inc/acf-custom.php';
+ */
+require get_template_directory() . '/inc/acf-custom.php';
 
 /**
  * Load WP Bootstrap Nav Walker file.
@@ -312,6 +320,38 @@ function bdchomok_active_plugins()
     tgmpa($plugins);
 }
 
+// Product page Image,Title, Cart Button Sticky
+add_action( 'woocommerce_after_single_product_summary', 'product_sticky', 10 );
+function product_sticky(){
+    global $post;
+    $product = wc_get_product( $post->ID );
+    ?>
+    <div class="product-sticky d-none">
+        <div class="container">
+            <div class="row align-items-center d-flex">
+                <div class="col-lg-4 d-lg-inline d-none">
+                    <div class="sticky-pro-img" style="max-width: 38px; display: inline-block; margin-right: 10px">
+                        <?php
+                        echo $product->get_image();
+                        ?>
+                    </div>
+                    <?php
+                    echo '<span class="pl-60">'.$product->get_name().'</span><span class="author-pro pl-60"></span>';
+                    ?>
+                </div>
+                <div class="col-lg-4 d-lg-inline d-none text-center">
+                    <p class="price">
+                        <?php echo $product->get_price_html(); ?>
+                    </p>
+                </div>
+                <div class="col-lg-4 col-12 d-lg-inline d-none text-lg-right">
+                    <a class="button add-to-cart" href="<?php echo $product->add_to_cart_url(); ?>"><?php _e( 'ক্রয় করুন', 'bdchomok' ); ?></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 
 function woocommerce_ajax_add_to_cart_js()
 {
@@ -378,7 +418,7 @@ function load_single_product()
 
     $output .= '<div class="woocommerce "><div id="product-' . $product->get_id() . '" class="product row type-product post-' . $product->get_id() . ' status-publish instock product_cat-desktop has-post-thumbnail shipping-taxable purchasable product-type-' . $product->get_type() . '">';
 
-            //echo wc_get_gallery_image_html( $attachment_id );die();
+    //echo wc_get_gallery_image_html( $attachment_id );die();
     $output .= '<div class="images text-center col-lg-5 col-12"><img src=" '.wp_get_attachment_url( $product->get_image_id() ).'" />';
 
     $output .= '</div><div class="summary entry-summary col-lg-7 col-12"><h2 class="product_title entry-title">'.$product->get_name().'</h2><p class="price">'.$product->get_price_html().'</p><div class="woocommerce-product-details__short-description mb-3">';
@@ -437,26 +477,26 @@ function load_add_cart_info_product()
 
     $output .= ' </div></div> </div>';
 
-                $args = array(
-                    'post_type'             => 'product',
-                    'post_status'           => 'publish',
-                    'posts_per_page'        => 10,
-                    'orderby'          => 'rand',
-                    'post__not_in'   => array( $product->get_id() )
-                );
-                $products = new WP_Query($args);
+    $args = array(
+        'post_type'             => 'product',
+        'post_status'           => 'publish',
+        'posts_per_page'        => 10,
+        'orderby'          => 'rand',
+        'post__not_in'   => array( $product->get_id() )
+    );
+    $products = new WP_Query($args);
 
-                if ( $products->have_posts() ) :
-                     $single = '';
-                    $output .='<h3 class="other-title">আমাদের অন্যান্য পণ্য:</h3>';
-                $output .= '<div class="clearfix woocommerce columns-4 category-filter overflow-inherit"><ul class="products columns-4  list-inline random-product rand-slider">';
+    if ( $products->have_posts() ) :
+        $single = '';
+        $output .='<h3 class="other-title">আমাদের অন্যান্য পণ্য:</h3>';
+        $output .= '<div class="clearfix woocommerce columns-4 category-filter overflow-inherit"><ul class="products columns-4  list-inline random-product rand-slider">';
 
-                    while ( $products->have_posts() ) : $products->the_post();
-                    global $product;
-                        $title = mb_strimwidth($product->get_name(), 0, 18, '...');
+        while ( $products->have_posts() ) : $products->the_post();
+            global $product;
+            $title = mb_strimwidth($product->get_name(), 0, 18, '...');
 
 
-                    $single .= '<li class="product list-inline-item type-product post-'.$product->get_id().' product-type-simple">
+            $single .= '<li class="product list-inline-item type-product post-'.$product->get_id().' product-type-simple">
 
                      <a href='.$product->get_permalink().' class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                             '.$product->get_image('woocommerce_thumbnail').'</a>
@@ -467,11 +507,11 @@ function load_add_cart_info_product()
                                data-product_id="'.$product->get_id().'" data-product_sku=""
                                aria-label="Add “Product” to your cart" rel="nofollow">ক্রয় করুন</a></p></li>';
 
-                    endwhile;
-                    wp_reset_query();
-                    $output .= $single;
-                    $output .= ' </ul></div>';
-                endif;
+        endwhile;
+        wp_reset_query();
+        $output .= $single;
+        $output .= ' </ul></div>';
+    endif;
 
 
     $output .= '</div>';
@@ -551,38 +591,44 @@ function function_to_add_author_woocommerce() {
 // Remove Category Product Page
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
-function my_custom_action() {
+// Offer Content in product page
+function offer_content() {
 
     global $product;
 
-   $offer_content =  get_field('offer_content', $product->get_id());
+    $offer_content =  get_field('offer_content', $product->get_id());
 
-   if ($offer_content){?>
-       <div class="offer">
-           <div class="d-flex green-text">
-               <span class="icofont-volume-off  icofont-1x mr-2"></span>
-               <span><?php  echo $offer_content;?></span>
-           </div>
-       </div>
-   <?php }
+    if ($offer_content){?>
+        <div class="offer">
+            <div class="d-flex green-text">
+                <span class="icofont-volume-off  icofont-1x mr-2"></span>
+                <span><?php  echo $offer_content;?></span>
+            </div>
+        </div>
+    <?php }
 
 };
-add_action( 'woocommerce_single_product_summary', 'my_custom_action', 15 );
+add_action( 'woocommerce_single_product_summary', 'offer_content', 15 );
 
 // Product Page ( Parent & Child Category )
-add_action( 'woocommerce_single_product_summary', 'bdchomok_product_page_category', 21 );
+add_action( 'woocommerce_single_product_summary', 'bdchomok_product_page_category', 10 );
 function bdchomok_product_page_category(){
-    $parents = get_terms( 'product_cat', array( 'parent' => 0 ) );
-    $categories = get_the_terms( get_the_ID(), 'product_cat' );
 
-    foreach( $parents as $parent ):
-        foreach( $categories as $category ):
-            if( $parent->term_id == $category->parent ):
-                echo esc_html( $parent->name ).' : ';
-                echo '<a href="' . esc_url( get_term_link( $category ) ) . '">' . esc_html( $category->name ) .'</a><br/> ';
-            endif;
-        endforeach;
-    endforeach;
+    $post_id = get_the_ID();
+    $assigned_terms = wp_get_post_terms($post_id, 'product_cat', array("fields" => "all"));
+    foreach($assigned_terms as $term){
+
+        echo '<p class="mb-1">';
+        // display parent term name
+        if($term->parent != 0){
+            $parent = get_term_by( 'id', $term->parent , 'product_cat' );
+            echo '<span class="mr-1">'.$parent->name.' : </span>';
+        }
+        $term_link = get_term_link( $term, array( 'product_cat') );
+        // display child term name
+        echo '<a class="'.$parent->slug.'" style="color: #ff0000;" href="'.esc_url( $term_link ).'">'.$term->name.'</a></p>';
+    }
+
 }
 
 // Ajax Search
@@ -599,43 +645,35 @@ function related_product_page_title($title, $id) {
     return $title;
 }
 
-add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
-function woo_custom_product_tabs( $tabs ) {
 
-    global $product;
-
-    $product_specifications = get_field('product_specifications',$product->id);
-    $authors = get_field('authors',$product->id);
-
-           // Remove the description tab
-    // unset( $tabs['reviews'] );               // Remove the reviews tab
-    unset( $tabs['additional_information'] );   // Remove the additional information tab
-
-
-    // 2 Adding new tabs and set the right order
-
-
-    if (!empty($product_specifications)){
-        // Adds the qty pricing  tab
-        $tabs['qty_pricing_tab'] = array(
-            'title'     => __( 'Specifications', 'woocommerce' ),
-            'priority'  => 110,
-            'callback'  => 'product_specifications_tab_content'
-        );
-    }
-
-
-    if (!empty($authors)) {
-        // Adds the other products tab
-        $tabs['other_products_tab'] = array(
-            'title' => __('Author', 'woocommerce'),
-            'priority' => 120,
-            'callback' => 'woo_other_products_tab_content'
-        );
-    }
-    return $tabs;
-
-}
+//
+//add_filter( 'woocommerce_product_tabs', 'woo_custom_product_tabs' );
+//function woo_custom_product_tabs( $tabs ) {
+//
+//    global $product;
+//
+//    $product_specifications = get_field('product_specifications',$product->id);
+//
+//    // Remove the description tab
+//    // unset( $tabs['reviews'] );               // Remove the reviews tab
+//    unset( $tabs['additional_information'] );   // Remove the additional information tab
+//
+//
+//    // 2 Adding new tabs and set the right order
+//
+//
+//    if (!empty($product_specifications)){
+//        // Adds the qty pricing  tab
+//        $tabs['qty_pricing_tab'] = array(
+//            'title'     => __( 'Specifications', 'woocommerce' ),
+//            'priority'  => 110,
+//            'callback'  => 'product_specifications_tab_content'
+//        );
+//    }
+//
+//    return $tabs;
+//
+//}
 
 function product_specifications_tab_content() {
     global $product;
@@ -654,7 +692,7 @@ function product_specifications_tab_content() {
                 <tr>
                     <td><?php
                         if ($key === 'title'){
-                          echo   $title = "Title";
+                            echo   $title = "Title";
                         }
                         if ($key === 'author'){
                             echo   $title = "Author";
@@ -677,13 +715,13 @@ function product_specifications_tab_content() {
                     <td><?php echo $specification; ?></td>
                 </tr>
 
-         <?php   }
+            <?php   }
         }
         ?>
 
 
         </tbody></table>
-<?php
+    <?php
 
 }
 function woo_other_products_tab_content() {
@@ -694,38 +732,38 @@ function woo_other_products_tab_content() {
 
     <div class="book-author__content-author">
         <div class="row no-gutters">
-    <?php
+            <?php
 
-    if (!empty($authors)){
-        $author_name = $authors['author_name'];
-        $image = $authors['author_image'];
-        $author_description = $authors['author_description'];
-        $author_url = $authors['author_url'];
+            if (!empty($authors)){
+                $author_name = $authors['author_name'];
+                $image = $authors['author_image'];
+                $author_description = $authors['author_description'];
+                $author_url = $authors['author_url'];
 
-            if (!empty($image)) {
-            ?>
-            <div class="col-2">
-                    <img style="height: 200px; width: 200px" class="img-fluid rounded-circle" src="<?php echo $image; ?>" alt="<?php echo $author_name; ?>">
+                if (!empty($image)) {
+                    ?>
+                    <div class="col-2">
+                        <img style="height: 200px; width: 200px" class="img-fluid rounded-circle" src="<?php echo $image; ?>" alt="<?php echo $author_name; ?>">
 
-            </div>
-            <div class="col author_des">
-                <p><a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a></p>
-                <div class="author-description-wrapper">
-                    <div class="author-description" id="js--author-description">
+                    </div>
+                    <div class="col author_des">
+                        <p><a href="<?php echo $author_url; ?>"><?php echo $author_name; ?></a></p>
+                        <div class="author-description-wrapper">
+                            <div class="author-description" id="js--author-description">
 
-                        <?php echo $author_description; ?>
+                                <?php echo $author_description; ?>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                </div>
-
-            </div>
-
-        <?php }  }
-    ?>
+                <?php }  }
+            ?>
         </div>
     </div>
 
-<?php
+    <?php
 }
 // Product sale price
 function bdchomok_product_sale_flash( $output, $post, $product ) {
@@ -944,5 +982,14 @@ function ewos_send_sms( $order_id, $old_status, $new_status ) {
 // 	wp_mail( $to, $subject, $ewos_message, $headers );
 
 }
-add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
+//add_action( 'woocommerce_order_status_changed', 'ewos_send_sms', 99, 3 );
 
+
+//add_filter( 'woocommerce_product_categories_widget_args', 'widget_arguments' );
+
+function widget_arguments( $args ) {
+
+    //bdchomok_get_terms_by_handler();
+
+    //return $args;
+}

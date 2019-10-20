@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 
-class BDchomok_Product_Filter extends Widget_Base {
+class BDchomok_Best_Selling_Woo extends Widget_Base {
 
     /**
      * Get widget name.
@@ -26,7 +26,7 @@ class BDchomok_Product_Filter extends Widget_Base {
      */
 
     public function get_name() {
-        return 'WooCommerce Product Filter';
+        return 'Best Selling';
     }
 
     /**
@@ -41,7 +41,7 @@ class BDchomok_Product_Filter extends Widget_Base {
      */
 
     public function get_title() {
-        return __( 'WooCommerce Product Filter', 'bdchomok' );
+        return __( 'Best Selling', 'bdchomok' );
     }
 
     /**
@@ -87,7 +87,7 @@ class BDchomok_Product_Filter extends Widget_Base {
 
         $this->start_controls_section(
 
-            'product_filter_section',
+            'Best_Selling_Woo_section',
             [
                 'label' => __( 'Setting', 'bdchomok' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -95,6 +95,27 @@ class BDchomok_Product_Filter extends Widget_Base {
         );
 
         $product_category_value = $this->prepare_cats_for_select();
+
+        $this->add_control(
+            'title',
+            [
+                'label' => __( 'Title', 'bdchomok' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Title', 'bdchomok' )
+            ]
+        );
+
+        $this->add_control(
+            'limit',
+            [
+                'label' => __( 'Limit', 'bdchomok' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 25,
+                'step' => 1,
+                'default' => 8,
+            ]
+        );
 
         $this->add_control(
             'product_category_id',
@@ -105,45 +126,9 @@ class BDchomok_Product_Filter extends Widget_Base {
                     'active' => true,
                 ],
                 'options' => $product_category_value,
-                'multiple' => false
+                'multiple' => true
             ]
         );
-
-        $this->add_control(
-            'limit',
-            [
-                'label' => __( 'Product Limit', 'bdchomok' ),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 1,
-                'max' => 25,
-                'step' => 1,
-                'default' => 8,
-            ]
-        );
-
-        $this->add_control(
-            'hr',
-            [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
-                'style' => 'thick',
-            ]
-        );
-
-        $this->add_control(
-            'title_color',
-            [
-                'label' => __( 'Icon BG Color', 'bdchomok' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'scheme' => [
-                    'type' => \Elementor\Scheme_Color::get_type(),
-                    'value' => \Elementor\Scheme_Color::COLOR_1,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .category-filter-wrap a .icofont-read-book' => 'background-color: {{VALUE}}',
-                ],
-            ]
-        );
-
 
         $this->end_controls_section();
     }
@@ -161,41 +146,26 @@ class BDchomok_Product_Filter extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 
-        $category_slider = is_array( $settings['product_category_id'] ) ? implode( ',', $settings['product_category_id'] ) : $settings['product_category_id'];
+        $get_category_list = is_array( $settings['product_category_id'] ) ? implode( ',', $settings['product_category_id'] ) : $settings['product_category_id'];
+
         ?>
         <div class="product-category-filter">
 
             <div class="category-filter-wrap mb-3 col-12 cat-tab">
                 <div class="d-block text-center">
-
-                    <?php
-                    $prod_cat_args = array(
-                        'taxonomy'     => 'product_cat',
-                        'orderby'      => 'name',
-                        'include' => $category_slider,
-                        'empty'        => 0
-                    );
-                    $woo_categories = get_terms( $prod_cat_args );
-                    foreach ( $woo_categories as $woo_cat ) {
-                        $woo_cat_name = $woo_cat->name; //category name
-                        echo '<a class="text-uppercase position-relative" href="'. get_term_link($woo_cat->slug, 'product_cat').'" data-filter=".product_cat"><span>'. $woo_cat_name.'</span><i class="icofont-read-book"></i></a>';
-                    }
-                    ?>
+                    <a style="color: #000;" class="text-uppercase position-relative"><span><?php echo esc_html( $settings['title'] ); ?></span><i class="icofont-read-book"></i></a>
                     <span class="seperater"></span>
                 </div>
             </div>
 
             <div class="category-filter-wrap cat-filter" data_limit="<?php echo $settings['limit'];?>">
-                <?php
-                echo do_shortcode( '[products  limit="'.$settings['limit'].'" class="category-filter" columns="4" category="' .$category_slider. '"]' );  ?>
+                <?php echo do_shortcode('[best_selling_products limit="'.$settings['limit'].'" class="category-filter" columns="5" best_selling="true" category="'. $get_category_list .'" ]' ); ?>
             </div>
 
-            <div class="cat-link text-center text-uppercase">
-                <a href="<?php echo get_term_link($woo_cat->slug, 'product_cat'); ?>"><?php esc_html_e( 'সব দেখুন', 'bdchomok' ); ?></a>
-            </div>
         </div>
         <?php
     }
+
     /**
      * Prepare posts to be used in the SELECT2 field
      */
@@ -209,4 +179,4 @@ class BDchomok_Product_Filter extends Widget_Base {
         return $options;
     }
 }
-Plugin::instance()->widgets_manager->register_widget_type( new BDchomok_Product_Filter() );
+Plugin::instance()->widgets_manager->register_widget_type( new BDchomok_Best_Selling_Woo() );

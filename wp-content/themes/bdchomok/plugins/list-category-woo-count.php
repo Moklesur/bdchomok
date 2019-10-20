@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 
-class BDchomok_List_Category_Woo extends Widget_Base {
+class BDchomok_List_Category_Woo_Count extends Widget_Base {
 
     /**
      * Get widget name.
@@ -26,7 +26,7 @@ class BDchomok_List_Category_Woo extends Widget_Base {
      */
 
     public function get_name() {
-        return 'List Category';
+        return 'Category with count';
     }
 
     /**
@@ -41,7 +41,7 @@ class BDchomok_List_Category_Woo extends Widget_Base {
      */
 
     public function get_title() {
-        return __( 'List Category', 'bdchomok' );
+        return __( 'Category With Count', 'bdchomok' );
     }
 
     /**
@@ -87,7 +87,7 @@ class BDchomok_List_Category_Woo extends Widget_Base {
 
         $this->start_controls_section(
 
-            'List_Category_Woo_section',
+            'List_Category_Woo_Count_section',
             [
                 'label' => __( 'Setting', 'bdchomok' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -95,15 +95,6 @@ class BDchomok_List_Category_Woo extends Widget_Base {
         );
 
         $product_category_value = $this->prepare_cats_for_select();
-
-        $this->add_control(
-            'title',
-            [
-                'label' => __( 'Title', 'bdchomok' ),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Title', 'bdchomok' )
-            ]
-        );
 
         $this->add_control(
             'product_category_id',
@@ -114,7 +105,7 @@ class BDchomok_List_Category_Woo extends Widget_Base {
                     'active' => true,
                 ],
                 'options' => $product_category_value,
-                'multiple' => true
+                'multiple' => false
             ]
         );
 
@@ -136,40 +127,54 @@ class BDchomok_List_Category_Woo extends Widget_Base {
 
         $get_category_list = is_array( $settings['product_category_id'] ) ? implode( ',', $settings['product_category_id'] ) : $settings['product_category_id'];
 
-        $prod_cat_args = array(
-            'taxonomy'     => 'product_cat',
-            'orderby'      => 'name',
-            'include' => $get_category_list,
-            'empty'        => 0
-        );
 
-        $woo_categories = get_categories( $prod_cat_args );
-        $taxonomy_name = 'product_cat';
-        ?>
-        <div class="widget-area">
-            <section class="widget pr-3">
-                <h3 class="category-parent widget-title">
-                    <?php echo esc_html( $settings['title'] ); ?>
-                </h3>
-                <div class="cat-list-items">
-                    <?php
-                    foreach ( $woo_categories as $woo_cat ) {
+            $prod_cat_args = array(
+                'taxonomy'     => 'product_cat',
+                'orderby'      => 'name',
+                'include' => $get_category_list,
+                'empty'        => 0
+            );
 
-                        $term_id = $woo_cat->term_id;
-                        $term_children = get_term_children($term_id, $taxonomy_name);
+            $woo_categories = get_categories( $prod_cat_args );
+            $taxonomy_name = 'product_cat';
 
-                        foreach ($term_children as $child) {
-                            $term = get_term_by('id', $child, $taxonomy_name);
-                            ?>
-                            <a class="d-block pt-1 pb-1 pr-0" href="<?php echo esc_url( get_term_link( $child, $taxonomy_name ) ); ?>"><?php echo esc_html( $term->name ); ?></a>
-                            <?php
-                        }
 
-                    }
+
+        foreach ( $woo_categories as $woo_cat ) {
+
+            $term_id = $woo_cat->term_id;
+            $catName = str_replace(' ','-', $woo_cat->name );
+
+            $term_children = get_term_children($term_id, $taxonomy_name);
+            ?>
+
+
+            <div class="row category-content">
+
+                <?php
+                foreach ($term_children as $child) {
+                    $term = get_term_by('id', $child, $taxonomy_name);
                     ?>
-                </div>
-            </section>
-        </div>
+
+                    <div class="col-6 col-sm-6 col-lg-4">
+                        <div class="cat-count-item shadow-skl">
+                            <a href="<?php echo esc_url( get_term_link( $child, $taxonomy_name ) ); ?>" class=" d-flex align-content-center">
+                                <span><?php echo esc_html( $term->name ); ?></span>
+                                <span class="ml-auto cat-count"><?php echo esc_html( $term->count ); ?></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <?php
+                }
+                ?>
+            </div>
+
+            <?php
+        }
+        ?>
+
+
         <?php
     }
 
@@ -186,4 +191,4 @@ class BDchomok_List_Category_Woo extends Widget_Base {
         return $options;
     }
 }
-Plugin::instance()->widgets_manager->register_widget_type( new BDchomok_List_Category_Woo() );
+Plugin::instance()->widgets_manager->register_widget_type( new BDchomok_List_Category_Woo_Count() );

@@ -6,74 +6,79 @@
  *
  * @package bdchomok
  */
-
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
     return;
 }
 ?>
 
 <aside id="secondary" class="widget-area col-lg-3 col-md-4 col-12">
-<?php
-    $tex_id = 1252;
-    $get_cat = array (
-    'post_per_page' => -1,
-    'post_type' => 'product',
-    'tax_query' => array(
-    array(
-    'taxonomy'  => 'product_cat',
-    'field'     => 'term_id',
-    'terms'     => array( $tex_id ),
-    )
-    ),
-    );
 
-    $loop = new WP_Query( $get_cat );
+    <?php
+    if( class_exists( 'WooCommerce' ) && is_product() ):
+        dynamic_sidebar( 'shop-page' );
+    else:
+
+        if(class_exists( 'WooCommerce' ) && is_product_category()) {
 
 
-    if ( $loop->have_posts() ) {
-    while ($loop->have_posts()) : $loop->the_post();
+            $terms = new BD_Chomok_Sidebar;
+            $terms = $terms->get_all_terms();
 
-
-    $post_id = $loop->post->ID;
-
-    $cats =  wp_get_post_terms( $post_id, 'product_cat' );
-    //            var_dump($cats);
-    $term_id = '';
-
-    foreach ($cats as $cat){
-    $term_id = $cat->term_id;
-    }
-
-
-
-    $subcats = wp_get_post_terms( $term_id, 'product_cat' );;
-
-
-
-
-    echo '<div class="product-cat-filter-list">';
-        foreach ($subcats as $sc) {
-        $link = get_term_link($sc->slug, $sc->taxonomy);
-        echo '<section class="widget"><h3 class="category-parent widget-title">'.esc_html( $sc->name ).'</h3>';
-            $args2 = wp_get_post_terms( $sc->term_id, 'product_cat' );;
-
-
-
-            foreach ($args2 as $subsubCats) {
-
-            echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$subsubCats->term_id.'" href=' . $subsubCats->slug . '><span>' . $subsubCats->name . '</span><span class="badge badge-danger float-right">'.$subsubCats->count.'</span></a>';
+            if(isset($terms['publishers']) && ! empty($terms['publishers'])) {
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.__( 'প্রকাশক', '' ).'</h3>';
+                foreach($terms['publishers'] as $publisher) {
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$publisher->term_id.'" href=' . esc_url( get_term_link($publisher->slug, 'product_cat') ) . '><span>' . $publisher->name . '</span><span class="badge badge-danger float-right">'.$publisher->count.'</span></a>';
+                }
+                echo '</section>';
             }
-            echo '</section>';
+
+            if( isset($terms['subjects']) && ! empty($terms['subjects']) ) {
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.__( 'বিষয় সমূহ', '' ).'</h3>';
+
+                foreach($terms['subjects'] as $subject) {
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$subject->term_id.'" href=' . esc_url( get_term_link($subject->slug, 'product_cat') ) . '><span>' . $subject->name . '</span><span class="badge badge-danger float-right">'.$subject->count.'</span></a>';
+                }
+
+                echo '</section>';
+
+            }
+
+            if( isset($terms['authors']) && ! empty($terms['authors']) ) {
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.__( 'লেখক', '' ).'</h3>';
+
+                foreach($terms['authors'] as $author) {
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$author->term_id.'" href=' . esc_url( get_term_link($author->slug, 'product_cat') ) . '><span>' . $author->name . '</span><span class="badge badge-danger float-right">'.$author->count.'</span></a>';
+
+                }
+
+                echo '</section>';
+            }
+
+            if(isset($terms['brands']) && ! empty($terms['brands'])) {
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.__( 'Brands', '' ).'</h3>';
+
+                foreach($terms['brands'] as $brand) {
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$brand->term_id.'" href=' . esc_url( get_term_link($brand->slug, 'product_cat') ) . '><span>' . $brand->name . '</span><span class="badge badge-danger float-right">'.$brand->count.'</span></a>';
+                }
+                echo '</section>';
+            }
+
+            if(isset($terms['accessories']) && ! empty($terms['accessories'])) {
+                echo '<section class="widget"><h3 class="category-parent widget-title">'.__( 'Accessories', '' ).'</h3>';
+
+                foreach( $terms['accessories'] as $ac ) {
+                    echo '<a class="product-filter-js full-width d-block overflow pt-1 pb-1" data-cat-id="'.$ac->term_id.'" href=' . esc_url( get_term_link($ac->slug, 'product_cat') ) . '><span>' . $ac->name . '</span><span class="badge badge-danger float-right">'.$ac->count.'</span></a>';
+                }
+
+                echo '</section>';
+            }
+
+
+            dynamic_sidebar( 'sidebar-1' );
         }
 
-        echo '</div>';
+    endif;
 
-
-
-    //           wc_get_template_part( 'content', 'product' );
-    endwhile;
-    wp_reset_postdata();
-    }
     ?>
 </aside><!-- #secondary -->
 
