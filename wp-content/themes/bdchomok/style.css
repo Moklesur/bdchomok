@@ -703,7 +703,7 @@ body.woocommerce-cart .wc-proceed-to-checkout .checkout-button {
 }
 
 .widget-area section {
-    padding: 30px;
+    padding: 25px;
     margin-bottom: 30px;
 }
 
@@ -1126,7 +1126,7 @@ li .discount-skl{
     margin-bottom: 10px;
 }
 .woocommerce ul.cart_list li img, .woocommerce ul.product_list_widget li img {
-    width: 55px;
+    width: 75px;
 }
 .woocommerce ul.products li.product a.woocommerce-LoopProduct-link .product-thumbs img{
     position: absolute;
@@ -2397,7 +2397,7 @@ ul.payment-method.list-inline.p-0.m-0.text-center img {
     border: 1px solid #000;
     border-radius: 0;
     padding: 5px 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     outline-color: #106f5a;
     width: 100%;
 }
